@@ -1,0 +1,44 @@
+--- 
+title: "DRAGENising COLO829 Dilution Series"
+author: "Peter Diakumis"
+date: "`r format(Sys.time(), '%a %Y-%b-%d')`"
+site: bookdown::bookdown_site
+description: "COLO829 DRAGEN"
+---
+
+```{r knitr_opts, include=F}
+knitr::opts_chunk$set(echo = T)
+```
+
+```{r load_pkgs, message=F, warning=F}
+require(tidyverse)
+```
+
+
+# Introduction
+Here we're analysing the COLO829 dilution series using the Dynamic Read Analysis
+for GENomics (DRAGEN) platform on the AWS Cloud.
+
+## Data
+A dilution series of varying purities (20, 40, 60, 80 and 100 per cent)
+was generated from the COLO829 cell line.
+The samples were sequenced with our in-house NovaSeq Illumina sequencing platform.
+Paired-end FASTQ files were generated and have been uploaded to the
+`umccr-primary-data-prod/Temp/2019-07-18T0233_COLO829_WGS_COLO829/` AWS S3 bucket.
+
+
+
+| Sample  | FileName                       | Read |
+|---------|--------------------------------|------|
+| C020    |                                | 1    |
+| C020    |                                | 2    |
+| C040    |                                | 1    |
+| C040    |                                | 2    |
+| C060    |                                | 1    |
+| C060    |                                | 2    |
+| C080    |                                | 1    |
+| C080    |                                | 2    |
+| C100    |                                | 1    |
+| C100    |                                | 2    |
+
+

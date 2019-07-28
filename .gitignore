@@ -1,1 +1,6 @@
 ami_license_vccc.txt
+.Rproj.user
+.Rhistory
+*.html
+.vscode/
+*.swp
