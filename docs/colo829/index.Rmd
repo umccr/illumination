@@ -19,6 +19,16 @@ require(tidyverse)
 Here we're analysing the COLO829 dilution series using the Dynamic Read Analysis
 for GENomics (DRAGEN) platform on the AWS Cloud.
 
+## DRAGEN Setup
+
+* Run `ssoaws`
+* Choose `dev-admin`
+* Run `bash setup_dragen_instance.sh`
+  - This outputs a json structure. Find the `i-...` target ID and copy it
+* Run `aws ssm start-session --target i-...`
+  - This _should_ connect you to the EC2 instance containing the DRAGEN software
+
+
 ## Data
 A dilution series of varying purities (20, 40, 60, 80 and 100 per cent)
 was generated from the COLO829 cell line.
