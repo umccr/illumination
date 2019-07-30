@@ -20,6 +20,7 @@ Here we're analysing the COLO829 dilution series using the Dynamic Read Analysis
 for GENomics (DRAGEN) platform on the AWS Cloud.
 
 ## DRAGEN Setup
+Quick DRAGEN setup instructions:
 
 * Run `ssoaws`
 * Choose `dev-admin`
@@ -27,9 +28,50 @@ for GENomics (DRAGEN) platform on the AWS Cloud.
   - This outputs a json structure. Find the `i-...` target ID and copy it
 * Run `aws ssm start-session --target i-...`
   - This _should_ connect you to the EC2 instance containing the DRAGEN software
+  - Alternatively, you can try
+    `ssh -i /path/to/.ssh/peter-dragen.pem centos@ec2-XXXXX.ap-southeast-2.compute.amazonaws.com`
+
+### Reference and temp data
+The DRAGEN reference hash table needs to be downloaded to the instance and stored
+on the instance NVMe.
+The temporary data are also stored on the instance NVMe.
+
+#### Build reference data
+DRAGEN requires a reference hashtable to be built. Process is:
+
+* Copy FASTA into instance at `/staging`
+
+```
+sudo mkdir /staging/hg19fa
+cd /staging/hg19fa
+sudo wget hgdownload.cse.ucsc.edu/goldenPath/hg19/bigZips/chromFa.tar.gz
+sudo tar -zxvf chromFa.tar.gz
+sudo touch hg19.fa
+sudo cat chr*.fa > hg19.fa
+sudo mkdir /staging/hg19/
+
+/opt/edico/bin/dragen \
+  --ht-reference /staging/hg19fa/hg19.fa \
+  --output-directory /staging/hg19/ \
+  --build-hash-table true
+```
+
+### Input data
+DRAGEN can (theoretically) process input data in the following ways:
+
+1. directly from S3
+2. from a pre-signed URL
+3. attached to the instance itself
+
+### Output data
+Output from DRAGEN is stored in either:
+
+1. The instance NVMe
+2. Attached EBS volume
 
 
-## Data
+
+## COLO829 Data
 A dilution series of varying purities (20, 40, 60, 80 and 100 per cent)
 was generated from the COLO829 cell line.
 The samples were sequenced with our in-house NovaSeq Illumina sequencing platform.
