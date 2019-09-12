@@ -1,5 +1,5 @@
-Setting up DRAGEN instance
-==========================
+ [DEPRECATED: USE STRATUS INSTEAD] Setting up DRAGEN instance manually
+=======================================================================
 
 * Run `ssoaws`
 * Choose `dev-admin`
