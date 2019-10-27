@@ -1,0 +1,24 @@
+{
+  "name": "woof",
+  "version": "1.0.0",
+  "description": "Playing with Illumina Stratus API",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/umccr/illumination.git"
+  },
+  "author": "Peter Diakumis",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/umccr/illumination/issues"
+  },
+  "homepage": "https://github.com/umccr/illumination#readme",
+  "dependencies": {
+    "ejs": "^2.7.1",
+    "express": "^4.17.1",
+    "request": "^2.88.0"
+  }
+}
