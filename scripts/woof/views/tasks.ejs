@@ -1,0 +1,22 @@
+<% include partials/header %>
+
+<h1>List of Tasks</h1>
+
+<ul>
+</ul>
+
+<ul>
+    <% tasks["items"].forEach((task) => { %>
+    <li>
+        <strong>
+            <%= task["id"] %>
+        </strong>- <%= task["name"] %>
+
+    </li>
+    <% }) %>
+</ul>
+
+
+<a href="/">Home</a>
+
+<% include partials/footer %>
