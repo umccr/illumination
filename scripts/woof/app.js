@@ -33,21 +33,18 @@ app.get("/", (req, res) => res.render("home"));
 
 let opts = {
     method: 'GET',
-    url: illumina_url + 'tasks',
+    url: illumina_url + 'tasks?pageSize=1000',
     headers: {
         Authorization: 'Bearer ' + token,
         'Content-Type': 'application/json'
     }
 };
 
-
 app.get("/tasks", (req, res) => {
 
     request(opts, (error, response, body) => {
         if (!error && response.statusCode == 200) {
             const tasks = JSON.parse(body);
-            console.log("Foo!");
-            // console.log(tasks);
             res.render("tasks", { tasks: tasks });
         }
     });
@@ -62,8 +59,6 @@ app.get("/tasks/runs/:runid", (req, res) => {
     const runid = req.params.runid;
     res.send("You're getting details for task run " + runid + "!");
 });
-
-
 
 app.get("*", (req, res) => {
     res.send("You're a STAR!");
