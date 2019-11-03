@@ -1,5 +1,13 @@
-Going through IAP docs
-======================
+IAP Walkthrough
+===============
+
+- [IAP Walkthrough](#iap-walkthrough)
+  - [CLI](#cli)
+    - [Examples](#examples)
+  - [Tutorials](#tutorials)
+    - [DRAGEN Trio](#dragen-trio)
+    - [DRAGEN Tumor-Normal](#dragen-tumor-normal)
+  - [WES](#wes)
 
 ## CLI
 
@@ -8,6 +16,7 @@ Going through IAP docs
 
 | ID       | User |
 |----------|------|
+| c9688651 | VS   |
 | 567d89e4 | PD   |
 | 7eec7332 | RV   |
 | 8abf754b | SK   |
@@ -79,7 +88,7 @@ id: f4541785-...
 gdsPath: gds://my_folder/fold1/
 ```
 
-* `iap folders upload ../../tmp1 gds://my_volume/fold2/
+* `iap folders upload ../../tmp1 gds://my_volume/fold2/`
 
 ```
 Using: 2 workers and 4 threads-per-worker
@@ -155,3 +164,5 @@ File not found
   - Create workflow version
   - Launch workflow
   - Retrieve output files
+
+
