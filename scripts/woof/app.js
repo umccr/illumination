@@ -10,11 +10,18 @@ const express = require("express"),
 const port = 3000;
 const illumina_url = "https://aps2.platform.illumina.com/v1/"
 
+const usernames = {
+    "567d89e4-de8b-3688-a733-d2a979eb510e": "PD",
+    "7eec7332-f780-3edc-bb70-c4f711398f1c": "RV",
+    "8abf754b-e94f-3841-b44b-75d10d33588b": "SK",
+    "c9688651-7872-3753-8146-ffa41c177aa1": "VS",
+};
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
 // access /public files from /static
 app.use("/static", express.static(path.join(__dirname, "public")));
+
 
 function read_iap_token(t) {
     let token;
@@ -45,7 +52,7 @@ app.get("/tasks", (req, res) => {
     request(opts, (error, response, body) => {
         if (!error && response.statusCode == 200) {
             const tasks = JSON.parse(body);
-            res.render("tasks", { tasks: tasks });
+            res.render("tasks", { tasks: tasks, usernames: usernames });
         }
     });
 });
@@ -63,7 +70,6 @@ app.get("/tasks/runs/:runid", (req, res) => {
 app.get("*", (req, res) => {
     res.send("You're a STAR!");
 });
-
 
 app.listen(port, () => {
     console.log("Server listening at http://localhost:3000");
