@@ -38,9 +38,8 @@ const token = read_iap_token(path.join(os.homedir(), '.iap/.session.yaml'));
 
 app.get("/", (req, res) => res.render("home"));
 
-let opts = {
+let options = {
     method: 'GET',
-    url: illumina_url + 'tasks?pageSize=1000',
     headers: {
         Authorization: 'Bearer ' + token,
         'Content-Type': 'application/json'
@@ -48,6 +47,8 @@ let opts = {
 };
 
 app.get("/tasks", (req, res) => {
+    let opts = options;
+    opts.url = illumina_url + 'tasks?pageSize=1000';
 
     request(opts, (error, response, body) => {
         if (!error && response.statusCode == 200) {
@@ -58,8 +59,17 @@ app.get("/tasks", (req, res) => {
 });
 
 app.get("/tasks/:taskid", (req, res) => {
+    let opts = options;
     const taskid = req.params.taskid;
-    res.send("You're getting details for task " + taskid + "!");
+    opts.url = illumina_url + `tasks/${taskid}`;
+
+    request(opts, (error, response, body) => {
+        if (!error && response.statusCode == 200) {
+            const task_info = JSON.parse(body);
+            console.log(task_info);
+            res.render("taskid", { task_info: task_info, taskid: taskid, usernames: usernames });
+        }
+    });
 });
 
 app.get("/tasks/runs/:runid", (req, res) => {
@@ -72,5 +82,5 @@ app.get("*", (req, res) => {
 });
 
 app.listen(port, () => {
-    console.log("Server listening at http://localhost:3000");
+    console.log(`Server listening at http://localhost:${port}`);
 });
