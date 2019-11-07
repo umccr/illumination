@@ -6,9 +6,9 @@
   <li>Name: <%= task_info['name'] %></li>
   <li>Description: <%= task_info['description'] %></li>
   <li>ACL: <%= task_info['acl'] %></li>
-  <li>Creator: <%= usernames[task_info['createdBy']] %></li>
+  <li>Creator: <%= id2username(task_info['createdBy']) %></li>
   <li>Creation Date: <%= task_info['timeCreated'] %></li>
-  <li>Modifier: <%= usernames[task_info['modifiedBy']] %></li>
+  <li>Modifier: <%= id2username(task_info['modifiedBy']) %></li>
   <li>Modification Date: <%= task_info['timeModified'] %></li>
 
 </ul>

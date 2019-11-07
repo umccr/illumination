@@ -21,7 +21,7 @@ const format_date = function(date) {
        <td> <%= `${i + 1}.` %></td>
        <td> <%= tasks[i].name %></td>
        <td> <%= tasks[i].id %></td>
-       <td> <%= usernames[tasks[i].createdBy] %></td>
+       <td> <%= id2username(tasks[i].createdBy) %></td>
        <td> <%= format_date(tasks[i].timeCreated) %></td>
     </tr>
     <% } %>
