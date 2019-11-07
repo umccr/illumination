@@ -7,9 +7,9 @@
   <li>Description: <%= task_info['description'] %></li>
   <li>ACL: <%= task_info['acl'] %></li>
   <li>Creator: <%= id2username(task_info['createdBy']) %></li>
-  <li>Creation Date: <%= task_info['timeCreated'] %></li>
+  <li>Creation Date: <%= format_date(task_info['timeCreated']) %></li>
   <li>Modifier: <%= id2username(task_info['modifiedBy']) %></li>
-  <li>Modification Date: <%= task_info['timeModified'] %></li>
+  <li>Modification Date: <%= format_date(task_info['timeModified']) %></li>
 
 </ul>
 <% include partials/footer %>

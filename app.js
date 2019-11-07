@@ -4,6 +4,7 @@ const express = require("express"),
       request = require("request"),
       path = require("path"),
       os = require("os"),
+      utils = require("./utils"),
       illumina = require("./illumina");
 
 const port = 3000;
@@ -32,7 +33,11 @@ app.get("/tasks", (req, res) => {
     request(opts, (error, response, body) => {
         if (!error && response.statusCode == 200) {
             const tasks = JSON.parse(body);
-            res.render("tasks", { tasks: tasks, id2username: illumina.id2username });
+            res.render("tasks", {
+                tasks: tasks,
+                id2username: illumina.id2username,
+                format_date: utils.format_date
+            });
         }
     });
 });
@@ -46,7 +51,12 @@ app.get("/tasks/:taskid", (req, res) => {
         if (!error && response.statusCode == 200) {
             const task_info = JSON.parse(body);
             console.log(task_info);
-            res.render("taskid", { task_info: task_info, taskid: taskid, id2username: illumina.id2username });
+            res.render("taskid", {
+                task_info: task_info,
+                taskid: taskid,
+                id2username: illumina.id2username,
+                format_date: utils.format_date
+            });
         }
     });
 });

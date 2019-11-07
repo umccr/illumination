@@ -1,14 +1,5 @@
 <% include partials/header %>
 
-<%
-const format_date = function(date) {
-    // remove milliseconds
-    let d = new Date(Date.parse(date));
-    return d.toISOString().split('.')[0]+"Z";
-}
-%>
-
-
 <h1>List of Tasks</h1>
 
 <table style="width:100%">
@@ -20,7 +11,7 @@ const format_date = function(date) {
     <tr>
        <td> <%= `${i + 1}.` %></td>
        <td> <%= tasks[i].name %></td>
-       <td> <%= tasks[i].id %></td>
+       <td> <a href="/tasks/<%= tasks[i].id %>"><%= tasks[i].id %></a></td>
        <td> <%= id2username(tasks[i].createdBy) %></td>
        <td> <%= format_date(tasks[i].timeCreated) %></td>
     </tr>
