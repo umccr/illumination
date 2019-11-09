@@ -1,4 +1,4 @@
-<% include partials/header %>
+<% include ../partials/header %>
 
 <h1>List of Tasks</h1>
 
@@ -8,6 +8,7 @@
          <th>N</th>
          <th>TaskName</th>
          <th>TaskID</th>
+         <th>TaskVersion</th>
          <th>UserName</th>
          <th>TimeCreated</th>
       </tr>
@@ -20,6 +21,7 @@
          <td> <%= `${i + 1}.` %></td>
          <td> <%= tasks[i].name %></td>
          <td> <a href="/tasks/<%= tasks[i].id %>"><%= tasks[i].id %></a></td>
+         <td> <a href="/tasks/<%= tasks[i].id %>/versions">version</a></td>
          <td> <%= id2username(tasks[i].createdBy) %></td>
          <td> <%= format_date(tasks[i].timeCreated) %></td>
       </tr>
@@ -33,4 +35,4 @@
    });
 </script>
 
-<% include partials/footer %>
+<% include ../partials/footer %>

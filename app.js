@@ -33,7 +33,7 @@ app.get("/tasks", (req, res) => {
     request(opts, (error, response, body) => {
         if (!error && response.statusCode == 200) {
             const tasks = JSON.parse(body);
-            res.render("tasks", {
+            res.render("tes/tasks", {
                 tasks: tasks,
                 id2username: illumina.id2username,
                 format_date: utils.format_date
@@ -46,13 +46,13 @@ app.get("/tasks", (req, res) => {
 
 app.get("/tasks/runs", (req, res) => {
     let opts = options;
-    opts.url = illumina.base_url + 'tasks/runs?pageSize=1000';
+    opts.url = illumina.base_url + 'tasks/runs?pageSize=200';
 
     request(opts, (error, response, body) => {
         if (!error && response.statusCode == 200) {
             const truns = JSON.parse(body);
-            console.log(truns);
-            res.render("taskruns", {
+            // console.log(truns);
+            res.render("tes/taskruns", {
                 truns: truns,
                 id2username: illumina.id2username,
                 format_date: utils.format_date
@@ -73,12 +73,34 @@ app.get("/tasks/:taskid", (req, res) => {
         if (!error && response.statusCode == 200) {
             const task_info = JSON.parse(body);
             // console.log(task_info);
-            res.render("taskid", {
+            res.render("tes/taskid", {
                 task_info: task_info,
                 taskid: taskid,
                 id2username: illumina.id2username,
                 format_date: utils.format_date
             });
+        } else {
+            console.log("There was an error: " + error);
+        }
+    });
+});
+
+app.get("/tasks/:taskid/versions", (req, res) => {
+    let opts = options;
+    const taskid = req.params.taskid;
+    opts.url = illumina.base_url + `tasks/${taskid}/versions`;
+
+    request(opts, (error, response, body) => {
+        if (!error && response.statusCode == 200) {
+            const vinfo = JSON.parse(body);
+            // console.log(vinfo);
+            res.send(vinfo);
+            // res.render("tes/taskid", {
+            //     task_info: task_info,
+            //     taskid: taskid,
+            //     id2username: illumina.id2username,
+            //     format_date: utils.format_date
+            // });
         } else {
             console.log("There was an error: " + error);
         }
@@ -95,7 +117,7 @@ app.get("/tasks/runs/:runid", (req, res) => {
             const trun_info = JSON.parse(body);
             // console.log(taskrun_info);
             // res.send(taskrun_info);
-            res.render("taskrunid", {
+            res.render("tes/taskrunid", {
                 trun_info: trun_info,
                 runid: runid,
                 id2username: illumina.id2username,
