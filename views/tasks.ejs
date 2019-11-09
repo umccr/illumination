@@ -2,20 +2,35 @@
 
 <h1>List of Tasks</h1>
 
-<table style="width:100%">
-    <tr>
-       <th>N</th><th>TaskName</th><th>TaskID</th><th>UserName</th><th>TimeCreated</th>
-    </tr>
-    <% tasks = tasks["items"]; %>
-    <% for (let i = 0; i < tasks.length; i++) { %>
-    <tr>
-       <td> <%= `${i + 1}.` %></td>
-       <td> <%= tasks[i].name %></td>
-       <td> <a href="/tasks/<%= tasks[i].id %>"><%= tasks[i].id %></a></td>
-       <td> <%= id2username(tasks[i].createdBy) %></td>
-       <td> <%= format_date(tasks[i].timeCreated) %></td>
-    </tr>
-    <% } %>
+<table id="task_table">
+   <thead>
+      <tr>
+         <th>N</th>
+         <th>TaskName</th>
+         <th>TaskID</th>
+         <th>UserName</th>
+         <th>TimeCreated</th>
+      </tr>
+   </thead>
+   <tbody>
+
+      <% tasks = tasks["items"]; %>
+      <% for (let i = 0; i < tasks.length; i++) { %>
+      <tr>
+         <td> <%= `${i + 1}.` %></td>
+         <td> <%= tasks[i].name %></td>
+         <td> <a href="/tasks/<%= tasks[i].id %>"><%= tasks[i].id %></a></td>
+         <td> <%= id2username(tasks[i].createdBy) %></td>
+         <td> <%= format_date(tasks[i].timeCreated) %></td>
+      </tr>
+      <% } %>
+   </tbody>
 </table>
+
+<script>
+   $(document).ready(function () {
+      $('#task_table').DataTable();
+   });
+</script>
 
 <% include partials/footer %>

@@ -7,7 +7,7 @@ const express = require("express"),
       utils = require("./utils"),
       illumina = require("./illumina");
 
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -38,6 +38,8 @@ app.get("/tasks", (req, res) => {
                 id2username: illumina.id2username,
                 format_date: utils.format_date
             });
+        } else {
+            console.log("There was an error: " + error);
         }
     });
 });
@@ -50,13 +52,15 @@ app.get("/tasks/:taskid", (req, res) => {
     request(opts, (error, response, body) => {
         if (!error && response.statusCode == 200) {
             const task_info = JSON.parse(body);
-            console.log(task_info);
+            // console.log(task_info);
             res.render("taskid", {
                 task_info: task_info,
                 taskid: taskid,
                 id2username: illumina.id2username,
                 format_date: utils.format_date
             });
+        } else {
+            console.log("There was an error: " + error);
         }
     });
 });
