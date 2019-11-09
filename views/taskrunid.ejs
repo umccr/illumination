@@ -1,0 +1,13 @@
+<% include partials/header %>
+
+<h1><%= `Info about task run with ID ${runid}` %></h1>
+<ul>
+  <li>ID: <%= trun_info['id'] %></li>
+  <li>Name: <%= trun_info['name'] %></li>
+  <li>Description: <%= trun_info['description'] %></li>
+  <li>Status: <%= trun_info['status'] %></li>
+  <li>Creator: <%= id2username(trun_info['createdBy']) %></li>
+  <li>CreationDate: <%= format_date(trun_info['timeCreated']) %></li>
+  <li>ModificationDate: <%= format_date(trun_info['timeModified']) %></li>
+</ul>
+<% include partials/footer %>

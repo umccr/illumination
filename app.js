@@ -44,6 +44,26 @@ app.get("/tasks", (req, res) => {
     });
 });
 
+app.get("/tasks/runs", (req, res) => {
+    let opts = options;
+    opts.url = illumina.base_url + 'tasks/runs?pageSize=1000';
+
+    request(opts, (error, response, body) => {
+        if (!error && response.statusCode == 200) {
+            const truns = JSON.parse(body);
+            console.log(truns);
+            res.render("taskruns", {
+                truns: truns,
+                id2username: illumina.id2username,
+                format_date: utils.format_date
+            });
+        } else {
+            console.log("There was an error: " + error);
+        }
+    });
+});
+
+
 app.get("/tasks/:taskid", (req, res) => {
     let opts = options;
     const taskid = req.params.taskid;
@@ -66,8 +86,25 @@ app.get("/tasks/:taskid", (req, res) => {
 });
 
 app.get("/tasks/runs/:runid", (req, res) => {
+    let opts = options;
     const runid = req.params.runid;
-    res.send("You're getting details for task run " + runid + "!");
+    opts.url = illumina.base_url + `tasks/runs/${runid}`;
+
+    request(opts, (error, response, body) => {
+        if (!error && response.statusCode == 200) {
+            const trun_info = JSON.parse(body);
+            // console.log(taskrun_info);
+            // res.send(taskrun_info);
+            res.render("taskrunid", {
+                trun_info: trun_info,
+                runid: runid,
+                id2username: illumina.id2username,
+                format_date: utils.format_date
+            });
+        } else {
+            console.log("There was an error: " + error);
+        }
+    });
 });
 
 app.get("*", (req, res) => {
