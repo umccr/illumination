@@ -24,7 +24,8 @@ let options = {
         Authorization: 'Bearer ' + token,
         'Content-Type': 'application/json'
     },
-    baseUrl : illumina.base_url
+    baseUrl : illumina.base_url,
+    json: true
 };
 
 //------------------------ TES Routes -------------------------------//
@@ -34,9 +35,8 @@ app.get("/tasks", (req, res) => {
 
     request.get(opts, (error, response, body) => {
         if (!error && response.statusCode == 200) {
-            const tasks = JSON.parse(body);
             res.render("tes/tasks", {
-                tasks: tasks,
+                tasks: body,
                 id2username: illumina.id2username,
                 format_date: utils.format_date
             });
@@ -52,10 +52,8 @@ app.get("/tasks/runs", (req, res) => {
 
     request.get(opts, (error, response, body) => {
         if (!error && response.statusCode == 200) {
-            const truns = JSON.parse(body);
-            // console.log(truns);
             res.render("tes/taskruns", {
-                truns: truns,
+                truns: body,
                 id2username: illumina.id2username,
                 format_date: utils.format_date
             });
@@ -73,10 +71,8 @@ app.get("/tasks/:taskid", (req, res) => {
 
     request.get(opts, (error, response, body) => {
         if (!error && response.statusCode == 200) {
-            const task_info = JSON.parse(body);
-            // console.log(task_info);
             res.render("tes/taskid", {
-                task_info: task_info,
+                task_info: body,
                 taskid: taskid,
                 id2username: illumina.id2username,
                 format_date: utils.format_date
@@ -94,9 +90,7 @@ app.get("/tasks/:taskid/versions", (req, res) => {
 
     request.get(opts, (error, response, body) => {
         if (!error && response.statusCode == 200) {
-            const vinfo = JSON.parse(body);
-            // console.log(vinfo);
-            res.send(vinfo);
+            res.send(body);
             // res.render("tes/taskid", {
             //     task_info: task_info,
             //     taskid: taskid,
@@ -116,11 +110,8 @@ app.get("/tasks/runs/:runid", (req, res) => {
 
     request.get(opts, (error, response, body) => {
         if (!error && response.statusCode == 200) {
-            const trun_info = JSON.parse(body);
-            // console.log(taskrun_info);
-            // res.send(taskrun_info);
             res.render("tes/taskrunid", {
-                trun_info: trun_info,
+                trun_info: body,
                 runid: runid,
                 id2username: illumina.id2username,
                 format_date: utils.format_date
@@ -138,10 +129,8 @@ app.get("/workflows", (req, res) => {
 
     request.get(opts, (error, response, body) => {
         if (!error && response.statusCode == 200) {
-            const wflows = JSON.parse(body);
-            // res.send(wflows);
             res.render("wes/workflows", {
-                wflows: wflows,
+                wflows: body,
                 id2username: illumina.id2username,
                 format_date: utils.format_date
             });
@@ -157,8 +146,7 @@ app.get("/workflows/runs", (req, res) => {
 
     request.get(opts, (error, response, body) => {
         if (!error && response.statusCode == 200) {
-            const wruns = JSON.parse(body);
-            res.send(wruns);
+            res.send(body);
             // res.render("wes/workflowruns", {
             //     wruns: wruns,
             //     id2username: illumina.id2username,
@@ -178,10 +166,8 @@ app.get("/workflows/:workflowid", (req, res) => {
 
     request.get(opts, (error, response, body) => {
         if (!error && response.statusCode == 200) {
-            const wflow_info = JSON.parse(body);
-            // res.send(wflow_info);
             res.render("wes/workflowid", {
-                wflow_info: wflow_info,
+                wflow_info: body,
                 wflowid: wflowid,
                 id2username: illumina.id2username,
                 format_date: utils.format_date
