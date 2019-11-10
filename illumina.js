@@ -1,7 +1,7 @@
 const yaml = require("js-yaml"),
       fs = require("fs");
 
-const base_url = "https://aps2.platform.illumina.com/v1/";
+const base_url = "https://aps2.platform.illumina.com/v1";
 
 id2username = function (id) {
     let username = {

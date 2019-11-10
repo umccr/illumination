@@ -1,0 +1,13 @@
+<% include ../partials/header %>
+
+<h1><%= `Info about workflow with ID ${wflowid}` %></h1>
+<ul>
+  <li>ID: <%= wflow_info['id'] %></li>
+  <li>Name: <%= wflow_info['name'] %></li>
+  <li>Creator: <%= id2username(wflow_info['createdBy']) %></li>
+  <li>Creation Date: <%= format_date(wflow_info['timeCreated']) %></li>
+  <li>Modifier: <%= id2username(wflow_info['modifiedBy']) %></li>
+  <li>Modification Date: <%= format_date(wflow_info['timeModified']) %></li>
+
+</ul>
+<% include ../partials/footer %>
