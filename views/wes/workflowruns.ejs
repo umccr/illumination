@@ -1,0 +1,44 @@
+<% include ../partials/header %>
+
+<h1>List of Workflow Runs</h1>
+
+<table id="workflowrun_table" class="cell-border display compact">
+   <thead>
+      <tr>
+         <th>N</th>
+         <th>ID</th>
+         <th>Creator</th>
+         <th>Modifier</th>
+         <th>TimeCreated</th>
+         <th>TimeModified</th>
+         <th>Status</th>
+         <th>Error</th>
+         <th>ErrorCause</th>
+      </tr>
+   </thead>
+   <tbody>
+
+      <% wruns = wruns["items"]; %>
+      <% for (let i = 0; i < wruns.length; i++) { %>
+      <tr>
+         <td> <%= `${i + 1}.` %></td>
+         <td> <a href="/workflows/runs/<%= wruns[i].id %>"><%= wruns[i].id %></a></td>
+         <td> <%= id2username(wruns[i].createdBy) %></td>
+         <td> <%= id2username(wruns[i].modifiedBy) %></td>
+         <td> <%= format_date(wruns[i].timeCreated) %></td>
+         <td> <%= format_date(wruns[i].timeModified) %></td>
+         <td> <%= wruns[i].status %></td>
+         <td> <%= wruns[i].error %></td>
+         <td> <%= wruns[i].errorCause %></td>
+      </tr>
+      <% } %>
+   </tbody>
+</table>
+
+<script>
+   $(document).ready(function () {
+      $('#workflowrun_table').DataTable();
+   });
+</script>
+
+<% include ../partials/footer %>
