@@ -2,8 +2,8 @@ const express = require("express"),
   request = require("request"),
   path = require("path"),
   os = require("os"),
-  utils = require("./utils"),
-  illumina = require("./illumina");
+  utils = require("./utils/utils"),
+  illumina = require("./utils/illumina");
 
 // const listEndpoints = require('express-list-endpoints');
 
