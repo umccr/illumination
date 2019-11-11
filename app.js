@@ -98,18 +98,39 @@ app.get("/tasks/:taskid/versions", (req, res) => {
 
   request.get(opts, (error, response, body) => {
     if (!error && response.statusCode == 200) {
-      res.send(body);
-      // res.render("tes/taskid", {
-      //     task_info: task_info,
-      //     taskid: taskid,
-      //     id2username: illumina.id2username,
-      //     format_date: utils.format_date
-      // });
+      // res.send(body);
+      res.render("tes/taskversions", {
+          versions: body,
+          taskid: taskid,
+          id2username: illumina.id2username,
+          format_date: utils.format_date
+      });
     } else {
       utils.print_error(error);
     }
   });
 });
+
+app.get("/tasks/:taskid/versions/:versionid", (req, res) => {
+  let opts = options;
+  const taskid = req.params.taskid;
+  const versionid = req.params.versionid;
+  opts.url = `/tasks/${taskid}/versions/${versionid}`;
+
+  request.get(opts, (error, response, body) => {
+    if (!error && response.statusCode == 200) {
+      res.render("tes/versionbody", {
+          taskid: taskid,
+          versionid: versionid,
+          version: body,
+          jsonSyntaxHighlight: utils.jsonSyntaxHighlight
+      });
+    } else {
+      utils.print_error(error);
+    }
+  });
+});
+
 
 app.get("/tasks/runs/:runid", (req, res) => {
   let opts = options;

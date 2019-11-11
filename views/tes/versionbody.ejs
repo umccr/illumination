@@ -1,0 +1,8 @@
+<% include ../partials/header %>
+<ul><li><%= `Version for Task ID: ${taskid}` %></li></ul>
+
+<pre>
+<%- jsonSyntaxHighlight(JSON.stringify(version, null, 2)) %>
+ </pre>
+
+<% include ../partials/footer %>
