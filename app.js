@@ -82,8 +82,7 @@ app.get("/tasks/:taskid", (req, res) => {
       res.render("tes/taskid", {
         task_info: body,
         taskid: taskid,
-        id2username: illumina.id2username,
-        format_date: utils.format_date
+        jsonSyntaxHighlight: utils.jsonSyntaxHighlight
       });
     } else {
       utils.print_error(error);
@@ -98,12 +97,11 @@ app.get("/tasks/:taskid/versions", (req, res) => {
 
   request.get(opts, (error, response, body) => {
     if (!error && response.statusCode == 200) {
-      // res.send(body);
       res.render("tes/taskversions", {
-          versions: body,
-          taskid: taskid,
-          id2username: illumina.id2username,
-          format_date: utils.format_date
+        versions: body,
+        taskid: taskid,
+        id2username: illumina.id2username,
+        format_date: utils.format_date
       });
     } else {
       utils.print_error(error);
@@ -119,18 +117,17 @@ app.get("/tasks/:taskid/versions/:versionid", (req, res) => {
 
   request.get(opts, (error, response, body) => {
     if (!error && response.statusCode == 200) {
-      res.render("tes/versionbody", {
-          taskid: taskid,
-          versionid: versionid,
-          version: body,
-          jsonSyntaxHighlight: utils.jsonSyntaxHighlight
+      res.render("tes/taskversionbody", {
+        taskid: taskid,
+        versionid: versionid,
+        version: body,
+        jsonSyntaxHighlight: utils.jsonSyntaxHighlight
       });
     } else {
       utils.print_error(error);
     }
   });
 });
-
 
 app.get("/tasks/runs/:runid", (req, res) => {
   let opts = options;
@@ -142,8 +139,7 @@ app.get("/tasks/runs/:runid", (req, res) => {
       res.render("tes/taskrunid", {
         trun_info: body,
         runid: runid,
-        id2username: illumina.id2username,
-        format_date: utils.format_date
+        jsonSyntaxHighlight: utils.jsonSyntaxHighlight
       });
     } else {
       utils.print_error(error);
@@ -184,7 +180,6 @@ app.get("/workflows/runs", (req, res) => {
 
   request.get(opts, (error, response, body) => {
     if (!error && response.statusCode == 200) {
-      // res.send(body);
       res.render("wes/workflowruns", {
         wruns: body,
         id2username: illumina.id2username,
@@ -196,6 +191,28 @@ app.get("/workflows/runs", (req, res) => {
   });
 });
 
+app.get("/workflows/versions", (req, res) => {
+  let opts = options;
+  opts.url = "/workflows/versions";
+  opts.qs = {
+    pageSize: pageSize,
+    sort: "timeCreated desc"
+  };
+
+  request.get(opts, (error, response, body) => {
+    if (!error && response.statusCode == 200) {
+      res.render("wes/workflowversionsall", {
+        versions: body,
+        id2username: illumina.id2username,
+        format_date: utils.format_date
+      });
+    } else {
+      utils.print_error(error);
+    }
+  });
+
+})
+
 app.get("/workflows/:workflowid", (req, res) => {
   let opts = options;
   const wflowid = req.params.workflowid;
@@ -206,8 +223,7 @@ app.get("/workflows/:workflowid", (req, res) => {
       res.render("wes/workflowid", {
         wflow_info: body,
         wflowid: wflowid,
-        id2username: illumina.id2username,
-        format_date: utils.format_date
+        jsonSyntaxHighlight: utils.jsonSyntaxHighlight
       });
     } else {
       utils.print_error(error);
@@ -222,18 +238,57 @@ app.get("/workflows/runs/:runid", (req, res) => {
 
   request.get(opts, (error, response, body) => {
     if (!error && response.statusCode == 200) {
-      res.send(body);
-      // res.render("wes/workflowrunid", {
-      //     wrun_info: body,
-      //     runid: runid,
-      //     id2username: illumina.id2username,
-      //     format_date: utils.format_date
-      // });
+      res.render("wes/workflowrunid", {
+        wrun_info: body,
+        runid: runid,
+        jsonSyntaxHighlight: utils.jsonSyntaxHighlight
+      });
     } else {
       utils.print_error(error);
     }
   });
 });
+
+app.get("/workflows/:workflowid/versions", (req, res) => {
+  let opts = options;
+  const workflowid = req.params.workflowid;
+  opts.url = `/workflows/${workflowid}/versions`;
+
+  request.get(opts, (error, response, body) => {
+    if (!error && response.statusCode == 200) {
+      // res.send(body);
+      res.render("wes/workflowversions", {
+        versions: body,
+        workflowid: workflowid,
+        id2username: illumina.id2username,
+        format_date: utils.format_date
+      });
+    } else {
+      utils.print_error(error);
+    }
+  });
+});
+
+app.get("/workflows/:workflowid/versions/:versionid", (req, res) => {
+  let opts = options;
+  const workflowid = req.params.workflowid;
+  const versionid = req.params.versionid;
+  opts.url = `/workflows/${workflowid}/versions/${versionid}`;
+
+  request.get(opts, (error, response, body) => {
+    if (!error && response.statusCode == 200) {
+      res.render("wes/workflowversionbody", {
+        workflowid: workflowid,
+        versionid: versionid,
+        version: body,
+        jsonSyntaxHighlight: utils.jsonSyntaxHighlight
+      });
+    } else {
+      utils.print_error(error);
+    }
+  });
+});
+
 
 app.get("*", (req, res) => {
   res.send("Oops. Wrong URL!");

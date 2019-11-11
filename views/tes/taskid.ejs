@@ -1,15 +1,11 @@
 <% include ../partials/header %>
 
-<h1><%= `Info about task with ID ${taskid}` %></h1>
 <ul>
-  <li>ID: <%= task_info['id'] %></li>
-  <li>Name: <%= task_info['name'] %></li>
-  <li>Description: <%= task_info['description'] %></li>
-  <li>ACL: <%= task_info['acl'] %></li>
-  <li>Creator: <%= id2username(task_info['createdBy']) %></li>
-  <li>Creation Date: <%= format_date(task_info['timeCreated']) %></li>
-  <li>Modifier: <%= id2username(task_info['modifiedBy']) %></li>
-  <li>Modification Date: <%= format_date(task_info['timeModified']) %></li>
-
+  <li><%= `Info about task with ID ${taskid}` %></li>
 </ul>
+
+<pre>
+<%- jsonSyntaxHighlight(JSON.stringify(task_info, null, 2)) %>
+</pre>
+
 <% include ../partials/footer %>

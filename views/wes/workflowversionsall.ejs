@@ -1,6 +1,6 @@
 <% include ../partials/header %>
 
-<h1><%= `Task Versions for Task with ID ${taskid}` %></h1>
+<h1>List of Workflow Versions</h1>
 
 <table id="version_table" class="cell-border display compact">
 
@@ -9,32 +9,36 @@
             <th>N</th>
             <th>ID</th>
             <th>Version</th>
+            <th>Language</th>
             <th>Creator</th>
             <th>TimeCreated</th>
             <th>Modifier</th>
             <th>TimeModified</th>
+            <th>Status</th>
         </tr>
     </thead>
     <tbody>
         <% versions = versions["items"]; %>
         <% for (let i = 0; i < versions.length; i++) { %>
         <tr>
-            <td> <%= `${i + 1}.` %> </td>
-            <td> <%= versions[i].id %> </td>
-            <td> <a href="/tasks/<%= taskid %>/versions/<%= versions[i].id %>"> <%= versions[i].version %> </a></td>
+            <td> <%= `${i + 1}.` %></td>
+            <td> <%= versions[i].id %></td>
+            <td> <%= versions[i].version %></td>
+            <td> <%= versions[i].language.name %></td>
             <td> <%= id2username(versions[i].createdBy) %></td>
             <td> <%= format_date(versions[i].timeCreated) %></td>
             <td> <%= id2username(versions[i].modifiedBy) %></td>
             <td> <%= format_date(versions[i].timeModified) %></td>
+            <td><%= versions[i].status %></td>
         </tr>
         <% } %>
     </tbody>
 </table>
 
 <script>
-   $(document).ready(function () {
-      $('#version_table').DataTable();
-   });
+    $(document).ready(function () {
+        $('#version_table').DataTable();
+    });
 </script>
 
 

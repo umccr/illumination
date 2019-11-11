@@ -1,8 +1,10 @@
 <% include ../partials/header %>
-<ul><li><%= `Version for Task ID: ${taskid}` %></li></ul>
+<ul>
+    <li><%= `Version for Workflow ID: ${workflowid}` %></li>
+</ul>
 
 <pre>
 <%- jsonSyntaxHighlight(JSON.stringify(version, null, 2)) %>
- </pre>
+</pre>
 
 <% include ../partials/footer %>

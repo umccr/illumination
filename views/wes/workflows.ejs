@@ -6,8 +6,9 @@
    <thead>
       <tr>
          <th>N</th>
-         <th>WflName</th>
-         <th>WflID</th>
+         <th>Name</th>
+         <th>ID</th>
+         <th>Versions</th>
          <th>Creator</th>
          <th>TimeCreated</th>
          <th>Modifier</th>
@@ -22,6 +23,7 @@
          <td> <%= `${i + 1}.` %></td>
          <td> <%= wflows[i].name %></td>
          <td> <a href="/workflows/<%= wflows[i].id %>"><%= wflows[i].id %></a></td>
+         <td> <a href="/workflows/<%= wflows[i].id %>/versions">versions</a></td>
          <td> <%= id2username(wflows[i].createdBy) %></td>
          <td> <%= format_date(wflows[i].timeCreated) %></td>
          <td> <%= id2username(wflows[i].modifiedBy) %></td>

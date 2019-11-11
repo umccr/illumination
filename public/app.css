@@ -6,7 +6,7 @@
     width:100%;
 }
 
-pre {outline: 1px solid #ccc; padding: 5px; margin: 5px; }
+pre {outline: 1px solid #ccc; padding: 5px; margin: 5px; white-space: pre-wrap;}
 .string { color: green; }
 .number { color: darkorange; }
 .boolean { color: blue; }

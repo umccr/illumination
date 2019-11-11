@@ -1,6 +1,6 @@
 <% include ../partials/header %>
 
-<h1><%= `Task Versions for Task with ID ${taskid}` %></h1>
+<h1><%= `Workflow Versions for Workflow with ID ${workflowid}` %></h1>
 
 <table id="version_table" class="cell-border display compact">
 
@@ -13,6 +13,8 @@
             <th>TimeCreated</th>
             <th>Modifier</th>
             <th>TimeModified</th>
+            <th>Language</th>
+            <th>Status</th>
         </tr>
     </thead>
     <tbody>
@@ -21,11 +23,13 @@
         <tr>
             <td> <%= `${i + 1}.` %> </td>
             <td> <%= versions[i].id %> </td>
-            <td> <a href="/tasks/<%= taskid %>/versions/<%= versions[i].id %>"> <%= versions[i].version %> </a></td>
+            <td> <a href="/workflows/<%= workflowid %>/versions/<%= versions[i].version %>"> <%= versions[i].version %> </a></td>
             <td> <%= id2username(versions[i].createdBy) %></td>
             <td> <%= format_date(versions[i].timeCreated) %></td>
             <td> <%= id2username(versions[i].modifiedBy) %></td>
             <td> <%= format_date(versions[i].timeModified) %></td>
+            <td><%= versions[i].language.name %></td>
+            <td><%= versions[i].status %></td>
         </tr>
         <% } %>
     </tbody>
