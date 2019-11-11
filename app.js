@@ -5,6 +5,8 @@ const express = require("express"),
   utils = require("./utils"),
   illumina = require("./illumina");
 
+// const listEndpoints = require('express-list-endpoints');
+
 const port = process.env.PORT || 3000;
 const pageSize = 100;
 
@@ -293,6 +295,8 @@ app.get("/workflows/:workflowid/versions/:versionid", (req, res) => {
 app.get("*", (req, res) => {
   res.send("Oops. Wrong URL!");
 });
+
+// console.log(listEndpoints(app));
 
 app.listen(port, () => {
   console.log(`Server listening at http://localhost:${port}`);
