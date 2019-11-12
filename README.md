@@ -7,9 +7,9 @@ Illumination
   - [Routes](#routes)
 
 Node.js Express app that interacts with the Illumina Stratus API.
-Currently supports main `GET` endpoints.
+Currently supports most `GET` endpoints.
 
-![illumination home page](https://flic.kr/p/2hJfQT6)
+<img src="https://i.postimg.cc/9fxp6Vds/illumination-home.png" alt="illumination home" height="500">
 
 Installation
 ------------

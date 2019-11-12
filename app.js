@@ -193,6 +193,46 @@ app.get("/workflows/runs", (req, res) => {
   });
 });
 
+app.get("/workflows/runs/:runid/history", (req, res) => {
+  let opts = options;
+  const runid = req.params.runid;
+  opts.url = `/workflows/runs/${runid}/history`;
+  opts.qs = {
+    pageSize: pageSize,
+    sort: "eventId asc"
+  };
+
+  request.get(opts, (error, response, body) => {
+    if (!error && response.statusCode == 200) {
+      res.render("wes/workflowrunhistory", {
+        history: body,
+        runid: runid,
+        jsonSyntaxHighlight: utils.jsonSyntaxHighlight
+      });
+    } else {
+      utils.print_error(error);
+    }
+  });
+});
+
+app.get("/workflows/runs/:runid", (req, res) => {
+  let opts = options;
+  const runid = req.params.runid;
+  opts.url = `/workflows/runs/${runid}`;
+
+  request.get(opts, (error, response, body) => {
+    if (!error && response.statusCode == 200) {
+      res.render("wes/workflowrunid", {
+        wrun_info: body,
+        runid: runid,
+        jsonSyntaxHighlight: utils.jsonSyntaxHighlight
+      });
+    } else {
+      utils.print_error(error);
+    }
+  });
+});
+
 app.get("/workflows/versions", (req, res) => {
   let opts = options;
   opts.url = "/workflows/versions";
@@ -225,24 +265,6 @@ app.get("/workflows/:workflowid", (req, res) => {
       res.render("wes/workflowid", {
         wflow_info: body,
         wflowid: wflowid,
-        jsonSyntaxHighlight: utils.jsonSyntaxHighlight
-      });
-    } else {
-      utils.print_error(error);
-    }
-  });
-});
-
-app.get("/workflows/runs/:runid", (req, res) => {
-  let opts = options;
-  const runid = req.params.runid;
-  opts.url = `/workflows/runs/${runid}`;
-
-  request.get(opts, (error, response, body) => {
-    if (!error && response.statusCode == 200) {
-      res.render("wes/workflowrunid", {
-        wrun_info: body,
-        runid: runid,
         jsonSyntaxHighlight: utils.jsonSyntaxHighlight
       });
     } else {
@@ -290,7 +312,6 @@ app.get("/workflows/:workflowid/versions/:versionid", (req, res) => {
     }
   });
 });
-
 
 app.get("*", (req, res) => {
   res.send("Oops. Wrong URL!");
