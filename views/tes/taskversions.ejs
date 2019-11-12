@@ -9,9 +9,9 @@
             <th>N</th>
             <th>ID</th>
             <th>Version</th>
-            <th>Creator</th>
+            <th>CreatedBy</th>
             <th>TimeCreated</th>
-            <th>Modifier</th>
+            <th>ModifiedBy</th>
             <th>TimeModified</th>
         </tr>
     </thead>
@@ -22,9 +22,9 @@
             <td> <%= `${i + 1}.` %> </td>
             <td> <%= versions[i].id %> </td>
             <td> <a href="/tasks/<%= taskid %>/versions/<%= versions[i].id %>"> <%= versions[i].version %> </a></td>
-            <td> <%= id2username(versions[i].createdBy) %></td>
+            <td title="<%= versions[i].createdBy %>"> <%= id2username(versions[i].createdBy) %></td>
             <td> <%= format_date(versions[i].timeCreated) %></td>
-            <td> <%= id2username(versions[i].modifiedBy) %></td>
+            <td title="<%= versions[i].modifiedBy %>"> <%= id2username(versions[i].modifiedBy) %></td>
             <td> <%= format_date(versions[i].timeModified) %></td>
         </tr>
         <% } %>

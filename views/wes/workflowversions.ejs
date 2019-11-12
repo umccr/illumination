@@ -9,12 +9,12 @@
             <th>N</th>
             <th>ID</th>
             <th>Version</th>
-            <th>Creator</th>
-            <th>TimeCreated</th>
-            <th>Modifier</th>
-            <th>TimeModified</th>
             <th>Language</th>
             <th>Status</th>
+            <th>CreatedBy</th>
+            <th>TimeCreated</th>
+            <th>ModifiedBy</th>
+            <th>TimeModified</th>
         </tr>
     </thead>
     <tbody>
@@ -24,12 +24,12 @@
             <td> <%= `${i + 1}.` %> </td>
             <td> <%= versions[i].id %> </td>
             <td> <a href="/workflows/<%= workflowid %>/versions/<%= versions[i].version %>"> <%= versions[i].version %> </a></td>
-            <td> <%= id2username(versions[i].createdBy) %></td>
-            <td> <%= format_date(versions[i].timeCreated) %></td>
-            <td> <%= id2username(versions[i].modifiedBy) %></td>
-            <td> <%= format_date(versions[i].timeModified) %></td>
             <td><%= versions[i].language.name %></td>
             <td><%= versions[i].status %></td>
+            <td title="<%= versions[i].createdBy %>"> <%= id2username(versions[i].createdBy) %></td>
+            <td> <%= format_date(versions[i].timeCreated) %></td>
+            <td title="<%= versions[i].modifiedBy %>"> <%= id2username(versions[i].modifiedBy) %></td>
+            <td> <%= format_date(versions[i].timeModified) %></td>
         </tr>
         <% } %>
     </tbody>

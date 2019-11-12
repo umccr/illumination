@@ -8,13 +8,14 @@
          <th>N</th>
          <th>ID</th>
          <th>History</th>
-         <th>Creator</th>
-         <th>Modifier</th>
-         <th>TimeCreated</th>
-         <th>TimeModified</th>
          <th>Status</th>
          <th>Error</th>
          <th>ErrorCause</th>
+         <th>CreatedBy</th>
+         <th>TimeCreated</th>
+         <th>TimeStarted</th>
+         <th>ModifiedBy</th>
+         <th>TimeModified</th>
       </tr>
    </thead>
    <tbody>
@@ -25,13 +26,14 @@
          <td> <%= `${i + 1}.` %></td>
          <td> <a href="/workflows/runs/<%= wruns[i].id %>"><%= wruns[i].id %></a></td>
          <td> <a href="/workflows/runs/<%= wruns[i].id %>/history">history</a></td>
-         <td> <%= id2username(wruns[i].createdBy) %></td>
-         <td> <%= id2username(wruns[i].modifiedBy) %></td>
-         <td> <%= format_date(wruns[i].timeCreated) %></td>
-         <td> <%= format_date(wruns[i].timeModified) %></td>
          <td> <%= wruns[i].status %></td>
          <td> <%= wruns[i].error %></td>
          <td> <%= wruns[i].errorCause %></td>
+         <td> <%= id2username(wruns[i].createdBy) %></td>
+         <td> <%= format_date(wruns[i].timeCreated) %></td>
+         <td> <%= format_date(wruns[i].timeStarted) %></td>
+         <td> <%= id2username(wruns[i].modifiedBy) %></td>
+         <td> <%= format_date(wruns[i].timeModified) %></td>
       </tr>
       <% } %>
    </tbody>

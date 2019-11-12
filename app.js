@@ -74,6 +74,25 @@ app.get("/tasks/runs", (req, res) => {
   });
 });
 
+app.get("/tasks/runs/:runid", (req, res) => {
+  let opts = options;
+  const runid = req.params.runid;
+  opts.url = `/tasks/runs/${runid}`;
+
+  request.get(opts, (error, response, body) => {
+    if (!error && response.statusCode == 200) {
+      res.render("tes/taskrunid", {
+        trun_info: body,
+        runid: runid,
+        jsonSyntaxHighlight: utils.jsonSyntaxHighlight
+      });
+    } else {
+      utils.print_error(error);
+    }
+  });
+});
+
+
 app.get("/tasks/:taskid", (req, res) => {
   let opts = options;
   const taskid = req.params.taskid;
@@ -131,24 +150,6 @@ app.get("/tasks/:taskid/versions/:versionid", (req, res) => {
   });
 });
 
-app.get("/tasks/runs/:runid", (req, res) => {
-  let opts = options;
-  const runid = req.params.runid;
-  opts.url = `/tasks/runs/${runid}`;
-
-  request.get(opts, (error, response, body) => {
-    if (!error && response.statusCode == 200) {
-      res.render("tes/taskrunid", {
-        trun_info: body,
-        runid: runid,
-        jsonSyntaxHighlight: utils.jsonSyntaxHighlight
-      });
-    } else {
-      utils.print_error(error);
-    }
-  });
-});
-
 //------------------------ Workflow Routes -------------------------------//
 
 app.get("/workflows", (req, res) => {
@@ -193,6 +194,24 @@ app.get("/workflows/runs", (req, res) => {
   });
 });
 
+app.get("/workflows/runs/:runid", (req, res) => {
+  let opts = options;
+  const runid = req.params.runid;
+  opts.url = `/workflows/runs/${runid}`;
+
+  request.get(opts, (error, response, body) => {
+    if (!error && response.statusCode == 200) {
+      res.render("wes/workflowrunid", {
+        wrun_info: body,
+        runid: runid,
+        jsonSyntaxHighlight: utils.jsonSyntaxHighlight
+      });
+    } else {
+      utils.print_error(error);
+    }
+  });
+});
+
 app.get("/workflows/runs/:runid/history", (req, res) => {
   let opts = options;
   const runid = req.params.runid;
@@ -215,23 +234,6 @@ app.get("/workflows/runs/:runid/history", (req, res) => {
   });
 });
 
-app.get("/workflows/runs/:runid", (req, res) => {
-  let opts = options;
-  const runid = req.params.runid;
-  opts.url = `/workflows/runs/${runid}`;
-
-  request.get(opts, (error, response, body) => {
-    if (!error && response.statusCode == 200) {
-      res.render("wes/workflowrunid", {
-        wrun_info: body,
-        runid: runid,
-        jsonSyntaxHighlight: utils.jsonSyntaxHighlight
-      });
-    } else {
-      utils.print_error(error);
-    }
-  });
-});
 
 app.get("/workflows/versions", (req, res) => {
   let opts = options;

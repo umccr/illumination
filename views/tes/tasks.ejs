@@ -6,11 +6,14 @@
    <thead>
       <tr>
          <th>N</th>
-         <th>TaskName</th>
-         <th>TaskID</th>
-         <th>TaskVersions</th>
-         <th>UserName</th>
+         <th>ID</th>
+         <th>Name</th>
+         <th>Description</th>
+         <th>Versions</th>
+         <th>CreatedBy</th>
          <th>TimeCreated</th>
+         <th>ModifiedBy</th>
+         <th>TimeModified</th>
       </tr>
    </thead>
    <tbody>
@@ -19,11 +22,14 @@
       <% for (let i = 0; i < tasks.length; i++) { %>
       <tr>
          <td> <%= `${i + 1}.` %></td>
-         <td> <%= tasks[i].name %></td>
          <td> <a href="/tasks/<%= tasks[i].id %>"><%= tasks[i].id %></a></td>
+         <td> <%= tasks[i].name %></td>
+         <td> <%= tasks[i].description %></td>
          <td> <a href="/tasks/<%= tasks[i].id %>/versions">versions</a></td>
-         <td> <%= id2username(tasks[i].createdBy) %></td>
+         <td title="<%= tasks[i].createdBy %>"> <%= id2username(tasks[i].createdBy) %></td>
          <td> <%= format_date(tasks[i].timeCreated) %></td>
+         <td title="<%= tasks[i].modifiedBy%>"> <%= id2username(tasks[i].modifiedBy) %></td>
+         <td> <%= format_date(tasks[i].timeModified) %></td>
       </tr>
       <% } %>
    </tbody>

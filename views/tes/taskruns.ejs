@@ -6,12 +6,15 @@
    <thead>
       <tr>
          <th>N</th>
-         <th>Name</th>
          <th>ID</th>
-         <th>UserName</th>
-         <th>TimeCreated</th>
-         <th>TimeModified</th>
+         <th>Name</th>
+         <th>Description</th>
          <th>Status</th>
+         <th>StatusDetails</th>
+         <th>CreatedBy</th>
+         <th>TimeCreated</th>
+         <th>ModifiedBy</th>
+         <th>TimeModified</th>
       </tr>
    </thead>
    <tbody>
@@ -20,12 +23,15 @@
       <% for (let i = 0; i < truns.length; i++) { %>
       <tr>
          <td> <%= `${i + 1}.` %></td>
-         <td> <%= truns[i].name %></td>
          <td> <a href="/tasks/runs/<%= truns[i].id %>"><%= truns[i].id %></a></td>
-         <td> <%= id2username(truns[i].createdBy) %></td>
-         <td> <%= format_date(truns[i].timeCreated) %></td>
-         <td> <%= format_date(truns[i].timeModified) %></td>
+         <td> <%= truns[i].name %></td>
+         <td> <%= truns[i].description %></td>
          <td> <%= truns[i].status %></td>
+         <td> <%= truns[i].statusDetails %></td>
+         <td title="<%= truns[i].createdBy %>"> <%= id2username(truns[i].createdBy) %></td>
+         <td> <%= format_date(truns[i].timeCreated) %></td>
+         <td title="<%= truns[i].modifiedBy %>"> <%= id2username(truns[i].modifiedBy) %></td>
+         <td> <%= format_date(truns[i].timeModified) %></td>
       </tr>
       <% } %>
    </tbody>
