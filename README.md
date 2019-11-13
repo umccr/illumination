@@ -14,10 +14,17 @@ Currently supports most `GET` endpoints.
 Installation
 ------------
 
-1. Install `Node.js` from <https://nodejs.org/en/download>
-    * `brew install node`
-    * For development install [nodemon](https://www.npmjs.com/package/nodemon):
-      * `npm install -g nodemon`
+1. Install `Node.js` from <https://nodejs.org/en/download> if not already done
+
+```bash
+brew install node
+```
+
+```
+# check version
+$ node --version
+v11.6.0
+```
 
 2. Clone `illumination` repo and install dependencies
 
@@ -31,13 +38,13 @@ Running
 -------
 
 ```bash
-node app.js
+npm start
 ```
 
-For dev purposes:
+Or
 
 ```bash
-nodemon
+node app.js
 ```
 
 Routes
