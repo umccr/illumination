@@ -92,7 +92,6 @@ app.get("/tasks/runs/:runid", (req, res) => {
   });
 });
 
-
 app.get("/tasks/:taskid", (req, res) => {
   let opts = options;
   const taskid = req.params.taskid;
@@ -234,7 +233,6 @@ app.get("/workflows/runs/:runid/history", (req, res) => {
   });
 });
 
-
 app.get("/workflows/versions", (req, res) => {
   let opts = options;
   opts.url = "/workflows/versions";
@@ -254,8 +252,7 @@ app.get("/workflows/versions", (req, res) => {
       utils.print_error(error);
     }
   });
-
-})
+});
 
 app.get("/workflows/:workflowid", (req, res) => {
   let opts = options;
@@ -314,6 +311,78 @@ app.get("/workflows/:workflowid/versions/:versionid", (req, res) => {
     }
   });
 });
+
+//------------------------ Other Routes -------------------------------//
+
+app.get("/health", (req, res) => {
+  let opts = options;
+  opts.url = "/health";
+
+  request.get(opts, (error, response, body) => {
+    if (!error && response.statusCode == 200) {
+      res.render("health/health", {
+        health: body,
+        jsonSyntaxHighlight: utils.jsonSyntaxHighlight
+      });
+    } else {
+      utils.print_error(error);
+    }
+  });
+});
+
+app.get("/regions", (req, res) => {
+  let opts = options;
+  opts.url = "/regions";
+
+  request.get(opts, (error, response, body) => {
+    if (!error && response.statusCode == 200) {
+      res.render("regions/regions", {
+        regions: body,
+        jsonSyntaxHighlight: utils.jsonSyntaxHighlight
+      });
+    } else {
+      utils.print_error(error);
+    }
+  });
+});
+
+app.get("/usages", (req, res) => {
+  let opts = options;
+  opts.url = "/usages";
+  opts.qs = {
+    periods: 3
+  };
+
+  request.get(opts, (error, response, body) => {
+    if (!error && response.statusCode == 200) {
+      res.send(body);
+      // res.render("usages/usages", {
+        // b: body
+        // jsonSyntaxHighlight: utils.jsonSyntaxHighlight
+      // });
+    } else {
+      utils.print_error(error);
+    }
+  });
+});
+
+// NOT RESPONSIVE
+// app.get("/workgroups", (req, res) => {
+//   let opts = options;
+//   opts.url = "/workgroups";
+
+//   request.get(opts, (error, response, body) => {
+//     if (!error && response.statusCode == 200) {
+//       res.send(req);
+//       // res.render("usages/usages", {
+//       //   regions: body,
+//       //   jsonSyntaxHighlight: utils.jsonSyntaxHighlight
+//       // });
+//     } else {
+//       utils.print_error(error);
+//     }
+//   });
+// });
 
 app.get("*", (req, res) => {
   res.send("Oops. Wrong URL!");
