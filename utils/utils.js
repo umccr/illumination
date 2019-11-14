@@ -1,15 +1,15 @@
-format_date = function(date) {
+const format_date = function(date) {
   // remove milliseconds
   let d = new Date(Date.parse(date));
   return d.toISOString().split(".")[0] + "Z";
 };
 
-print_error = function(e) {
+const print_error = function(e) {
   console.log(`There was an error ${e}`);
 };
 
 // From: https://stackoverflow.com/questions/4810841/how-can-i-pretty-print-json-using-javascript
-jsonSyntaxHighlight = function(json) {
+const jsonSyntaxHighlight = function(json) {
   json = json
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")

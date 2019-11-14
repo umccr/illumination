@@ -3,7 +3,7 @@ const yaml = require("js-yaml"),
 
 const base_url = "https://aps2.platform.illumina.com/v1";
 
-id2username = function(id) {
+const id2username = function(id) {
   let username = {
     "567d89e4-de8b-3688-a733-d2a979eb510e": "PD",
     "7eec7332-f780-3edc-bb70-c4f711398f1c": "RV",
@@ -15,7 +15,7 @@ id2username = function(id) {
   return username[id];
 };
 
-read_iap_token = function(t) {
+const read_iap_token = function(t) {
   let token;
   try {
     token = yaml.safeLoad(fs.readFileSync(t, "utf8"));
@@ -26,7 +26,7 @@ read_iap_token = function(t) {
   return token;
 };
 
-total_period_usage = function(periods) {
+const total_period_usage = function(periods) {
   let arr = [];
   for (let p = 0; p < periods.length; p++) {
     let x = periods[p];
@@ -50,7 +50,7 @@ total_period_usage = function(periods) {
   return arr;
 };
 
-user_aggregated_period_usage = function(periods) {
+const user_aggregated_period_usage = function(periods) {
   let arr = [];
   for (let p = 0; p < periods.length; p++) {
     let x = periods[p];
