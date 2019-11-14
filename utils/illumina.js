@@ -26,47 +26,53 @@ read_iap_token = function(t) {
   return token;
 };
 
-total_period_usage = function(x) {
-  // grab "totalPeriodUsage" element from each array element
-  let pn = x["periodName"];
-  let ps = x["start"];
-  let pe = x["end"];
-  let tot = x["totalPeriodUsage"];
+total_period_usage = function(periods) {
   let arr = [];
+  for (let p = 0; p < periods.length; p++) {
+    let x = periods[p];
+    let pn = x["periodName"];
+    let ps = x["start"];
+    let pe = x["end"];
+    let tot = x["totalPeriodUsage"];
 
-  tot.forEach(t => {
-    arr.push({
-      periodName: pn,
-      periodStart: ps,
-      periodEnd: pe,
-      product: t["productName"],
-      amount: `${t["amount"]} ${t["unit"]}`
-    });
-  });
-  return arr;
-};
-
-user_aggregated_usage = function(x) {
-  let pn = x["periodName"];
-  let ps = x["start"];
-  let pe = x["end"];
-  let users = x["userAggregatedUsage"];
-  let arr = [];
-
-  for (let i = 0; i < users.length; i++) {
-    for (let y = 0; y < users[i]["productUsages"].length; y++) {
-      arr.push({
-        userFullName: users[i]["user"]["fullName"],
-        userName: users[i]["user"]["userName"],
-        productName: users[i]["productUsages"][y]["productName"],
-        amount: users[i]["productUsages"][y]["amount"],
-        periodName: pn,
-        periodStart: ps,
-        periodEnd: pe
+    for (let i = 0; i < tot.length; i++) {
+      tot.forEach(t => {
+        arr.push({
+          periodName: pn,
+          periodStart: ps,
+          periodEnd: pe,
+          product: t["productName"],
+          amount: `${t["amount"]} ${t["unit"]}`
+        });
       });
     }
   }
+  return arr;
+};
 
+user_aggregated_period_usage = function(periods) {
+  let arr = [];
+  for (let p = 0; p < periods.length; p++) {
+    let x = periods[p];
+    let pn = x["periodName"];
+    let ps = x["start"];
+    let pe = x["end"];
+    let users = x["userAggregatedUsage"];
+
+    for (let i = 0; i < users.length; i++) {
+      for (let y = 0; y < users[i]["productUsages"].length; y++) {
+        arr.push({
+          userFullName: users[i]["user"]["fullName"],
+          userName: users[i]["user"]["userName"],
+          productName: users[i]["productUsages"][y]["productName"],
+          amount: users[i]["productUsages"][y]["amount"],
+          periodName: pn,
+          periodStart: ps,
+          periodEnd: pe
+        });
+      }
+    }
+  }
   return arr;
 };
 
@@ -75,5 +81,5 @@ module.exports = {
   base_url: base_url,
   id2username: id2username,
   total_period_usage: total_period_usage,
-  user_aggregated_usage: user_aggregated_usage
+  user_aggregated_period_usage: user_aggregated_period_usage
 };

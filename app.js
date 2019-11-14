@@ -355,11 +355,10 @@ app.get("/usages", (req, res) => {
 
   request.get(opts, (error, response, body) => {
     if (!error && response.statusCode == 200) {
-      res.send(body);
-      // res.render("usages/usages", {
-        // b: body
-        // jsonSyntaxHighlight: utils.jsonSyntaxHighlight
-      // });
+      // res.send(body);
+      res.render("usages/usages", {
+        b: body
+      });
     } else {
       utils.print_error(error);
     }

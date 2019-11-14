@@ -1,0 +1,10 @@
+<% include ../partials/header %>
+<ul>
+    <li>List of available regions</li>
+</ul>
+
+<pre>
+<%- jsonSyntaxHighlight(JSON.stringify(regions, null, 2)) %>
+</pre>
+
+<% include ../partials/footer %>

@@ -1,0 +1,35 @@
+<% include ../partials/header %>
+
+<h1>Health status for all services</h1>
+<h2>Status: <%= health["status"]; %></h2>
+
+<table id="health_table" class="cell-border display compact">
+   <thead>
+      <tr>
+         <th>N</th>
+         <th>Name</th>
+         <th>Status</th>
+         <th>Version</th>
+      </tr>
+   </thead>
+   <tbody>
+
+      <% h = health["details"]; %>
+      <% for (let i = 0; i < h.length; i++) { %>
+      <tr>
+         <td> <%= `${i + 1}.` %></td>
+         <td> <%= h[i].name %></td>
+         <td> <%= h[i].status %></td>
+         <td> <%= h[i].version %></td>
+      </tr>
+      <% } %>
+   </tbody>
+</table>
+
+<script>
+   $(document).ready(function () {
+      $('#health_table').DataTable();
+   });
+</script>
+
+<% include ../partials/footer %>
