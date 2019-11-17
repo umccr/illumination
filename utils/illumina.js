@@ -1,7 +1,7 @@
 const yaml = require("js-yaml"),
-  fs = require("fs");
-
-const base_url = "https://aps2.platform.illumina.com/v1";
+  fs = require("fs"),
+  path = require("path"),
+  os = require("os");
 
 const id2username = function(id) {
   let username = {
@@ -15,16 +15,39 @@ const id2username = function(id) {
   return username[id];
 };
 
-const read_iap_token = function(t) {
-  let token;
-  try {
-    token = yaml.safeLoad(fs.readFileSync(t, "utf8"));
-    token = token["access-token"];
-  } catch (e) {
-    console.log(e);
-  }
-  return token;
+const base_url = function() {
+  return "https://aps2.platform.illumina.com/v1";
 };
+
+const token = function() {
+  const session_yaml = path.join(os.homedir(), ".iap/.session.yaml");
+
+  const read_iap_token = function(y) {
+    let token;
+    try {
+      token = yaml.safeLoad(fs.readFileSync(y, "utf8"));
+      token = token["access-token"];
+    } catch (e) {
+      console.log(e);
+    }
+    return token;
+  };
+  return read_iap_token(session_yaml);
+};
+
+const request_opts = function() {
+  const base_url = module.exports.base_url();
+  const t = module.exports.token();
+  return {
+    headers: {
+      Authorization: `Bearer ${t}`,
+      "Content-Type": "application/json"
+    },
+    baseUrl: base_url,
+    json: true
+  };
+};
+
 
 const total_period_usage = function(periods) {
   let arr = [];
@@ -77,8 +100,9 @@ const user_aggregated_period_usage = function(periods) {
 };
 
 module.exports = {
-  read_iap_token: read_iap_token,
+  token: token,
   base_url: base_url,
+  request_opts: request_opts,
   id2username: id2username,
   total_period_usage: total_period_usage,
   user_aggregated_period_usage: user_aggregated_period_usage
