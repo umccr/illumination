@@ -66,5 +66,8 @@ Routes
   { path: '/workflows/:workflowid', methods: [ 'GET' ] },
   { path: '/workflows/:workflowid/versions', methods: [ 'GET' ] },
   { path: '/workflows/:workflowid/versions/:versionid', methods: [ 'GET' ] },
+  { path: '/usages', methods: [ 'GET' ] },
+  { path: '/health', methods: [ 'GET' ] },
+  { path: '/regions', methods: [ 'GET' ] },
   { path: '*', methods: [ 'GET' ] } ]
 ```
