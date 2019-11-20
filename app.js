@@ -7,7 +7,8 @@ const indexRouter = require("./routes/index"),
   workflowsRouter = require("./routes/workflows"),
   usagesRouter = require("./routes/usages"),
   healthRouter = require("./routes/health"),
-  regionsRouter = require("./routes/regions");
+  regionsRouter = require("./routes/regions"),
+  subscriptionsRouter = require("./routes/subscriptions");
 
 // const listEndpoints = require('express-list-endpoints');
 
@@ -22,6 +23,7 @@ app.use("/workflows", workflowsRouter);
 app.use("/usages", usagesRouter);
 app.use("/health", healthRouter);
 app.use("/regions", regionsRouter);
+app.use("/subscriptions", subscriptionsRouter);
 
 app.get("*", (req, res) => {
   res.send("Oooooops. Wrong URL!");
