@@ -99,11 +99,26 @@ Returns Task Run ID.
 
 
 ## Workflows
-* Workflow
-* Workflow Version
+* Workflow: just a template with substitutions
+* Workflow Version: filled-in template
+* Workflow Run
 
 ### Create Workflow (`POST /workflows`)
-Returns Workflow ID
+Returns Workflow ID (+ versino ID if `workflowVersion` provided)
+
+* name (*)
+* description
+* organization
+* category
+* workflowVersion
+  * version (*)
+  * description
+  * language
+    * name (*)
+    * version
+  * definition
+  * acl
+* acl
 
 ### Create Workflow Version (`POST /workflows/<workflowid>`)
 
