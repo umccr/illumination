@@ -71,6 +71,8 @@ Routes
   { path: '/usages', methods: [ 'GET' ] },
   { path: '/health', methods: [ 'GET' ] },
   { path: '/regions', methods: [ 'GET' ] },
+  { path: '/volumes', methods: [ 'GET' ] },
+  { path: '/volumes/:volumeid', methods: [ 'GET' ] },
   { path: '/subscriptions', methods: [ 'GET' ] },
   { path: '/subscriptions/:subscriptionid', methods: [ 'GET' ] },
   { path: '*', methods: [ 'GET' ] } ]

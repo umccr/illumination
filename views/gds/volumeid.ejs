@@ -1,0 +1,11 @@
+<% include ../partials/header %>
+
+<ul>
+  <li><%= `Info about volume with ID (or name) ${volid}` %></li>
+</ul>
+
+<pre>
+<%- jsonSyntaxHighlight(JSON.stringify(vinfo, null, 2)) %>
+</pre>
+
+<% include ../partials/footer %>
