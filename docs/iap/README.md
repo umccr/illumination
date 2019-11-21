@@ -10,6 +10,7 @@ IAP Documentation Notes
   - [Workflows](#workflows)
     - [Create Workflow (`POST /workflows`)](#create-workflow-post-workflows)
     - [Create Workflow Version (`POST /workflows/<workflowid>`)](#create-workflow-version-post-workflowsworkflowid)
+    - [Launch Workflow Version (`POST /workflows/<workflowid>/versons/<version-name>:launch`)](#launch-workflow-version-post-workflowsworkflowidversonsversion-namelaunch)
   - [DRAGEN Trio](#dragen-trio)
   - [DRAGEN Tumor-Normal](#dragen-tumor-normal)
 
@@ -21,7 +22,7 @@ IAP Documentation Notes
 ### Create Task (`POST /tasks`)
 Returns Task ID (+ version ID if `taskVersions` provided)
 
-* name (*)
+* name (req)
 * description
 * acl
 * taskVersions (similar/same structure as `POST /tasks/<taskid>/versions`)
@@ -34,7 +35,7 @@ Returns Task Run ID
 * acl
 * execution
   * image
-    * name (*)
+    * name (req)
     * tag
     * digest
     * credentials
@@ -60,12 +61,12 @@ Returns Task Run ID
 Creates new Task Version within an existing task with Task ID `<taskid>`.
 Returns Task Version ID.
 
-* version (*)
+* version (req)
 * description
 * acl
 * execution
   * image
-    * name (*)
+    * name (req)
     * tag
     * digest
     * credentials
@@ -104,23 +105,36 @@ Returns Task Run ID.
 * Workflow Run
 
 ### Create Workflow (`POST /workflows`)
-Returns Workflow ID (+ versino ID if `workflowVersion` provided)
+Returns Workflow ID (+ version ID if `workflowVersion` provided)
 
-* name (*)
+* name (req)
 * description
 * organization
 * category
 * workflowVersion
-  * version (*)
+  * version (req)
   * description
   * language
-    * name (*)
+    * name (req)
     * version
   * definition
   * acl
 * acl
 
 ### Create Workflow Version (`POST /workflows/<workflowid>`)
+
+* version (req)
+* description
+* language
+  * name (req)
+  * version
+* definition
+* acl
+
+### Launch Workflow Version (`POST /workflows/<workflowid>/versons/<version-name>:launch`)
+
+* name (req)
+* input
 
 ## DRAGEN Trio
 
