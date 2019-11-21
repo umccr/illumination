@@ -9,24 +9,32 @@
         </div>
     </header>
 
-    <h2>TASKS</h2>
-
-    <p><a class="btn btn-primary btn-lg" href="/tasks">Tasks</a></p>
-    <p><a class="btn btn-success btn-lg" href="/tasks/runs">Task Runs</a></p>
-
-    <h2>WORKFLOWS</h2>
-
-    <p><a class="btn btn-primary btn-lg" href="/workflows">Workflows</a></p>
-    <p><a class="btn btn-success btn-lg" href="/workflows/runs">Workflow Runs</a></p>
-    <p><a class="btn btn-warning btn-lg" href="/workflows/versions">Workflow Versions</a></p>
-
-    <h2>OTHER</h2>
-    <p><a class="btn btn-warning btn-lg" href="/usages">Usages</a></p>
-    <p><a class="btn btn-primary btn-lg" href="/health">Health Status</a></p>
-
-    <h2>ENS</h2>
-    <p><a class="btn btn-primary btn-lg" href="/subscriptions">Subscriptions</a></p>
-
+    <div class="container">
+        <div class="row">
+            <div class="col mx-2">
+                <h2>TES</h2>
+                <p><a class="btn btn-primary btn-lg" href="/tasks">Tasks</a></p>
+                <p><a class="btn btn-success btn-lg" href="/tasks/runs">Task Runs</a></p>
+            </div>
+            <div class="col mx-2">
+                <h2>WES</h2>
+                <p><a class="btn btn-primary btn-lg" href="/workflows">Workflows</a></p>
+                <p><a class="btn btn-success btn-lg" href="/workflows/runs">Workflow Runs</a></p>
+                <p><a class="btn btn-warning btn-lg" href="/workflows/versions">Workflow Versions</a></p>
+                <p><a class="btn btn-warning btn-lg" href="/workflows/signals">Workflow Signals (nothing yet)</a></p>
+            </div>
+            <div class="col mx-2">
+                <h2>ENS</h2>
+                <p><a class="btn btn-primary btn-lg" href="/subscriptions">Subscriptions</a></p>
+            </div>
+            <div class="col mx-2">
+                <h2>OTHER</h2>
+                <p><a class="btn btn-primary btn-lg" href="/health">Health Status</a></p>
+                <p><a class="btn btn-success btn-lg" href="/usages">Usages</a></p>
+                <p><a class="btn btn-warning btn-lg" href="/regions">Regions (nothing yet)</a></p>
+            </div>
+        </div>
+    </div>
 </div>
 
 <% include partials/footer %>

@@ -63,6 +63,8 @@ Routes
   { path: '/workflows/runs/:runid', methods: [ 'GET' ] },
   { path: '/workflows/runs/:runid/history', methods: [ 'GET' ] },
   { path: '/workflows/versions', methods: [ 'GET' ] },
+  { path: '/workflows/signals', methods: [ 'GET' ] },
+  { path: '/workflows/signals/:signalid', methods: [ 'GET' ] },
   { path: '/workflows/:workflowid', methods: [ 'GET' ] },
   { path: '/workflows/:workflowid/versions', methods: [ 'GET' ] },
   { path: '/workflows/:workflowid/versions/:versionid', methods: [ 'GET' ] },

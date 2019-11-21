@@ -109,6 +109,45 @@ router.get("/versions", (req, res) => {
   });
 });
 
+router.get("/signals", (req, res) => {
+  let opts = request_opts;
+  opts.url = "/workflows/signals";
+  opts.qs = {
+    pageSize: pageSize,
+    sort: "timeCreated desc"
+  };
+
+  request.get(opts, (error, response, body) => {
+    if (!error && response.statusCode == 200) {
+      res.render("wes/workflowsignals", {
+        signals: body,
+        jsonSyntaxHighlight: utils.jsonSyntaxHighlight
+      });
+    } else {
+      utils.print_error(error);
+    }
+  });
+});
+
+router.get("/signals/:signalid", (req, res) => {
+  let opts = request_opts;
+  const signalid = req.params.signalid;
+  opts.url = `/workflows/signals/${signalid}`;
+
+  request.get(opts, (error, response, body) => {
+    if (!error && response.statusCode == 200) {
+      res.render("wes/workflowsignalid", {
+        signal: body,
+        signalid: signalid,
+        jsonSyntaxHighlight: utils.jsonSyntaxHighlight
+      });
+    } else {
+      utils.print_error(error);
+    }
+  });
+});
+
+
 router.get("/:workflowid", (req, res) => {
   let opts = request_opts;
   const wflowid = req.params.workflowid;

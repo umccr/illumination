@@ -1,0 +1,11 @@
+<% include ../partials/header %>
+
+<ul>
+  <li><%= `Info about Workflow Signal with ID ${signalid}` %></li>
+</ul>
+
+<pre>
+<%- jsonSyntaxHighlight(JSON.stringify(signal, null, 2)) %>
+</pre>
+
+<% include ../partials/footer %>
