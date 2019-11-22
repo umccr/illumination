@@ -7,21 +7,23 @@ Illumination
   - [Routes](#routes)
 
 Node.js Express app that interacts with the Illumina Stratus API.
-Currently supports most `GET` endpoints.
+Currently supports only `GET` endpoints.
 
-<img src="https://i.postimg.cc/9fxp6Vds/illumination-home.png" alt="illumination home" height="500">
+<img src="https://i.postimg.cc/JzWnLPZj/illumination-home.png" alt="illumination home" height="500">
 
 Installation
 ------------
 
-1. Install `Node.js` from <https://nodejs.org/en/download> if not already done
+1. Install `Node.js` from <https://nodejs.org/en/download> if not already done.
+
+e.g.:
 
 ```bash
 brew install node
 ```
 
 ```
-# check version
+# check that it works
 $ node --version
 v11.6.0
 ```
@@ -47,8 +49,8 @@ Or
 node app.js
 ```
 
-Routes
-------
+Routes Supported
+----------------
 
 ```js
 [ { path: '/', methods: [ 'GET' ] },
@@ -71,6 +73,8 @@ Routes
   { path: '/usages', methods: [ 'GET' ] },
   { path: '/health', methods: [ 'GET' ] },
   { path: '/regions', methods: [ 'GET' ] },
+  { path: '/files', methods: [ 'GET' ] },
+  { path: '/files/:fileid', methods: [ 'GET' ] },
   { path: '/volumes', methods: [ 'GET' ] },
   { path: '/volumes/:volumeid', methods: [ 'GET' ] },
   { path: '/subscriptions', methods: [ 'GET' ] },
