@@ -14,7 +14,7 @@ router.get("/", (req, res) => {
 
   request.get(opts, (error, response, body) => {
     if (!error && response.statusCode == 200) {
-      res.render("usages/usages", {
+      res.render("dcs/usages", {
         b: body,
         total_period_usage: illumina.total_period_usage,
         user_aggregated_period_usage: illumina.user_aggregated_period_usage

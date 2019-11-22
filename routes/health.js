@@ -11,7 +11,7 @@ router.get("/", (req, res) => {
 
   request.get(opts, (error, response, body) => {
     if (!error && response.statusCode == 200) {
-      res.render("health/health", {
+      res.render("dcs/health", {
         health: body,
         jsonSyntaxHighlight: utils.jsonSyntaxHighlight
       });
