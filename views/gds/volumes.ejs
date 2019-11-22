@@ -20,7 +20,7 @@
         <% for (let i = 0; i < vols.length; i++) { %>
         <tr>
             <td><%= `${i + 1}.` %></td>
-            <td><%= vols[i].name %></td>
+            <td><a href="/files?volume.name=<%= vols[i].name %>"><%= vols[i].name %></a></td>
             <td><a href="/volumes/<%= vols[i].id %>"><%= vols[i].id %></a></td>
             <td title="<%= vols[i].createdBy %>"> <%= id2username(vols[i].createdBy) %></td>
             <td><%= format_date(vols[i].timeCreated) %></td>

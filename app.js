@@ -8,6 +8,7 @@ const indexRouter = require("./routes/index"),
   usagesRouter = require("./routes/usages"),
   healthRouter = require("./routes/health"),
   regionsRouter = require("./routes/regions"),
+  filesRouter = require("./routes/files"),
   volumesRouter = require("./routes/volumes"),
   subscriptionsRouter = require("./routes/subscriptions");
 
@@ -24,6 +25,7 @@ app.use("/workflows", workflowsRouter);
 app.use("/usages", usagesRouter);
 app.use("/health", healthRouter);
 app.use("/regions", regionsRouter);
+app.use("/files", filesRouter);
 app.use("/volumes", volumesRouter);
 app.use("/subscriptions", subscriptionsRouter);
 

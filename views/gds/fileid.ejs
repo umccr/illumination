@@ -1,0 +1,12 @@
+<% include ../partials/header %>
+
+<ul>
+  <li><%= `Info about file with ID ${fileid}` %></li>
+</ul>
+
+<pre>
+<%- jsonSyntaxHighlight(JSON.stringify(finfo, null, 2)) %>
+</pre>
+
+<% include ../partials/footer %>
+
