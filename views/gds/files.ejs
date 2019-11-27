@@ -6,17 +6,17 @@
     <thead>
         <tr>
             <th>N</th>
-            <th>Name</th>
-            <th>ID</th>
             <th>Path</th>
+            <th>Name</th>
             <th>Size</th>
-            <th>IsUploaded</th>
-            <th>ArchiveStatus</th>
-            <th>StorageTier</th>
             <th>CreatedBy</th>
             <th>TimeCreated</th>
             <th>ModifiedBy</th>
             <th>TimeModified</th>
+            <th>ID</th>
+            <th>IsUploaded</th>
+            <th>ArchiveStatus</th>
+            <th>StorageTier</th>
         </tr>
     </thead>
     <tbody>
@@ -24,17 +24,17 @@
         <% for (let i = 0; i < fs.length; i++) { %>
         <tr>
             <td><%= `${i + 1}.` %></td>
-            <td><%= fs[i].name %></td>
-            <td><a href="/files/<%= fs[i].id %>"><%= fs[i].id %></a></td>
             <td><%= fs[i].path %></td>
+            <td><%= fs[i].name %></td>
             <td><%= format_bytes(fs[i].sizeInBytes) %></td>
-            <td><%= fs[i].isUploaded %></td>
-            <td><%= fs[i].archiveStatus %></td>
-            <td><%= fs[i].storageTier %></td>
             <td title="<%= fs[i].createdBy %>"> <%= id2username(fs[i].createdBy) %></td>
             <td><%= format_date(fs[i].timeCreated) %></td>
             <td title="<%= fs[i].modifiedBy %>"> <%= id2username(fs[i].modifiedBy) %></td>
             <td><%= format_date(fs[i].timeModified) %></td>
+            <td><a href="/files/<%= fs[i].id %>"><%= fs[i].id %></a></td>
+            <td><%= fs[i].isUploaded %></td>
+            <td><%= fs[i].archiveStatus %></td>
+            <td><%= fs[i].storageTier %></td>
         </tr>
         <% } %>
     </tbody>
@@ -44,7 +44,7 @@
     $(document).ready(function () {
         $('#file_table').DataTable({
      "columnDefs": [
-       { "type": "file-size", "targets": 4 }
+       { "type": "file-size", "targets": 3 }
      ]
   });
     });
