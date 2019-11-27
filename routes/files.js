@@ -19,7 +19,8 @@ router.get("/", (req, res) => {
         files: body,
         vname: opts.qs["volume.name"],
         id2username: illumina.id2username,
-        format_date: utils.format_date
+        format_date: utils.format_date,
+        format_bytes: utils.format_bytes
       });
     } else {
       utils.print_error(error);

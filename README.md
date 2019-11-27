@@ -4,7 +4,7 @@ Illumination
 - [Illumination](#illumination)
   - [Installation](#installation)
   - [Running](#running)
-  - [Routes](#routes)
+  - [Routes Supported](#routes-supported)
 
 Node.js Express app that interacts with the Illumina Stratus API.
 Currently supports only `GET` endpoints.

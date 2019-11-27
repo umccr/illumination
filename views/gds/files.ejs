@@ -9,7 +9,7 @@
             <th>Name</th>
             <th>ID</th>
             <th>Path</th>
-            <th>SizeBytes</th>
+            <th>Size</th>
             <th>IsUploaded</th>
             <th>ArchiveStatus</th>
             <th>StorageTier</th>
@@ -27,7 +27,7 @@
             <td><%= fs[i].name %></td>
             <td><a href="/files/<%= fs[i].id %>"><%= fs[i].id %></a></td>
             <td><%= fs[i].path %></td>
-            <td><%= fs[i].sizeInBytes %></td>
+            <td><%= format_bytes(fs[i].sizeInBytes) %></td>
             <td><%= fs[i].isUploaded %></td>
             <td><%= fs[i].archiveStatus %></td>
             <td><%= fs[i].storageTier %></td>
@@ -42,7 +42,11 @@
 
 <script>
     $(document).ready(function () {
-        $('#file_table').DataTable();
+        $('#file_table').DataTable({
+     "columnDefs": [
+       { "type": "file-size", "targets": 4 }
+     ]
+  });
     });
 </script>
 
