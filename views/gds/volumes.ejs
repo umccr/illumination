@@ -8,11 +8,11 @@
         <tr>
             <th>N</th>
             <th>Name</th>
-            <th>ID</th>
             <th>CreatedBy</th>
             <th>TimeCreated</th>
             <th>ModifiedBy</th>
             <th>TimeModified</th>
+            <th>ID</th>
         </tr>
     </thead>
     <tbody>
@@ -21,11 +21,11 @@
         <tr>
             <td><%= `${i + 1}.` %></td>
             <td><a href="/files?volume.name=<%= vols[i].name %>"><%= vols[i].name %></a></td>
-            <td><a href="/volumes/<%= vols[i].id %>"><%= vols[i].id %></a></td>
             <td title="<%= vols[i].createdBy %>"> <%= id2username(vols[i].createdBy) %></td>
             <td><%= format_date(vols[i].timeCreated) %></td>
             <td title="<%= vols[i].modifiedBy %>"> <%= id2username(vols[i].modifiedBy) %></td>
             <td><%= format_date(vols[i].timeModified) %></td>
+            <td><a href="/volumes/<%= vols[i].id %>"><%= vols[i].id %></a></td>
         </tr>
         <% } %>
     </tbody>

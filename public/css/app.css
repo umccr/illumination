@@ -12,3 +12,7 @@ pre {outline: 1px solid #ccc; padding: 5px; margin: 5px; white-space: pre-wrap;}
 .boolean { color: blue; }
 .null { color: magenta; }
 .key { color: red; }
+
+table {
+    font-family: Monaco, "Lucida Console", monospace;
+}
