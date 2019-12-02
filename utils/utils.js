@@ -1,7 +1,11 @@
 const format_date = function(date) {
-  // remove milliseconds
+  // convert UTC to AEST
   let d = new Date(Date.parse(date));
-  return d.toISOString().split(".")[0] + "Z";
+  return d.toLocaleString("en-AU", {
+    timeZone: "Australia/Melbourne",
+    timeZoneName: "short",
+    hour12: false
+  });
 };
 
 const print_error = function(e) {
@@ -36,14 +40,14 @@ const jsonSyntaxHighlight = function(json) {
 
 // https://stackoverflow.com/questions/15900485/correct-way-to-convert-size-in-bytes-to-kb-mb-gb-in-javascript/18650828/#18650828
 function format_bytes(bytes, decimals = 2) {
-  if (bytes === 0) return '0 B';
+  if (bytes === 0) return "0 B";
 
   const k = 1024;
   const dm = decimals < 0 ? 0 : decimals;
-  const sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+  const sizes = ["B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
   const i = Math.floor(Math.log(bytes) / Math.log(k));
 
-  return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+  return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + " " + sizes[i];
 }
 
 module.exports = {
