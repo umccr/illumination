@@ -2,42 +2,42 @@
 
 <h1>List of Subscriptions</h1>
 
-
 <table id="subs_table" class="cell-border display compact">
-    <thead>
-        <tr>
-            <th>N</th>
-            <th>Name</th>
-            <th>Description</th>
-            <th>ID</th>
-            <th>Type</th>
-            <th>Actions</th>
-            <th>CreatedBy</th>
-            <th>TimeCreated</th>
-        </tr>
-    </thead>
-    <tbody>
-        <% subs = subscriptions["items"] %>
-        <% for (let i = 0; i < subs.length; i++) { %>
-        <tr>
-            <td><%= `${i + 1}.` %></td>
-            <td><%= subs[i].name %></td>
-            <td><%= subs[i].description %></td>
-            <td><a href="/subscriptions/<%= subs[i].id %>"><%= subs[i].id %></a></td>
-            <td><%= subs[i].type %></td>
-            <td><%= subs[i].actions.join(", ") %></td>
-            <td title="<%= subs[i].createdByUserId %>"> <%= id2username(subs[i].createdByUserId) %></td>
-            <td><%= format_date(subs[i].timeCreated) %></td>
-        </tr>
-        <% } %>
-    </tbody>
+  <thead>
+    <tr>
+      <th>N</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>ID</th>
+      <th>Type</th>
+      <th>Actions</th>
+      <th>CreatedBy</th>
+      <th>TimeCreated</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% subs = subscriptions["items"] %> <% for (let i = 0; i < subs.length; i++)
+    { %>
+    <tr>
+      <td><%= `${i + 1}.` %></td>
+      <td><%= subs[i].name %></td>
+      <td><%= subs[i].description %></td>
+      <td><a href="/subscriptions/<%= subs[i].id %>"><%= subs[i].id %></a></td>
+      <td><%= subs[i].type %></td>
+      <td><%= subs[i].actions.join(", ") %></td>
+      <td title="<%= subs[i].createdByUserId %>">
+        <%= id2username(subs[i].createdByUserId) %>
+      </td>
+      <td><%= format_date(subs[i].timeCreated) %></td>
+    </tr>
+    <% } %>
+  </tbody>
 </table>
 
 <script>
-    $(document).ready(function () {
-        $('#subs_table').DataTable();
-    });
+  $(document).ready(function() {
+    $("#subs_table").DataTable();
+  });
 </script>
-
 
 <% include ../partials/footer %>

@@ -1,35 +1,32 @@
-<% include ../partials/header %>
-
-<% b = b["items"]; %>
+<% include ../partials/header %> <% b = b["items"]; %>
 
 <h2>Total Usage</h2>
 
 <% t = total_period_usage(b); %>
 
 <table id="tot_usage" class="cell-border display compact">
-    <thead>
-        <tr>
-            <th>N</th>
-            <th>Period</th>
-            <th>Start</th>
-            <th>End</th>
-            <th>Product</th>
-            <th>Amount</th>
-        </tr>
-    </thead>
-    <tbody>
-
-        <% for (let i = 0; i < t.length; i++) { %>
-        <tr>
-            <td> <%= `${i + 1}.` %></td>
-            <td> <%= t[i].periodName %></td>
-            <td> <%= t[i].periodStart %></td>
-            <td> <%= t[i].periodEnd %></td>
-            <td> <%= t[i].product %></td>
-            <td> <%= t[i].amount %></td>
-        </tr>
-        <% } %>
-    </tbody>
+  <thead>
+    <tr>
+      <th>N</th>
+      <th>Period</th>
+      <th>Start</th>
+      <th>End</th>
+      <th>Product</th>
+      <th>Amount</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% for (let i = 0; i < t.length; i++) { %>
+    <tr>
+      <td><%= `${i + 1}.` %></td>
+      <td><%= t[i].periodName %></td>
+      <td><%= t[i].periodStart %></td>
+      <td><%= t[i].periodEnd %></td>
+      <td><%= t[i].product %></td>
+      <td><%= t[i].amount %></td>
+    </tr>
+    <% } %>
+  </tbody>
 </table>
 
 <h2>User Usage</h2>
@@ -37,42 +34,40 @@
 <% u = user_aggregated_period_usage(b); %>
 
 <table id="user_usage" class="cell-border display compact">
-    <thead>
-        <tr>
-            <th>N</th>
-            <th>FullName</th>
-            <th>Product</th>
-            <th>Amount</th>
-            <th>Period</th>
-            <th>Start</th>
-            <th>End</th>
-        </tr>
-    </thead>
-    <tbody>
-
-        <% for (let i = 0; i < u.length; i++) { %>
-        <tr>
-            <td> <%= `${i + 1}.` %></td>
-            <td> <%= `${u[i].userFullName} (${u[i].userName})` %></td>
-            <td> <%= u[i].productName %></td>
-            <td> <%= u[i].amount %></td>
-            <td> <%= u[i].periodName %></td>
-            <td> <%= u[i].periodStart %></td>
-            <td> <%= u[i].periodEnd %></td>
-        </tr>
-        <% } %>
-    </tbody>
+  <thead>
+    <tr>
+      <th>N</th>
+      <th>FullName</th>
+      <th>Product</th>
+      <th>Amount</th>
+      <th>Period</th>
+      <th>Start</th>
+      <th>End</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% for (let i = 0; i < u.length; i++) { %>
+    <tr>
+      <td><%= `${i + 1}.` %></td>
+      <td><%= `${u[i].userFullName} (${u[i].userName})` %></td>
+      <td><%= u[i].productName %></td>
+      <td><%= u[i].amount %></td>
+      <td><%= u[i].periodName %></td>
+      <td><%= u[i].periodStart %></td>
+      <td><%= u[i].periodEnd %></td>
+    </tr>
+    <% } %>
+  </tbody>
 </table>
 
-
 <script>
-    $(document).ready(function () {
-        $('#tot_usage').DataTable();
-    });
+  $(document).ready(function() {
+    $("#tot_usage").DataTable();
+  });
 
-    $(document).ready(function () {
-        $('#user_usage').DataTable();
-    });
+  $(document).ready(function() {
+    $("#user_usage").DataTable();
+  });
 </script>
 
 <% include ../partials/footer %>

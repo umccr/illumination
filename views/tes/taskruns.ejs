@@ -3,44 +3,46 @@
 <h1>List of Task Runs</h1>
 
 <table id="taskrun_table" class="cell-border display compact">
-   <thead>
-      <tr>
-         <th>N</th>
-         <th>ID</th>
-         <th>Name</th>
-         <th>Description</th>
-         <th>Status</th>
-         <th>StatusDetails</th>
-         <th>CreatedBy</th>
-         <th>TimeCreated</th>
-         <th>ModifiedBy</th>
-         <th>TimeModified</th>
-      </tr>
-   </thead>
-   <tbody>
-
-      <% truns = truns["items"]; %>
-      <% for (let i = 0; i < truns.length; i++) { %>
-      <tr>
-         <td> <%= `${i + 1}.` %></td>
-         <td> <a href="/tasks/runs/<%= truns[i].id %>"><%= truns[i].id %></a></td>
-         <td> <%= truns[i].name %></td>
-         <td> <%= truns[i].description %></td>
-         <td> <%= truns[i].status %></td>
-         <td> <%= truns[i].statusDetails %></td>
-         <td title="<%= truns[i].createdBy %>"> <%= id2username(truns[i].createdBy) %></td>
-         <td> <%= format_date(truns[i].timeCreated) %></td>
-         <td title="<%= truns[i].modifiedBy %>"> <%= id2username(truns[i].modifiedBy) %></td>
-         <td> <%= format_date(truns[i].timeModified) %></td>
-      </tr>
-      <% } %>
-   </tbody>
+  <thead>
+    <tr>
+      <th>N</th>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Status</th>
+      <th>StatusDetails</th>
+      <th>CreatedBy</th>
+      <th>TimeCreated</th>
+      <th>ModifiedBy</th>
+      <th>TimeModified</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% truns = truns["items"]; %> <% for (let i = 0; i < truns.length; i++) { %>
+    <tr>
+      <td><%= `${i + 1}.` %></td>
+      <td><a href="/tasks/runs/<%= truns[i].id %>"><%= truns[i].id %></a></td>
+      <td><%= truns[i].name %></td>
+      <td><%= truns[i].description %></td>
+      <td><%= truns[i].status %></td>
+      <td><%= truns[i].statusDetails %></td>
+      <td title="<%= truns[i].createdBy %>">
+        <%= id2username(truns[i].createdBy) %>
+      </td>
+      <td><%= format_date(truns[i].timeCreated) %></td>
+      <td title="<%= truns[i].modifiedBy %>">
+        <%= id2username(truns[i].modifiedBy) %>
+      </td>
+      <td><%= format_date(truns[i].timeModified) %></td>
+    </tr>
+    <% } %>
+  </tbody>
 </table>
 
 <script>
-   $(document).ready(function () {
-      $('#taskrun_table').DataTable();
-   });
+  $(document).ready(function() {
+    $("#taskrun_table").DataTable();
+  });
 </script>
 
 <% include ../partials/footer %>

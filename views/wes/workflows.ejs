@@ -3,40 +3,43 @@
 <h1>List of Workflows</h1>
 
 <table id="workflow_table" class="cell-border display compact">
-   <thead>
-      <tr>
-         <th>N</th>
-         <th>ID</th>
-         <th>Name</th>
-         <th>Versions</th>
-         <th>CreatedBy</th>
-         <th>TimeCreated</th>
-         <th>ModifiedBy</th>
-         <th>TimeModified</th>
-      </tr>
-   </thead>
-   <tbody>
-
-      <% wflows = wflows["items"]; %>
-      <% for (let i = 0; i < wflows.length; i++) { %>
-      <tr>
-         <td> <%= `${i + 1}.` %></td>
-         <td> <a href="/workflows/<%= wflows[i].id %>"><%= wflows[i].id %></a></td>
-         <td> <%= wflows[i].name %></td>
-         <td> <a href="/workflows/<%= wflows[i].id %>/versions">versions</a></td>
-         <td title="<%= wflows[i].createdBy %>"> <%= id2username(wflows[i].createdBy) %></td>
-         <td> <%= format_date(wflows[i].timeCreated) %></td>
-         <td title="<%= wflows[i].modifiedBy %>"> <%= id2username(wflows[i].modifiedBy) %></td>
-         <td> <%= format_date(wflows[i].timeModified) %></td>
-      </tr>
-      <% } %>
-   </tbody>
+  <thead>
+    <tr>
+      <th>N</th>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Versions</th>
+      <th>CreatedBy</th>
+      <th>TimeCreated</th>
+      <th>ModifiedBy</th>
+      <th>TimeModified</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% wflows = wflows["items"]; %> <% for (let i = 0; i < wflows.length; i++) {
+    %>
+    <tr>
+      <td><%= `${i + 1}.` %></td>
+      <td><a href="/workflows/<%= wflows[i].id %>"><%= wflows[i].id %></a></td>
+      <td><%= wflows[i].name %></td>
+      <td><a href="/workflows/<%= wflows[i].id %>/versions">versions</a></td>
+      <td title="<%= wflows[i].createdBy %>">
+        <%= id2username(wflows[i].createdBy) %>
+      </td>
+      <td><%= format_date(wflows[i].timeCreated) %></td>
+      <td title="<%= wflows[i].modifiedBy %>">
+        <%= id2username(wflows[i].modifiedBy) %>
+      </td>
+      <td><%= format_date(wflows[i].timeModified) %></td>
+    </tr>
+    <% } %>
+  </tbody>
 </table>
 
 <script>
-   $(document).ready(function () {
-      $('#workflow_table').DataTable();
-   });
+  $(document).ready(function() {
+    $("#workflow_table").DataTable();
+  });
 </script>
 
 <% include ../partials/footer %>

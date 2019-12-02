@@ -1,44 +1,61 @@
 <% include partials/header %>
 
 <div class="container">
-
-    <header class="jumbotron">
-        <div class="container">
-            <h1>UMCCR Stratus Illumination</h1>
-            <p>Interacting with the Stratus API</p>
-        </div>
-    </header>
-
+  <header class="jumbotron">
     <div class="container">
-        <div class="row">
-            <div class="col mx-4">
-                <h2>TES</h2>
-                <p><a class="btn btn-primary btn-lg" href="/tasks">Tasks</a></p>
-                <p><a class="btn btn-success btn-lg" href="/tasks/runs">Task Runs</a></p>
-            </div>
-            <div class="col mx-4">
-                <h2>WES</h2>
-                <p><a class="btn btn-primary btn-lg" href="/workflows">Workflows</a></p>
-                <p><a class="btn btn-success btn-lg" href="/workflows/runs">Workflow Runs</a></p>
-                <p><a class="btn btn-warning btn-lg" href="/workflows/versions">Workflow Versions</a></p>
-                <p><a class="btn btn-secondary btn-lg" href="/workflows/signals">Workflow Signals</a></p>
-            </div>
-            <div class="col mx-4">
-                <h2>GDS</h2>
-                <p><a class="btn btn-primary btn-lg" href="/volumes">Volumes</a></p>
-            </div>
-            <div class="col mx-4">
-                <h2>ENS</h2>
-                <p><a class="btn btn-primary btn-lg" href="/subscriptions">Subscriptions</a></p>
-                <br>
-                <br>
-                <h2>DCS</h2>
-                <p><a class="btn btn-primary btn-lg" href="/health">Health</a></p>
-                <p><a class="btn btn-success btn-lg" href="/usages">Usages</a></p>
-                <p><a class="btn btn-secondary btn-lg" href="/regions">Regions</a></p>
-            </div>
-        </div>
+      <h1>UMCCR Stratus Illumination</h1>
+      <p>Interacting with the Stratus API</p>
     </div>
+  </header>
+
+  <div class="container">
+    <div class="row">
+      <div class="col mx-4">
+        <h2>TES</h2>
+        <p><a class="btn btn-primary btn-lg" href="/tasks">Tasks</a></p>
+        <p>
+          <a class="btn btn-success btn-lg" href="/tasks/runs">Task Runs</a>
+        </p>
+      </div>
+      <div class="col mx-4">
+        <h2>WES</h2>
+        <p><a class="btn btn-primary btn-lg" href="/workflows">Workflows</a></p>
+        <p>
+          <a class="btn btn-success btn-lg" href="/workflows/runs"
+            >Workflow Runs</a
+          >
+        </p>
+        <p>
+          <a class="btn btn-warning btn-lg" href="/workflows/versions"
+            >Workflow Versions</a
+          >
+        </p>
+        <p>
+          <a class="btn btn-secondary btn-lg" href="/workflows/signals"
+            >Workflow Signals</a
+          >
+        </p>
+      </div>
+      <div class="col mx-4">
+        <h2>GDS</h2>
+        <p><a class="btn btn-primary btn-lg" href="/volumes">Volumes</a></p>
+      </div>
+      <div class="col mx-4">
+        <h2>ENS</h2>
+        <p>
+          <a class="btn btn-primary btn-lg" href="/subscriptions"
+            >Subscriptions</a
+          >
+        </p>
+        <br />
+        <br />
+        <h2>DCS</h2>
+        <p><a class="btn btn-primary btn-lg" href="/health">Health</a></p>
+        <p><a class="btn btn-success btn-lg" href="/usages">Usages</a></p>
+        <p><a class="btn btn-secondary btn-lg" href="/regions">Regions</a></p>
+      </div>
+    </div>
+  </div>
 </div>
 
 <% include partials/footer %>

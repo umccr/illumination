@@ -48,7 +48,6 @@ const request_opts = function() {
   };
 };
 
-
 const total_period_usage = function(periods) {
   let arr = [];
   for (let p = 0; p < periods.length; p++) {

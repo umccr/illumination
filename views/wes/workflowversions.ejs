@@ -3,43 +3,51 @@
 <h1><%= `Workflow Versions for Workflow with ID ${workflowid}` %></h1>
 
 <table id="version_table" class="cell-border display compact">
-
-    <thead>
-        <tr>
-            <th>N</th>
-            <th>ID</th>
-            <th>Version</th>
-            <th>Language</th>
-            <th>Status</th>
-            <th>CreatedBy</th>
-            <th>TimeCreated</th>
-            <th>ModifiedBy</th>
-            <th>TimeModified</th>
-        </tr>
-    </thead>
-    <tbody>
-        <% versions = versions["items"]; %>
-        <% for (let i = 0; i < versions.length; i++) { %>
-        <tr>
-            <td> <%= `${i + 1}.` %> </td>
-            <td> <%= versions[i].id %> </td>
-            <td> <a href="/workflows/<%= workflowid %>/versions/<%= versions[i].version %>"> <%= versions[i].version %> </a></td>
-            <td><%= versions[i].language.name %></td>
-            <td><%= versions[i].status %></td>
-            <td title="<%= versions[i].createdBy %>"> <%= id2username(versions[i].createdBy) %></td>
-            <td> <%= format_date(versions[i].timeCreated) %></td>
-            <td title="<%= versions[i].modifiedBy %>"> <%= id2username(versions[i].modifiedBy) %></td>
-            <td> <%= format_date(versions[i].timeModified) %></td>
-        </tr>
-        <% } %>
-    </tbody>
+  <thead>
+    <tr>
+      <th>N</th>
+      <th>ID</th>
+      <th>Version</th>
+      <th>Language</th>
+      <th>Status</th>
+      <th>CreatedBy</th>
+      <th>TimeCreated</th>
+      <th>ModifiedBy</th>
+      <th>TimeModified</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% versions = versions["items"]; %> <% for (let i = 0; i < versions.length;
+    i++) { %>
+    <tr>
+      <td><%= `${i + 1}.` %></td>
+      <td><%= versions[i].id %></td>
+      <td>
+        <a
+          href="/workflows/<%= workflowid %>/versions/<%= versions[i].version %>"
+        >
+          <%= versions[i].version %>
+        </a>
+      </td>
+      <td><%= versions[i].language.name %></td>
+      <td><%= versions[i].status %></td>
+      <td title="<%= versions[i].createdBy %>">
+        <%= id2username(versions[i].createdBy) %>
+      </td>
+      <td><%= format_date(versions[i].timeCreated) %></td>
+      <td title="<%= versions[i].modifiedBy %>">
+        <%= id2username(versions[i].modifiedBy) %>
+      </td>
+      <td><%= format_date(versions[i].timeModified) %></td>
+    </tr>
+    <% } %>
+  </tbody>
 </table>
 
 <script>
-   $(document).ready(function () {
-      $('#version_table').DataTable();
-   });
+  $(document).ready(function() {
+    $("#version_table").DataTable();
+  });
 </script>
-
 
 <% include ../partials/footer %>
