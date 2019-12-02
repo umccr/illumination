@@ -21,17 +21,17 @@ const jsonSyntaxHighlight = function(json) {
   return json.replace(
     /("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g,
     function(match) {
-      var cls = "number";
+      var cls = "number_pre";
       if (/^"/.test(match)) {
         if (/:$/.test(match)) {
-          cls = "key";
+          cls = "key_pre";
         } else {
-          cls = "string";
+          cls = "string_pre";
         }
       } else if (/true|false/.test(match)) {
-        cls = "boolean";
+        cls = "boolean_pre";
       } else if (/null/.test(match)) {
-        cls = "null";
+        cls = "null_pre";
       }
       return '<span class="' + cls + '">' + match + "</span>";
     }

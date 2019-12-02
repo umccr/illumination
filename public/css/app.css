@@ -1,18 +1,33 @@
 #footer {
-    position:fixed;
-    left:20px;
-    bottom:0px;
-    height:30px;
-    width:100%;
+  position: fixed;
+  left: 20px;
+  bottom: 0px;
+  height: 30px;
+  width: 100%;
 }
 
-pre {outline: 1px solid #ccc; padding: 5px; margin: 5px; white-space: pre-wrap;}
-.string { color: green; }
-.number { color: darkorange; }
-.boolean { color: blue; }
-.null { color: magenta; }
-.key { color: red; }
+pre {
+  outline: 1px solid #ccc;
+  padding: 5px;
+  margin: 5px;
+  white-space: pre-wrap;
+}
+.string_pre {
+  color: green;
+}
+.number_pre {
+  color: darkorange;
+}
+.boolean_pre {
+  color: blue;
+}
+.null_pre {
+  color: magenta;
+}
+.key_pre {
+  color: red;
+}
 
 table {
-    font-family: Monaco, "Lucida Console", monospace;
+  font-family: Monaco, "Lucida Console", monospace;
 }
