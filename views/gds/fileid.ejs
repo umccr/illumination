@@ -4,6 +4,10 @@
   <li><%= `Info about file with ID ${fileid}` %></li>
 </ul>
 
+<ul>
+  <li><a href="<%= finfo.presignedUrl %>">Presigned URL</a></li>
+</ul>
+
 <pre>
 <%- jsonSyntaxHighlight(JSON.stringify(finfo, null, 2)) %>
 </pre>

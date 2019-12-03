@@ -30,7 +30,7 @@ app.use("/volumes", volumesRouter);
 app.use("/subscriptions", subscriptionsRouter);
 
 app.get("*", (req, res) => {
-  res.send("Oooooops. Wrong URL!");
+  res.status(404).render("404");
 });
 
 // console.log(listEndpoints(app));
