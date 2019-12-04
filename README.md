@@ -5,6 +5,7 @@ Illumination
   - [Installation](#installation)
   - [Running](#running)
   - [Routes Supported](#routes-supported)
+  - [Docker](#docker)
 
 Node.js Express app that interacts with the Illumina Stratus API.
 Currently supports only `GET` endpoints.
@@ -73,4 +74,17 @@ Routes Supported
   { path: '/subscriptions', methods: [ 'GET' ] },
   { path: '/subscriptions/:subscriptionid', methods: [ 'GET' ] },
   { path: '*', methods: [ 'GET' ] } ]
+```
+
+Docker
+------
+
+```
+# build the image
+docker build -t umccr/illumination:latest .
+
+# set your IAP access token
+export IAP_TOKEN='...'
+# run the container
+docker run --rm --env IAP_TOKEN -p 3000:3000 umccr/illumination:latest
 ```

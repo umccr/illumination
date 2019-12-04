@@ -4,9 +4,7 @@ const request = require("request"),
   utils = require("../../utils/utils"),
   illumina = require("../../utils/illumina");
 
-const token = illumina.read_iap_token(
-  path.join(os.homedir(), ".iap/.session.yaml")
-);
+const token = illumina.token;
 
 let options = {
   headers: {
