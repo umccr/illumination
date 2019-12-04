@@ -15,32 +15,33 @@ const id2username = function(id) {
   return username[id];
 };
 
-const base_url = function() {
-  return "https://aps2.platform.illumina.com/v1";
-};
+const base_url = "https://aps2.platform.illumina.com/v1";
 
-const token = function() {
-  const session_yaml = path.join(os.homedir(), ".iap/.session.yaml");
-
-  const read_iap_token = function(y) {
-    let token;
+const token = (function() {
+  console.log("Loading IAP token");
+  let token;
+  token = process.env.IAP_TOKEN;
+  if (token) {
+    console.log("Using token from ENV");
+  } else {
     try {
-      token = yaml.safeLoad(fs.readFileSync(y, "utf8"));
+      var session_file = path.join(os.homedir(), ".iap/.session.yaml")
+      token = yaml.safeLoad(fs.readFileSync(session_file, "utf8"));
       token = token["access-token"];
     } catch (e) {
       console.log(e);
     }
-    return token;
-  };
-  return read_iap_token(session_yaml);
-};
+    console.log("Using token from session file");
+  }
+  return token;
+})();
 
 const request_opts = function() {
-  const base_url = module.exports.base_url();
-  const t = module.exports.token();
+  // const base_url = module.exports.base_url;
+  // const t = module.exports.token;
   return {
     headers: {
-      Authorization: `Bearer ${t}`,
+      Authorization: `Bearer ${token}`,
       "Content-Type": "application/json"
     },
     baseUrl: base_url,
