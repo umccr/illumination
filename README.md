@@ -14,21 +14,20 @@ Currently supports only `GET` endpoints.
 Installation
 ------------
 
-1. Install `Node.js` from <https://nodejs.org/en/download> if not already done.
+**Step 1**: Install `Node.js` from <https://nodejs.org/en/download> if not already done.
 
 e.g.:
 
 ```bash
 brew install node
-```
 
-```
 # check that it works
-$ node --version
-v11.6.0
+node --version
+# v11.6.0
 ```
 
-2. Clone `illumination` repo and install dependencies
+**Step 2**: Clone `illumination` repo and install dependencies
+(should take less than 10 seconds)
 
 ```bash
 git clone https://github.com/umccr/illumination
@@ -40,13 +39,7 @@ Running
 -------
 
 ```bash
-npm start
-```
-
-Or
-
-```bash
-node app.js
+npm start # or node app.js
 ```
 
 Routes Supported
