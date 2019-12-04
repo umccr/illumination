@@ -6,6 +6,6 @@ package-lock.json
 *.html
 .vscode/
 *.swp
-tmp/
+nogit/
 
 test_iap.js
