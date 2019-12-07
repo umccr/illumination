@@ -6,6 +6,14 @@
   width: 100%;
 }
 
+h1.title {
+  padding-top: 2em;
+}
+
+i.icon {
+  font-size: 1em;
+}
+
 pre {
   outline: 1px solid #ccc;
   padding: 5px;

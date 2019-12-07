@@ -1,11 +1,9 @@
 <% include ../partials/header %>
 
-<ul>
-  <li><%= `Info about file with ID ${fileid}` %></li>
-</ul>
+<h1 class="title"><%= `Info about file with ID ${fileid}` %></h1>
 
 <ul>
-  <li><a href="<%= finfo.presignedUrl %>">Presigned URL</a></li>
+  <li><a href="<%= finfo.presignedUrl %>">Download via Presigned URL</a></li>
 </ul>
 
 <pre>

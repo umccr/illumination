@@ -1,8 +1,6 @@
 <% include ../partials/header %>
 
-<ul>
-  <li><%= `Info about task run with ID ${runid}` %></li>
-</ul>
+<h1 class="title"><%= `Task Run with ID ${runid}` %></h1>
 
 <pre>
 <%- jsonSyntaxHighlight(JSON.stringify(trun_info, null, 2)) %>

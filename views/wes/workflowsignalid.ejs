@@ -1,8 +1,6 @@
 <% include ../partials/header %>
 
-<ul>
-  <li><%= `Info about Workflow Signal with ID ${signalid}` %></li>
-</ul>
+<h1 class="title"><%= `Info about Workflow Signal with ID ${signalid}` %></h1>
 
 <pre>
 <%- jsonSyntaxHighlight(JSON.stringify(signal, null, 2)) %>

@@ -1,8 +1,6 @@
 <% include ../partials/header %>
 
-<ul>
-  <li><%= `Info about subscription with ID ${subid}` %></li>
-</ul>
+<h1 class="title"><%= `Info about subscription with ID ${subid}` %></h1>
 
 <pre>
 <%- jsonSyntaxHighlight(JSON.stringify(sub_info, null, 2)) %>
