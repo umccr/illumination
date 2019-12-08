@@ -41,7 +41,15 @@
 
 <script>
   $(document).ready(function() {
-    $("#taskrun_table").DataTable();
+    $("#taskrun_table").DataTable({
+      pageLength: 25,
+      columnDefs: [
+        {
+          targets: [2, 3, 5],
+          render: $.fn.dataTable.render.ellipsis(15)
+        }
+      ]
+    });
   });
 </script>
 

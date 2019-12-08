@@ -46,6 +46,7 @@
 <script>
   $(document).ready(function() {
     $("#file_table").DataTable({
+      pageLength: 25,
       columnDefs: [{ type: "file-size", targets: 3 }]
     });
   });
