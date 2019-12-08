@@ -1,13 +1,13 @@
-#footer {
+/* #footer {
   position: fixed;
   left: 20px;
   bottom: 0px;
   height: 30px;
   width: 100%;
-}
+} */
 
 h1.title {
-  padding-top: 2em;
+  padding-top: 1em;
 }
 
 i.icon {

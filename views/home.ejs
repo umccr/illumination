@@ -1,61 +1,45 @@
 <% include partials/header %>
 
-<div class="container">
-  <header class="jumbotron">
-    <div class="container">
-      <h1>UMCCR Stratus Illumination</h1>
-      <p>Interacting with the Stratus API</p>
+<div class="ui grid container">
+  <div class="row">
+    <div class="column">
+      <div class="ui divider hidden"></div>
+      <h1 class="ui header">UMCCR Stratus Illumination</h1>
+      <div class="ui divider"></div>
     </div>
-  </header>
+  </div>
 
-  <div class="container">
-    <div class="row">
-      <div class="col mx-4">
-        <h2>TES</h2>
-        <p><a class="btn btn-primary btn-lg" href="/tasks">Tasks</a></p>
-        <p>
-          <a class="btn btn-success btn-lg" href="/tasks/runs">Task Runs</a>
-        </p>
-      </div>
-      <div class="col mx-4">
-        <h2>WES</h2>
-        <p><a class="btn btn-primary btn-lg" href="/workflows">Workflows</a></p>
-        <p>
-          <a class="btn btn-success btn-lg" href="/workflows/runs"
-            >Workflow Runs</a
-          >
-        </p>
-        <p>
-          <a class="btn btn-warning btn-lg" href="/workflows/versions"
-            >Workflow Versions</a
-          >
-        </p>
-        <p>
-          <a class="btn btn-secondary btn-lg" href="/workflows/signals"
-            >Workflow Signals</a
-          >
-        </p>
-      </div>
-      <div class="col mx-4">
-        <h2>GDS</h2>
-        <p><a class="btn btn-primary btn-lg" href="/volumes">Volumes</a></p>
-      </div>
-      <div class="col mx-4">
-        <h2>ENS</h2>
-        <p>
-          <a class="btn btn-primary btn-lg" href="/subscriptions"
-            >Subscriptions</a
-          >
-        </p>
-        <br />
-        <br />
-        <h2>DCS</h2>
-        <p><a class="btn btn-primary btn-lg" href="/health">Health</a></p>
-        <p><a class="btn btn-success btn-lg" href="/usages">Usages</a></p>
-        <p><a class="btn btn-secondary btn-lg" href="/regions">Regions</a></p>
+  <div class="row">
+    <div class="column">
+      <div class="ui two column grid">
+        <div class="column">
+
+          <h1 class="ui header">TES</h1>
+          <p><a href="/tasks" class="ui big blue button" tabindex="0">Tasks</a></p>
+          <p><a href="/tasks/runs" class="ui big green button">Task Runs</a></p>
+
+          <h1 class="ui header">WES</h1>
+          <p><a href="/workflows" class="ui big blue button">Workflows</a></p>
+          <p><a href="/workflows/runs" class="ui big green button">Workflow Runs</a></p>
+          <p><a href="/workflows/versions" class="ui big orange button">Workflow Versions</a></p>
+          <p><a href="/workflows/signals" class="ui big grey button">Workflow Signals</a></p>
+        </div>
+
+        <div class="column">
+          <h1 class="ui header">GDS</h1>
+          <p><a href="/volumes" class="ui big blue button">Volumes</a></p>
+
+          <h1 class="ui header">ENS</h1>
+          <a href="/subscriptions" class="ui big green button">Subscriptions</a>
+
+          <h1 class="ui header">DCS</h1>
+          <p><a href="/usages" class="ui big blue button">Usages</a></p>
+          <p><a href="/health" class="ui big green button">Health</a></p>
+          <p><a href="/regions" class="ui big orange button">Regions</a></p>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<% include partials/footer %>
+  <% include partials/footer %>
+</div>
