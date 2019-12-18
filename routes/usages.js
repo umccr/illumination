@@ -9,7 +9,7 @@ router.get("/", (req, res) => {
   let opts = request_opts;
   opts.url = "/usages";
   opts.qs = {
-    periods: 3
+    periods: 6
   };
 
   request.get(opts, (error, response, body) => {

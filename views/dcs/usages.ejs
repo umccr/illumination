@@ -8,10 +8,9 @@
   <thead>
     <tr>
       <th>N</th>
-      <th>Period</th>
       <th>Start</th>
       <th>End</th>
-      <th>Product</th>
+      <th>Type</th>
       <th>Amount</th>
     </tr>
   </thead>
@@ -19,10 +18,9 @@
     <% for (let i = 0; i < t.length; i++) { %>
     <tr>
       <td><%= `${i + 1}.` %></td>
-      <td><%= t[i].periodName %></td>
       <td><%= t[i].periodStart %></td>
       <td><%= t[i].periodEnd %></td>
-      <td><%= t[i].product %></td>
+      <td><%= t[i].type %></td>
       <td><%= t[i].amount %></td>
     </tr>
     <% } %>
@@ -38,9 +36,8 @@
     <tr>
       <th>N</th>
       <th>FullName</th>
-      <th>Product</th>
+      <th>Type</th>
       <th>Amount</th>
-      <th>Period</th>
       <th>Start</th>
       <th>End</th>
     </tr>
@@ -50,9 +47,8 @@
     <tr>
       <td><%= `${i + 1}.` %></td>
       <td><%= `${u[i].userFullName} (${u[i].userName})` %></td>
-      <td><%= u[i].productName %></td>
+      <td><%= u[i].type %></td>
       <td><%= u[i].amount %></td>
-      <td><%= u[i].periodName %></td>
       <td><%= u[i].periodStart %></td>
       <td><%= u[i].periodEnd %></td>
     </tr>

@@ -26,7 +26,7 @@ const token = (function() {
     console.log("Using token from ENV");
   } else {
     try {
-      var session_file = path.join(os.homedir(), ".iap/.session.yaml")
+      var session_file = path.join(os.homedir(), ".iap/.session.yaml");
       token = yaml.safeLoad(fs.readFileSync(session_file, "utf8"));
       token = token["access-token"];
     } catch (e) {
@@ -54,18 +54,18 @@ const total_period_usage = function(periods) {
   let arr = [];
   for (let p = 0; p < periods.length; p++) {
     let x = periods[p];
-    let pn = x["periodName"];
+    // let pn = x["periodName"];
     let ps = x["start"];
     let pe = x["end"];
-    let tot = x["totalPeriodUsage"];
+    let tot = x["totalUsages"];
 
     for (let i = 0; i < tot.length; i++) {
       tot.forEach(t => {
         arr.push({
-          periodName: pn,
+          // periodName: pn,
           periodStart: ps,
           periodEnd: pe,
-          product: t["productName"],
+          type: t["type"],
           amount: `${t["amount"]} ${t["unit"]}`
         });
       });
@@ -78,19 +78,19 @@ const user_aggregated_period_usage = function(periods) {
   let arr = [];
   for (let p = 0; p < periods.length; p++) {
     let x = periods[p];
-    let pn = x["periodName"];
+    // let pn = x["periodName"];
     let ps = x["start"];
     let pe = x["end"];
-    let users = x["userAggregatedUsage"];
+    let users = x["userAggregatedUsages"];
 
     for (let i = 0; i < users.length; i++) {
-      for (let y = 0; y < users[i]["productUsages"].length; y++) {
+      for (let y = 0; y < users[i]["usages"].length; y++) {
         arr.push({
           userFullName: users[i]["user"]["fullName"],
           userName: users[i]["user"]["userName"],
-          productName: users[i]["productUsages"][y]["productName"],
-          amount: users[i]["productUsages"][y]["amount"],
-          periodName: pn,
+          type: users[i]["usages"][y]["type"],
+          amount: `${users[i]["usages"][y]["amount"]} ${users[i]["usages"][y]["unit"]}`,
+          // periodName: pn,
           periodStart: ps,
           periodEnd: pe
         });
