@@ -3,7 +3,6 @@ const router = express.Router();
 const request = require("request");
 const illumina = require("../utils/illumina");
 const utils = require("../utils/utils");
-const pageSize = 100;
 const request_opts = illumina.request_opts();
 
 router.get("/", (req, res) => {

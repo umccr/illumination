@@ -1,2 +1,1 @@
-views/partials/header.ejs
-views/home.ejs
+*.ejs

@@ -20,7 +20,9 @@
     </tr>
   </thead>
   <tbody>
-    <% fs = files["items"] %> <% for (let i = 0; i < fs.length; i++) { %>
+    <% fs = files["items"]; %>
+    <% delete qs.pageSize; %>
+    <% for (let i = 0; i < fs.length; i++) { %>
     <tr>
       <td><%= `${i + 1}.` %></td>
       <td><%= fs[i].path %></td>

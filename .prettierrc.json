@@ -1,0 +1,5 @@
+{
+  "arrowParens": "always",
+  "bracketSpacing": true,
+  "printWidth": 100
+}

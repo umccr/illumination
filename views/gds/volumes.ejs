@@ -15,13 +15,29 @@
     </tr>
   </thead>
   <tbody>
-    <% vols = volumes["items"] %> <% for (let i = 0; i < vols.length; i++) { %>
+    <% vols = volumes["items"]; %>
+    <% firstPageToken = volumes["firstPageToken"] %>
+    <% nextPageToken = volumes["nextPageToken"] %>
+    <% prevPageToken = volumes["prevPageToken"] %>
+    <ul>
+      <% if (firstPageToken) {%>
+        <li><a href="/volumes?pageToken=<%= firstPageToken %>">FirstPage</a></li>
+       <% } %>
+      <% if (nextPageToken) {%>
+        <li><a href="/volumes?pageToken=<%= nextPageToken %>">NextPage</a></li>
+       <% } %>
+      <% if (prevPageToken) {%>
+        <li><a href="/volumes?pageToken=<%= prevPageToken %>">PreviousPage</a></li>
+       <% } %>
+    </ul>
+
+    <% for (let i = 0; i < vols.length; i++) { %>
     <tr>
       <td><%= `${i + 1}.` %></td>
       <td>
-        <a href="/files?volume.name=<%= vols[i].name %>&pageSize=1000"
-          ><%= vols[i].name %></a
-        >
+        <a href="/files?volume.name=<%= vols[i].name %>&pageSize=1000">
+          <%= vols[i].name %>
+        </a>
       </td>
       <td title="<%= vols[i].createdBy %>">
         <%= id2username(vols[i].createdBy) %>
