@@ -19,7 +19,9 @@
     <tr>
       <td><%= `${i + 1}.` %></td>
       <td>
-        <a href="/files?volume.name=<%= vols[i].name %>"><%= vols[i].name %></a>
+        <a href="/files?volume.name=<%= vols[i].name %>&pageSize=1000"
+          ><%= vols[i].name %></a
+        >
       </td>
       <td title="<%= vols[i].createdBy %>">
         <%= id2username(vols[i].createdBy) %>

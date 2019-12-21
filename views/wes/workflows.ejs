@@ -22,7 +22,12 @@
       <td><%= `${i + 1}.` %></td>
       <td><a href="/workflows/<%= wflows[i].id %>"><%= wflows[i].id %></a></td>
       <td><%= wflows[i].name %></td>
-      <td><a href="/workflows/<%= wflows[i].id %>/versions">versions</a></td>
+      <td>
+        <a
+          href="/workflows/<%= wflows[i].id %>/versions?pageSize=100&sort=timeCreated desc"
+          >versions</a
+        >
+      </td>
       <td title="<%= wflows[i].createdBy %>">
         <%= id2username(wflows[i].createdBy) %>
       </td>

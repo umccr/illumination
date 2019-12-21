@@ -29,7 +29,12 @@
       <td>
         <a href="/workflows/runs/<%= wruns[i].id %>"><%= wruns[i].id %></a>
       </td>
-      <td><a href="/workflows/runs/<%= wruns[i].id %>/history">history</a></td>
+      <td>
+        <a
+          href="/workflows/runs/<%= wruns[i].id %>/history?pagesSize=100&sort=eventId asc"
+          >history</a
+        >
+      </td>
       <td><%= wruns[i].status %></td>
       <td><%= wruns[i].error %></td>
       <td><%= wruns[i].errorCause %></td>

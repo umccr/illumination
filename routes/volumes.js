@@ -8,10 +8,9 @@ const request_opts = illumina.request_opts();
 
 router.get("/", (req, res) => {
   let opts = request_opts;
+  let qs = req.query;
   opts.url = "/volumes";
-  opts.qs = {
-    pageSize: pageSize
-  };
+  opts.qs = qs;
 
   request.get(opts, (error, response, body) => {
     if (!error && response.statusCode == 200) {
@@ -29,8 +28,10 @@ router.get("/", (req, res) => {
 
 router.get("/:volumeid", (req, res) => {
   let opts = request_opts;
+  let qs = req.query;
   const volid = req.params.volumeid;
   opts.url = `/volumes/${volid}`;
+  opts.qs = qs;
 
   request.get(opts, (error, response, body) => {
     if (!error && response.statusCode == 200) {

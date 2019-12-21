@@ -7,7 +7,9 @@ const request_opts = illumina.request_opts();
 
 router.get("/", (req, res) => {
   let opts = request_opts;
+  let qs = req.query;
   opts.url = "/regions";
+  opts.qs = qs;
 
   request.get(opts, (error, response, body) => {
     if (!error && response.statusCode == 200) {

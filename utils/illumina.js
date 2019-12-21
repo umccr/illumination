@@ -10,7 +10,8 @@ const id2username = function(id) {
     "1678890e-b107-3974-a47d-0bb532a64ad6": "RV",
     "8abf754b-e94f-3841-b44b-75d10d33588b": "SK",
     "c9688651-7872-3753-8146-ffa41c177aa1": "VS",
-    "57a99faa-ae79-33f8-9736-454a36b06a43": "SU"
+    "57a99faa-ae79-33f8-9736-454a36b06a43": "SU",
+    "6696900a-96ea-372a-bc00-ca6bbe19bf7b": "Kym"
   };
 
   return username[id];

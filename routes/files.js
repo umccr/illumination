@@ -3,7 +3,6 @@ const router = express.Router();
 const request = require("request");
 const illumina = require("../utils/illumina");
 const utils = require("../utils/utils");
-const pageSize = 1000;
 const request_opts = illumina.request_opts();
 
 router.get("/", (req, res) => {
@@ -11,7 +10,6 @@ router.get("/", (req, res) => {
   let qs = req.query;
   opts.url = "/files";
   opts.qs = qs;
-  opts.qs.pageSize = pageSize;
 
   request.get(opts, (error, response, body) => {
     if (!error && response.statusCode == 200) {
@@ -30,8 +28,10 @@ router.get("/", (req, res) => {
 
 router.get("/:fileid", (req, res) => {
   let opts = request_opts;
+  let qs = req.query;
   const fileid = req.params.fileid;
   opts.url = `/files/${fileid}`;
+  opts.qs = qs;
 
   request.get(opts, (error, response, body) => {
     if (!error && response.statusCode == 200) {

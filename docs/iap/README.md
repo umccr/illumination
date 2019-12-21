@@ -100,9 +100,14 @@ Returns Task Run ID.
 
 
 ## Workflows
-* Workflow: just a template with substitutions
-* Workflow Version: filled-in template
-* Workflow Run
+* __Workflow__: Parent object associated with a workflow containing metadata inherited
+  by all child workflow versions
+* __Workflow Version__: Contains version specific metadata and the definition of the
+  workflow to be executed when launched
+* __Workflow Run__: Created when a workflow version is launched and contains inputs
+  given to the workflow version
+* __Workflow Signal__: Created by ISL workflow versions when a WaitForSignal state
+  is encountered to pause a workflow until external input is provided
 
 ### Create Workflow (`POST /workflows`)
 Returns Workflow ID (+ version ID if `workflowVersion` provided)
@@ -157,11 +162,13 @@ Returns Workflow ID (+ version ID if `workflowVersion` provided)
 
 1. Building Workflow
   - Create workflow
+    - name
+    - description
   - Create workflow version
-      - Define arguments and connections
-      - State for creating GDS volume
-      - State for running DRAGEN
-      - State for polling for DRAGEN task status
+    - StartAt
+    - States
+    - Arguments
+    - Connections
 
 2. Launching Workflow
   - Create workflow

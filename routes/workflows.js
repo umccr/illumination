@@ -3,16 +3,13 @@ const router = express.Router();
 const request = require("request");
 const illumina = require("../utils/illumina");
 const utils = require("../utils/utils");
-const pageSize = 100;
 const request_opts = illumina.request_opts();
 
 router.get("/", (req, res) => {
   let opts = request_opts;
+  let qs = req.query;
   opts.url = "/workflows";
-  opts.qs = {
-    pageSize: pageSize,
-    sort: "timeCreated desc"
-  };
+  opts.qs = qs;
 
   request.get(opts, (error, response, body) => {
     if (!error && response.statusCode == 200) {
@@ -29,11 +26,9 @@ router.get("/", (req, res) => {
 
 router.get("/runs", (req, res) => {
   let opts = request_opts;
+  let qs = req.query;
   opts.url = "/workflows/runs";
-  opts.qs = {
-    pageSize: pageSize,
-    sort: "timeCreated desc"
-  };
+  opts.qs = qs;
 
   request.get(opts, (error, response, body) => {
     if (!error && response.statusCode == 200) {
@@ -50,8 +45,10 @@ router.get("/runs", (req, res) => {
 
 router.get("/runs/:runid", (req, res) => {
   let opts = request_opts;
+  let qs = req.query;
   const runid = req.params.runid;
   opts.url = `/workflows/runs/${runid}`;
+  opts.qs = qs;
 
   request.get(opts, (error, response, body) => {
     if (!error && response.statusCode == 200) {
@@ -68,12 +65,10 @@ router.get("/runs/:runid", (req, res) => {
 
 router.get("/runs/:runid/history", (req, res) => {
   let opts = request_opts;
+  let qs = req.query;
   const runid = req.params.runid;
   opts.url = `/workflows/runs/${runid}/history`;
-  opts.qs = {
-    pageSize: pageSize,
-    sort: "eventId asc"
-  };
+  opts.qs = qs;
 
   request.get(opts, (error, response, body) => {
     if (!error && response.statusCode == 200) {
@@ -90,11 +85,9 @@ router.get("/runs/:runid/history", (req, res) => {
 
 router.get("/versions", (req, res) => {
   let opts = request_opts;
+  let qs = req.query;
   opts.url = "/workflows/versions";
-  opts.qs = {
-    pageSize: pageSize,
-    sort: "timeCreated desc"
-  };
+  opts.qs = qs;
 
   request.get(opts, (error, response, body) => {
     if (!error && response.statusCode == 200) {
@@ -111,11 +104,9 @@ router.get("/versions", (req, res) => {
 
 router.get("/signals", (req, res) => {
   let opts = request_opts;
+  let qs = req.query;
   opts.url = "/workflows/signals";
-  opts.qs = {
-    pageSize: pageSize,
-    sort: "timeCreated desc"
-  };
+  opts.qs = qs;
 
   request.get(opts, (error, response, body) => {
     if (!error && response.statusCode == 200) {
@@ -131,8 +122,10 @@ router.get("/signals", (req, res) => {
 
 router.get("/signals/:signalid", (req, res) => {
   let opts = request_opts;
+  let qs = req.query;
   const signalid = req.params.signalid;
   opts.url = `/workflows/signals/${signalid}`;
+  opts.qs = qs;
 
   request.get(opts, (error, response, body) => {
     if (!error && response.statusCode == 200) {
@@ -149,8 +142,10 @@ router.get("/signals/:signalid", (req, res) => {
 
 router.get("/:workflowid", (req, res) => {
   let opts = request_opts;
+  let qs = req.query;
   const wflowid = req.params.workflowid;
   opts.url = `/workflows/${wflowid}`;
+  opts.qs = qs;
 
   request.get(opts, (error, response, body) => {
     if (!error && response.statusCode == 200) {
@@ -167,8 +162,10 @@ router.get("/:workflowid", (req, res) => {
 
 router.get("/:workflowid/versions", (req, res) => {
   let opts = request_opts;
+  let qs = req.query;
   const workflowid = req.params.workflowid;
   opts.url = `/workflows/${workflowid}/versions`;
+  opts.qs = qs;
 
   request.get(opts, (error, response, body) => {
     if (!error && response.statusCode == 200) {
@@ -187,9 +184,11 @@ router.get("/:workflowid/versions", (req, res) => {
 
 router.get("/:workflowid/versions/:versionid", (req, res) => {
   let opts = request_opts;
+  let qs = req.query;
   const workflowid = req.params.workflowid;
   const versionid = req.params.versionid;
   opts.url = `/workflows/${workflowid}/versions/${versionid}`;
+  opts.qs = qs;
 
   request.get(opts, (error, response, body) => {
     if (!error && response.statusCode == 200) {
