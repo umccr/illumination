@@ -21,7 +21,19 @@
   </thead>
   <tbody>
     <% fs = files["items"]; %>
-    <% delete qs.pageSize; %>
+    <% firstPageToken = files["firstPageToken"] %>
+    <% nextPageToken = files["nextPageToken"] %>
+    <% prevPageToken = files["prevPageToken"] %>
+    <% delete qs.pageSize %>
+    <% delete qs.pageToken %>
+    <% qs_new = queryString.stringify(qs) %>
+    <ul>
+      <% if (firstPageToken) {%> <li><a href="/files?pageToken=<%= firstPageToken %>&<%= qs_new %>">FirstPage</a></li> <% } %>
+      <% if (nextPageToken) {%> <li><a href="/files?pageToken=<%= nextPageToken %>&<%= qs_new %>">NextPage</a></li> <% } %>
+      <% if (prevPageToken) {%> <li><a href="/files?pageToken=<%= prevPageToken %>&<%= qs_new %>">PrevPage</a></li> <% } %>
+    </ul>
+
+
     <% for (let i = 0; i < fs.length; i++) { %>
     <tr>
       <td><%= `${i + 1}.` %></td>

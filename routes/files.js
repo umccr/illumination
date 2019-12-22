@@ -4,6 +4,7 @@ const request = require("request");
 const illumina = require("../utils/illumina");
 const utils = require("../utils/utils");
 const request_opts = illumina.request_opts();
+const queryString = require("querystring");
 
 router.get("/", (req, res) => {
   let opts = request_opts;
@@ -15,6 +16,8 @@ router.get("/", (req, res) => {
     if (!error && response.statusCode == 200) {
       res.render("gds/files", {
         files: body,
+        queryString: queryString,
+        qs: qs,
         vname: opts.qs["volume.name"],
         id2username: illumina.id2username,
         format_date: utils.format_date,
