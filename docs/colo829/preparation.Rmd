@@ -1,0 +1,32 @@
+Preparation
+===========
+
+
+## Building Reference Hash Table
+We need to prepare the GRCh37 and hg38 genome builds ('hash tables') for our analyses.
+The following process should take 15min using 8 threads (default).
+
+```
+# put/link hg19.fa into /staging/human/reference/hg19/hg19.fa first
+
+d1="/staging/human/reference/hg19"
+mkdir -p ${d1}/hg19.fa.k_21.f_16.m_149
+cd ${d1}
+
+dragen \
+  --build-hash-table true \
+  --ht-reference ${d1}/hg19.fa \
+  --output-dir ${d1}/hg19.fa.k_21.f_16.m_149 \
+  --ht-alt-liftover /opt/edico/liftover/hg19_alt_liftover.sam
+  #--ht-build-rna-hashtable true # required for some analyses
+  #--ht-num-threads 8
+```
+
+* You can load the reference with the following
+  (takes 1min, displays `DRAGEN finished normally`):
+
+```
+dragen -l \
+  -r /staging/human/reference/hg19/hg19.fa.k_21.f_16.m_149
+```
+
