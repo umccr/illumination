@@ -1,5 +1,5 @@
 {
-    "Name": "wes-test",
+    "Name": "COLO829",
     "Input": {
         "Connections": [
             {
@@ -30,11 +30,11 @@
             },
             {
                 "Name": "normal_name",
-                "Value": "TCRBOA6_N"
+                "Value": "Colo829_B"
             },
             {
                 "Name": "tumor_name",
-                "Value": "TCRBOA6_T"
+                "Value": "Colo829"
             },
             {
                 "Name": "gds_volume_name",

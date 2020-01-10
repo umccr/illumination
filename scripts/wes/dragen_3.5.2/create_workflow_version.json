@@ -1,5 +1,5 @@
 {
-  "Version": "four",
+  "Version": "one",
   "Definition": {
     "StartAt": "Somatic_TN_Phase",
     "States": {
@@ -10,7 +10,7 @@
         "Comment": "",
         "TaskRun": {
           "name": "Somatic_TN_Phase",
-          "description": "WES DRAGEN TN via S3",
+          "description": "DRAGEN TN via S3 Streaming",
           "execution": {
             "image": {
               "name": "699120554104.dkr.ecr.us-east-1.amazonaws.com/public/dragen",
@@ -40,7 +40,7 @@
             "Environment": {
               "resources": {
                 "Type": "fpga",
-                "Size": "small"
+                "Size": "medium"
               }
             }
           }

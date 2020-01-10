@@ -29,7 +29,8 @@
   },
   "nodemonConfig": {
     "ignore": [
-      "nogit/*"
+      "nogit/*",
+      "docs/*"
     ]
   }
 }
