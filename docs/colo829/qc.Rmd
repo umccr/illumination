@@ -1,0 +1,25 @@
+QC
+==
+
+Fragment Length
+---------------
+
+```{r fragment_length}
+frag_len_file <- here::here("nogit/tests/results/somatic.fragment_length_hist.csv")
+
+min_count <- 10
+readr::read_lines(frag_len_file) %>%
+  tibble::enframe() %>%
+  dplyr::mutate(
+    sample = ifelse(
+      grepl("#Sample", value),
+      sub("#Sample: (.*)", "\\1", value), NA_character_)) %>%
+  tidyr::fill(sample, .direction = "down") %>%
+  dplyr::filter(!grepl("#Sample: |FragmentLength,Count", value)) %>%
+  tidyr::separate(value, c("FragmentLength", "Count"), convert = TRUE) %>%
+  dplyr::filter(Count >= min_count) %>%
+  ggplot2::ggplot(aes(x = FragmentLength, y = Count, colour = sample)) +
+  ggplot2::geom_line() +
+  ggplot2::theme_bw()
+```
+

@@ -1,7 +1,7 @@
 --- 
 title: "DRAGENising COLO829 Dilution Series"
 author: "Peter Diakumis"
-date: "`r format(Sys.time(), '%a %Y-%b-%d')`"
+date: "`r Sys.time()`"
 site: bookdown::bookdown_site
 description: "COLO829 DRAGEN"
 ---
@@ -12,6 +12,9 @@ knitr::opts_chunk$set(echo = T)
 
 ```{r load_pkgs, message=F, warning=F}
 require(tidyverse)
+require(kableExtra)
+require(DT)
+require(here)
 ```
 
 
@@ -24,9 +27,6 @@ Stratus Illumina Analysis Platform.
 A dilution series of varying purities (20, 40, 60, 80 and 100 per cent)
 was generated from the COLO829 cell line.
 The samples were sequenced with our in-house NovaSeq Illumina sequencing platform.
-Paired-end FASTQ files were generated and have been uploaded to the
-`umccr-primary-data-prod/Temp/2019-07-18T0233_COLO829_WGS_COLO829/` AWS S3 bucket.
-
 
 | Sample  | FileName                       | Read |
 |---------|--------------------------------|------|
