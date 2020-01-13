@@ -18,15 +18,94 @@ dragen \
   --ht-reference ${d1}/hg19.fa \
   --output-dir ${d1}/hg19.fa.k_21.f_16.m_149 \
   --ht-alt-liftover /opt/edico/liftover/hg19_alt_liftover.sam
-  #--ht-build-rna-hashtable true # required for some analyses
-  #--ht-num-threads 8
+  # --ht-build-rna-hashtable true # required for some analyses
+  # --ht-num-threads 8
 ```
 
-* You can load the reference with the following
-  (takes 1min, displays `DRAGEN finished normally`):
+* Load the reference with the below. This loads the binary reference genome into memory
+  on the DRAGEN board. You don't need to reload it, unless you switch to a different
+  reference genome.
+* If the genome is already resident on the board, it skips the upload (you can force it
+  with `--force-load-reference`).
 
 ```
-dragen -l \
-  -r /staging/human/reference/hg19/hg19.fa.k_21.f_16.m_149
+dragen -r ${d1}/hg19.fa.k_21.f_16.m_149
+  # --force-load-reference
+```
+
+## Input and Output File Locations
+* `/staging` mounts a fast file system consisting of a set of fast SSD disks with RAID-0.
+  Data stored here will be lost if there is a failure with the disks.
+
+## Dragen CLI Options
+
+### General
+
+* `-r [--ref-dir] <REF_DIRECTORY>`
+* `--output-directory <OUT_DIRECTORY>`
+* `--output-file-prefix <FILE_PREFIX>`
+* `--output-format <SAM/BAM/CRAM>`: BAM by default
+* `-f [--force]`: force file overwrite
+* `-1 <FQ_NOR_1>`
+* `-2 <FQ_NOR_2>`
+* `--tumor-fastq1 <FQ_TUM_1>`
+* `--tumor-fastq2 <FQ_TUM_2>`
+* `--RGID <RG_ID_NOR>`
+* `--RGID-tumor <RG_ID_TUM>`
+* `--RGSM <RG_SAMPLENAME_NOR>`
+* `--RGSM-tumor <RG_SAMPLENAME_TUM>`
+* `--lic-instance-id-location <CLOUD_INSTANCE_ID_LOCATION>`
+  * `/opt/instance-identity`
+* `--enable-map-align-output true/false`: keep BAMs after alignment
+* `--enable-duplicate-marking true/false`: mark duplicates during alignment
+* `--sample-sex <MALE/FEMALE>`
+
+### Variant Calling
+
+* `--enable-variant-caller true/false`
+
+### RNA-Seq Data
+* `--enable-rna true/false`
+* `-a [--annotation-file] <FILE>`: Transcript annotation file (RNA).
+  Improves mapping + aligning accuracy. GTF/GFF format, listing annotated transcripts
+  for specified genome.
+
+### FASTQ Input
+
+* `--enable-auto-multifile true/false`:
+  - `true` by default. Import all subsequent FASTQ segments automatically
+    e.g. `-1 SAMPLE1_S1_L001_R1_001.fastq` will read in:
+    - `SAMPLE1_S1_L001_R1_001.fastq.gz`
+    - `SAMPLE1_S1_L001_R1_002.fastq.gz`
+    - `SAMPLE1_S1_L001_R1_003.fastq.gz`
+    - ...etc.
+
+* `--combine-samples-by-name true/false`:
+  - `false` by default. Import all FASTQ files with same sample name
+    e.g. `-1 SAMPLE1_S1_L001_R1_001.fastq` will read in:
+    - `SAMPLE1_<X>_R1_<A>.fastq.gz`
+    - `SAMPLE1_<Y>_R1_<B>.fastq.gz`
+    - `SAMPLE1_<Z>_R1_<C>.fastq.gz`
+  - __Not Recommended__. See `--fastq-list` option instead.
+
+* `--fastq-list <FILE>`: CSV file specifying list of FASTQs for input.
+  - allows arbitrary names for FASTQ files, multiple subdirectories,
+    explicit BAM tags per group. Automatically generated during bcl2fastq
+    (`fastq_list.csv`).
+  - the BAM header will contain RG tags for the following: ID (RGID), SM (RGSM) and LB (RGLB)
+  - `--fastq-list-all-samples true`: to grab all samples in CSV (__Probably not a good idea__, since
+    for a single run only one BAM and VCF output file are produced because all input read groups
+    are expected to belong to the same sample).
+  - `--fastq-list-sample-id <SampleID>`: __Recommended__ to use this multiple times for multiple samples.
+  - For somatic samples, use `--tumor-fastq-list-sample-id` and `--tumor-fastq-list`
+  - when using the `--fastq-list` option, you shouldn't specify `--RGxx` options, since they are already
+    in the CSV file.
+  - here's a section of that file from run127:
+
+```{r read_fastq_list}
+fastqList <- readr::read_csv(here::here("nogit/bcl2fastq_results/fastq_list.csv"), col_types = "cccccc", n_max = 10)
+knitr::kable(fastqList) %>%
+  kableExtra::kable_styling(full_width = FALSE, position = "left", bootstrap_options = "striped", font_size = 10) %>%
+  kableExtra::scroll_box(height = "300px")
 ```
 
