@@ -11,7 +11,9 @@ const id2username = function(id) {
     "8abf754b-e94f-3841-b44b-75d10d33588b": "SK",
     "c9688651-7872-3753-8146-ffa41c177aa1": "VS",
     "57a99faa-ae79-33f8-9736-454a36b06a43": "SU",
-    "6696900a-96ea-372a-bc00-ca6bbe19bf7b": "Kym"
+    "6696900a-96ea-372a-bc00-ca6bbe19bf7b": "Kym",
+    "ef928f99-662d-3e9f-8476-303131e9a58a": "Karey",
+    "3ed6bc8a-ba5a-3ec3-9e25-361703c7ba20": "Egan-Illumina"
   };
 
   return username[id];
