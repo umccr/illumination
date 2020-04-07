@@ -22,6 +22,7 @@ const id2username = function(id) {
     "ef928f99-662d-3e9f-8476-303131e9a58a": "Karey",
     "a46c2704-4568-3a39-b934-45bc9b352ac8": "Voula",
     "3ed6bc8a-ba5a-3ec3-9e25-361703c7ba20": "Egan-Illumina",
+    "aa9f1c02-3963-3c3b-ad0d-9b6f6e26a405": "Pratik-Illumina",
   };
 
   return username[id];
