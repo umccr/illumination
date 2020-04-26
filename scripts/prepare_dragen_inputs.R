@@ -1,5 +1,43 @@
 require(tidyverse)
 
+#-------------- validationFive --------------#
+# FASTQ list
+x <- tribble(
+  ~RGSM, ~Read1File, ~Read2File,
+  "B_ALL_Case_10_T", "/mount/fastqs/B_ALL_Case_10/B_ALL_Case_10_T_R1.fastq.gz", "/mount/fastqs/B_ALL_Case_10/B_ALL_Case_10_T_R2.fastq.gz",
+  "B_ALL_Case_10_N", "/mount/fastqs/B_ALL_Case_10/B_ALL_Case_10_N_R1.fastq.gz", "/mount/fastqs/B_ALL_Case_10/B_ALL_Case_10_N_R2.fastq.gz",
+  "CUP_Pairs8_T", "/mount/fastqs/CUP_Pairs8/CUP_Pairs8_T_R1.fastq.gz", "/mount/fastqs/CUP_Pairs8/CUP_Pairs8_T_R2.fastq.gz",
+  "CUP_Pairs8_N", "/mount/fastqs/CUP_Pairs8/CUP_Pairs8_N_R1.fastq.gz", "/mount/fastqs/CUP_Pairs8/CUP_Pairs8_N_R2.fastq.gz",
+  "P025_T", "/mount/fastqs/P025/P025_T_R1.fastq.gz", "/mount/fastqs/P025/P025_T_R2.fastq.gz",
+  "P025_N", "/mount/fastqs/P025/P025_N_R1.fastq.gz", "/mount/fastqs/P025/P025_N_R2.fastq.gz",
+  "P033_T", "/mount/fastqs/P033/P033_T_R1.fastq.gz", "/mount/fastqs/P033/P033_T_R2.fastq.gz",
+  "P033_N", "/mount/fastqs/P033/P033_N_R1.fastq.gz", "/mount/fastqs/P033/P033_N_R2.fastq.gz",
+  "SEQC50_T", "/mount/fastqs/SEQC50/SEQC50_T_R1.fastq.gz", "/mount/fastqs/SEQC50/SEQC50_T_R2.fastq.gz",
+  "SEQC50_N", "/mount/fastqs/SEQC50/SEQC50_N_R1.fastq.gz", "/mount/fastqs/SEQC50/SEQC50_N_R2.fastq.gz",
+  "SFRC_T", "/mount/fastqs/SFRC/SFRC_T_R1.fastq.gz", "/mount/fastqs/SFRC/SFRC_T_R2.fastq.gz",
+  "SFRC_N", "/mount/fastqs/SFRC/SFRC_N_R1.fastq.gz", "/mount/fastqs/SFRC/SFRC_N_R2.fastq.gz",
+) %>%
+  dplyr::mutate(RGID = RGSM, RGLB = "Unknown", Lane = "1") %>%
+  dplyr::select(RGID, RGSM, RGLB, Lane, Read1File, Read2File)
+# readr::write_csv(x, "validationSix_inputs.csv")
+
+# tracking sheet
+
+ts <- x %>%
+  dplyr::mutate(
+    LibraryID = paste0("Lib_", RGSM),
+    "Sample_ID (SampleSheet)" = RGSM,
+    SampleID = RGSM,
+    SubjectID = sub("_T$|_N$", "", RGSM),
+    SubjectID = paste0("SBJ_", SubjectID),
+    Phenotype = ifelse(grepl("_T$", RGSM), "tumor", "normal"),
+    Type = "WGS"
+  ) %>%
+  dplyr::select(LibraryID:Type)
+
+writexl::write_xlsx(x = list(`2019` = ts), path = "validationSix_tracking_sheet.xlsx")
+
+
 #-------------- SEQCII --------------#
 # FASTQ list
 tribble(
