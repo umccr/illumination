@@ -109,3 +109,325 @@ knitr::kable(fastqList) %>%
   kableExtra::scroll_box(height = "300px")
 ```
 
+
+
+### All
+
+```
+  --fastq-list-sample-id arg                              Only process entries whose 'RGSM' entry matches the given 
+                                                          Sample ID parameter (for fastq-list.csv input)
+  --fastq-list-all-samples arg                            Process all samples in fastq-list file, even when there are multiple 'RGSM' (Sample ID) values
+  --tumor-fastq-list arg                                  CSV file specifying list of tumor FASTQs for input
+  --tumor-fastq-list-sample-id arg                        Only process entries in the tumor fastq list input whose 'RGSM' entry matches the given Sample ID parameter (for fastq-list.csv input)
+  --tumor-fastq-list-all-samples arg                      Process all samples in tumor-fastq-list file, even when there are multiple 'RGSM' (Sample ID) values
+  --variant-list arg                                      file specifying list of Variants for input
+  -b [ --bam-input ] arg                                  Input BAM file to send to card
+  --tumor-bam-input arg                                   Input BAM file of tumor reads for somatic mode
+  -p [ --pair-by-name ] arg                               Whether to use read names to identify read pairs. Valid only for BAM input.
+  --append-read-index-to-name arg                         Whether to append /1 or /2 to read names for paired-end
+  --pair-suffix-delimiter arg                             Character that delimits paired-end suffixes, e.g. / for /1 and /2
+  --strip-input-qname-suffixes arg                        Whether to strip /1 or /2 from input read names
+  --input-qname-suffix-delimiter arg                      Character that delimits input qname suffixes, e.g. / for /1 and /2
+  -r [ --ref-dir ] arg                                    Directory with reference and hash tables
+  -c [ --config-file ] arg                                Configuration file
+  -n [ --num-threads ] arg                                The number of processor threads to use
+  --output-file-prefix arg                                Output filename prefix
+  --output-directory arg                                  Output directory
+  --output-format arg                                     Format of output file (SAM|BAM|CRAM) (Default=BAM)
+  --enable-vcf-compression arg                            Enable compression of VCF output files (Default=true)
+  --enable-vcf-indexing arg                               Output a .tbi index file along with the output .vcf/gvcf (Default=true)
+  --sse-key arg                                           Set server-side encryption [AES256]
+  --lic-server arg                                        set license server for cloud sites: http://<base64_user>:<base64_pass>@<path>
+  --lic-instance-id-location arg                          set cloud instance ID location
+  --RGID arg                                              Read group ID
+  --RGLB arg                                              Read group library
+  --RGPL arg                                              Read group sequencing technology
+  --RGPU arg                                              Read group platform unit
+  --RGSM arg                                              Read group sample name
+  --RGCN arg                                              Read group sequencing center name
+  --RGDS arg                                              Read group description
+  --RGDT arg                                              Read group run date
+  --RGPI arg                                              Read group predicted insert size
+  --RGID-tumor arg                                        Read group ID for tumor input
+  --RGLB-tumor arg                                        Read group library for tumor input
+  --RGPL-tumor arg                                        Read group sequencing technology for tumor input
+  --RGPU-tumor arg                                        Read group platform unit for tumpr input
+  --RGSM-tumor arg                                        Read group sample name for tumor input
+  --RGCN-tumor arg                                        Read group sequencing center name for tumor input
+  --RGDS-tumor arg                                        Read group description for tumor input
+  --RGDT-tumor arg                                        Read group run date for tumor input
+  --RGPI-tumor arg                                        Read group predicted insert size for tumor input
+  --prepend-filename-to-rgid arg                          Internally prepend the file name to the RGID tag in cases of 
+                                                          having the same RGID for different read groups across 
+                                                          multiple bams
+  --bcl-conversion-only arg                               Perform Illumina BCL conversion to FASTQ format (default 
+                                                          false)
+  --bcl-input-directory arg                               Input BCL directory for BCL conversion (must be specified for
+                                                          BCL input)
+  --sample-sheet arg                                      For BCL input, path to SampleSheet.csv file (default searched
+                                                          for in --bcl-input-directory)
+  --bcl-only-lane arg                                     For BCL input, convert only specified lane number (default 
+                                                          all lanes)
+  --strict-mode arg                                       For BCL input, abort if any files are missing (false by 
+                                                          default)
+  --first-tile-only arg                                   For BCL conversion, only convert first tile of input (for 
+                                                          testing & debugging)
+  --enable-map-align arg                                  Enable the mapper/aligner (Default=true)
+  --enable-map-align-output arg                           Enable the output from mapper/aligner
+  --enable-rna arg                                        Enable the mapper/aligner RNA pipeline
+  -a [ --annotation-file ] arg                            Transcript annotation file (RNA)
+  --enable-rna-gene-fusion arg                            Enable the RNA gene fusion detection algorithm
+  --rna-gf-input-file arg                                 Input chimeric junctions file, for standalone RNA gene fusion
+  --rna-gf-restrict-genes arg                             Filter transcripts with biotype other than protein coding or 
+                                                          lncRNA from annotation
+  --enable-auto-multifile arg                             Import subsequent segments of *_001.fastq files 
+                                                          (Default=true)
+  --combine-samples-by-name arg                           Import all fastq files with same sample name as given file 
+                                                          (even across lanes) (Default=false)
+  --enable-bam-indexing arg                               Output a .bai index file along with the output .bam
+  --enable-sort arg                                       Enable sorting after mapping/alignment   (Default=true)
+  --enable-duplicate-marking arg                          Enable marking or removal of duplicate alignment records 
+                                                          (Default=false)
+  --remove-duplicates arg                                 Remove duplicates instead of marking them with flag 0x400 
+                                                          (Default=false)
+  --fastq-offset arg                                      FASTQ quality offset value. Set to 33 or 64 (Default=33)
+  --fastq-n-quality arg                                   FASTQ quality to output for N base calls
+  --ref-sequence-filter arg                               Output only reads mapping to this reference sequence
+  --intermediate-results-dir arg                          Directory for sort intermediate results
+  --generate-md-tags arg                                  Whether to generate MD tags for alignment output records
+  --generate-zs-tags arg                                  Whether to generate ZS tags for alignment output records
+  --generate-xq-tags arg                                  Whether to generate XQ tags (extended MAPQ) for alignment 
+                                                          output records
+  --preserve-bqsr-tags arg                                If true, pass through BI/BD tags (default=true)
+  --methylation-protocol arg                              Library protocol for methylation analysis. 
+                                                          (none|directional|non-directional|directional-complement|pbat
+                                                          )
+  --methylation-match-bismark arg                         When running methyl-seq analysis, try to match Bismark output
+  --enable-methylation-calling arg                        If true, merge methyl-seq runs and add tags. If false, 
+                                                          methyl-seq just writes a BAM file per aligner run
+  --methylation-generate-cytosine-report arg              Whether to generate a genome-wide cytosine methylation report
+  --methylation-generate-mbias-report arg                 Whether to generate a per-sequencer-cycle methylation bias 
+                                                          report
+  --methylation-reports-only arg                          Skip methylation analysis and generates reports. Requires 
+                                                          dragen methylated BAM input
+  --preserve-map-align-order arg                          Preserve the order of mapper/aligner output to produce 
+                                                          deterministic results.  Impacts performance
+  --filter-flags-from-output arg                          Filter output alignments with any bits set in 'val' present 
+                                                          in the flags field.  Hex & decimal values accepted
+  --alt-aware arg                                         Enables special processing for alt contigs, if alt liftover 
+                                                          was used in hash table
+  --enable-bqsr arg                                       Enable base quality score recalibration (BQSR)
+  --bqsr-max-cycle-value arg                              Longest expected possible read length for BQSR cycle 
+                                                          covariate
+  --bqsr-cycle-mismatch-context arg                       Width of contexts for mismatches in BQSR cycle covariate
+  --bqsr-cycle-indel-context arg                          Width of contexts for indels in BQSR cycle covariate
+  --bqsr-context-low-quality-tail arg                     How many low-quality bases to ignore at read ends for BQSR 
+                                                          context covariate
+  --bqsr-enable-recal-indels arg                          Whether or not to apply base recalibrations derived from 
+                                                          indel stats
+  --bqsr-match-gatk arg                                   If true, match GATK's BQSR behavior exactly, including quirks
+  --bqsr-emit-indel-tags arg                              Enables the emitting of BI and BD tags in output alignment 
+                                                          records
+  --umi-enable arg                                        Enable UMI-based read processing
+  --umi-min-supporting-reads arg                          Minimum number of supporting reads required for a family. 
+                                                          Applied independently to read1 and read2
+  --repeat-genotype-enable arg                            Enable calling of repeat-expansion variants
+  --repeat-genotype-specs arg                             Repeat variant catalog file
+  --repeat-genotype-region-extension-length arg           How far from on/off-target regions to search for informative 
+                                                          reads
+  --repeat-genotype-min-baseq arg                         Minimum quality of a high-confidence base call
+  --enable-variant-caller arg                             Enable the variant caller (Default=false)
+  --enable-joint-genotyping arg                           Use one or more input gVCF files for genotyping 
+                                                          (Default=false)
+  --enable-combinegvcfs arg                               Use one or more input gVCF files for combining the files into
+                                                          one gvcf (Default=false)
+  --include-non-variant-sites arg                         Include loci found to be non-variant after genotyping 
+                                                          (Default=false)
+  --vc-reference arg                                      Reference file in FASTA format
+  --vc-target-bed arg                                     Target BED file
+  --vc-target-bed-padding arg                             Padding (in bp) to be added to each target BED region
+  --vc-depth-intervals-bed arg                            Depth intervals BED file
+  --vc-enable-depth-of-coverage arg                       Enable depth of coverage calculations (Default=false)
+  --vc-sample-name arg                                    Variant caller sample name
+  --vc-tumor-sample-name arg                              Variant caller sample name for tumor sample
+  --vc-target-coverage arg                                Target coverage at any locus
+  --vc-min-read-qual arg                                  Minimum read quality (MAPQ)
+  --vc-min-tumor-read-qual arg                            Minimum read quality threshold for tumor reads
+  --vc-min-base-qual arg                                  Minimum base quality
+  --vc-min-call-qual arg                                  Minimum variant call quality for emitting a call
+  --vc-emit-ref-confidence arg                            Output gVCF in specified format (NONE|GVCF) (Default=NONE)
+  --vc-gvcf-gq-bands arg                                  Define GQ bands for gVCF output. Example (and default): 5 20 
+                                                          60
+  --vc-max-alternate-alleles arg                          Maximum number of ALT alleles which will be output in a VCF 
+                                                          or gVCF (Default=6)
+  --vc-pcr-indel-model arg                                PCR indel model to use (none|hostile|aggressive|conservative)
+                                                          (Default=conservative)
+  --variant arg                                           One or more input gVCF files
+  --dbsnp arg                                             Variant annotation database VCF (or .vcf.gz) file
+  --panel-of-normals arg                                  Variant vcf (or .vcf.gz) of calls to be blacklisted in 
+                                                          somatic mode
+  --cosmic arg                                            Variant vcf (or .vcf.gz) of known somatic variants
+  --vc-log-bed arg                                        Log information for regions in this BED file
+  --vc-enable-dragstr arg                                 Enable DRAGStr mode (Default=false)
+  --vc-enable-homologous-mapping-filter arg               Enable homologous filter for somatic mode
+  --vc-enable-clustered-events-filter arg                 Enable clustered-events filter for somatic mode
+  --vc-clustered-events-threshold arg                     Threshold for clustered-events filter for somatic mode 
+                                                          (Default=3)
+  --vc-enable-triallelic-filter arg                       Enable triallelic_site filter for somatic mode
+  --vc-enable-multi-event-alt-allele-in-normal-filter arg Enable multi event alt allele in normal filter
+  --vc-enable-strand-artifact-filter arg                  Enable the strand artifact filter in gatk 4 mode
+  --vc-enable-af-filter arg                               Enable the allele frequency filter in somatic caller 
+                                                          (Default=false)
+  --vc-enable-histogram-of-coverage arg                   Enable histogram of coverage calculations (Default=false)
+  --vc-use-secondaries arg                                If true, allow secondary alignments to be used in making 
+                                                          variant calls
+  --vc-mapq-floor arg                                     Force MAPQ for all variant call input records to at least 
+                                                          this value
+  --vc-mapq-floor-min-matches arg                         Only apply --vc-mapq-floor to reads with at least this many 
+                                                          CIGAR M's
+  --enable-multi-sample-gvcf arg                          Output gVCF when joint genotyping is enabled (Default=false)
+  --vc-denovo-prior arg                                   Prior probablility for calling deNovo variants
+  --vc-enable-format-fields arg                           One or more FORMAT fields to be output for variant calls in a
+                                                          VCF or gVCF
+  --vc-enable-homref-format-fields arg                    One or more FORMAT fields to be output for homozygous 
+                                                          reference calls in a gVCF
+  --vc-enable-somatic-active-region-pon-lookup arg        During active region detection, suppress positions that are 
+                                                          in the panel of normals (Default=false)
+  --vc-forcegt-vcf arg                                    List of small variants to force genotype. Can be .vcf or 
+                                                          .vcf.gz file
+  --vc-enable-baf arg                                     Enable B allele frequency output
+  --vc-enable-roh arg                                     Enable ROH output
+  --vc-roh-blacklist-bed arg                              Blacklist BED file for ROH
+  --vc-enable-vcf-output arg                              Enable output of VCF file during a gVCF run (Default=false)
+  --pedigree-file arg                                     Pedigree file
+  --sample-sex arg                                        Sex of sample (MALE|FEMALE)
+  --enable-vlrd arg                                       Enable VLRD processing using homologous regions Bed file 
+                                                          (Default=false)
+  --enable-vlrd-map-align-output arg                      Enable VLRD to produce an output file with remapped reads 
+                                                          (Default=false)
+  --enable-vqsr arg                                       Enables VQSR processing
+  --vqsr-config-file arg                                  VQSR configuration file
+  --gg-regions arg                                        Regions to process in parallel: BED file or 
+                                                          comma/line_return-separated list of regions
+  --gg-max-alternate-alleles arg                          Maximum number of ALT alleles which will be output in a VCF 
+                                                          or gVCF (Default=50)
+  --enable-cnv arg                                        Enable the copy number variant caller (Default=false)
+  --cnv-blacklist-bed arg                                 Regions to blacklist for making CNV calls
+  --cnv-counts-method arg                                 Overlap method for counting an alignment
+  --cnv-enable-gcbias-correction arg                      Enables GC bias correction
+  --cnv-enable-gcbias-smoothing arg                       Enables smoothing across GC bins
+  --cnv-enable-plots arg                                  Enables post processing to generate plots
+  --cnv-enable-ref-calls arg                              Enables copy neutral (REF) calls to be emitted in the CNV VCF
+  --cnv-enable-self-normalization arg                     Enables self normalization
+  --cnv-enable-tracks arg                                 Enables generation of IGV track files
+  --cnv-extreme-percentile arg                            Extreme median percentile to filter out samples
+  --cnv-filter-bin-count arg                              Minimum number of bins to pass a call (currently only applied
+                                                          to somatic calls)
+  --cnv-filter-bin-support-ratio arg                      Minimum ratio for number of target bins to segment length
+  --cnv-filter-de-novo-qual arg                           DQ value at which to flag de novo events in the CNV VCF
+  --cnv-filter-copy-ratio arg                             Threshold value around copy ratio 1.0 to hard filter CNV VCF
+  --cnv-filter-length arg                                 Minimum event length to hard filter CNV VCF
+  --cnv-filter-qual arg                                   QUAL value at which to hard filter CNV VCF
+  --cnv-input arg                                         CNV input file instead of a BAM. Either target.counts or 
+                                                          tn.tsv (for DeNovo)
+  --cnv-interval-width arg                                Width of the sampling interval for CNV processing
+  --cnv-max-percent-zero-samples arg                      Zero coverage sample percent threshold
+  --cnv-max-percent-zero-targets arg                      Zero coverage target percent threshold
+  --cnv-normal-b-allele-vcf arg                           Normal sample SNV VCF for determining het sites
+  --cnv-normals-file arg                                  One or more input normal counts files
+  --cnv-normals-list arg                                  Input list for panel of normal counts files
+  --cnv-num-gc-bins arg                                   Number of GC bins for GC bias correction
+  --cnv-merge-threshold arg                               Maximum segment mean difference for merging segments
+  --cnv-merge-distance arg                                Maximum segment gap allowed for merging segments
+  --cnv-min-mapq arg                                      Minimum MAPQ for alignment to be considered
+  --cnv-ploidy arg                                        Assumed ploidy for analysis and copy number calculations
+  --cnv-qual-length-scale arg                             Scales noise estimate with length of segment. [0.0, 1.0]
+  --cnv-qual-noise-scale arg                              Compensation for imperfect tail modeling. [1.0, 10.0]
+  --cnv-segmentation-mode arg                             Segmentation algorithm to perform
+  --cnv-target-bed arg                                    CNV target BED file
+  --cnv-target-factor-threshold arg                       Target factor threshold
+  --cnv-truncate-threshold arg                            Truncate counts at the bottom and top percentile of this 
+                                                          threshold
+  --cnv-skip-contig-list arg                              Skip these primary contigs for CNV processing (comma 
+                                                          separated string)
+  --enable-sv arg                                         Enable the structural variant caller (Default=false)
+  --sv-reference arg                                      Reference file in FASTA format
+  --sv-call-regions-bed arg                               Bgzip-compressed/tabix-indexed BED file containing the set of
+                                                          regions to call
+  --sv-region arg                                         Limit the analysis to a region of the genome for debugging 
+                                                          purposes
+  --sv-exome arg                                          Set options for WES input: turn off depth filters 
+                                                          (Default=false)
+  --sv-output-contigs arg                                 Output assembled contig sequences in VCF file (Default=false)
+  --sv-denovo-scoring arg                                 Run Denovo quality scoring on multi sample VCFs 
+                                                          (Default=false)
+  --sv-quiet arg                                          Don't write any log output to stderr (but still write to log 
+                                                          file) (Default=true)
+  --cram-reference arg                                    Reference file in FASTA format
+  --cram-input arg                                        Input CRAM file to send to card
+  --tumor-cram-input arg                                  Input CRAM file of tumor reads for somatic mode
+  --build-hash-table arg                                  Generate a reference/hash table
+  --ht-reference arg                                      Reference in FASTA format
+  --ht-ref-seed-interval arg                              Number of positions per reference seed
+  --ht-seed-len arg                                       Initial seed length to store in hash table
+  --ht-max-ext-seed-len arg                               Maximum extended seed length
+  --ht-max-seed-freq arg                                  Maximum allowed frequency for a seed match after extension 
+                                                          attempts
+  --ht-target-seed-freq arg                               Target seed frequency for seed extension
+  --ht-soft-seed-freq-cap arg                             Soft seed frequency cap for thinning
+  --ht-max-dec-factor arg                                 Maximum decimation factor for seed thinning
+  --ht-cost-coeff-seed-len arg                            Cost coefficient of extended seed length
+  --ht-cost-coeff-seed-freq arg                           Cost coefficient of extended seed frequency
+  --ht-cost-penalty arg                                   Cost penalty to extend a seed by any number of bases
+  --ht-cost-penalty-incr arg                              Cost penalty to incrementally extend a seed another step
+  --ht-rand-hit-hifreq arg                                Include a random hit with each HIFREQ record
+  --ht-rand-hit-extend arg                                Include a random hit with each EXTEND record of this 
+                                                          frequency
+  --ht-methylated arg                                     If set to true, generate C->T and G->A converted pair of 
+                                                          hashtables
+  --ht-num-threads arg                                    Worker threads for generating hash table
+  --ht-size arg                                           Size of hash table, units B|KB|MB|GB
+  --ht-sj-size arg                                        Reserved space for RNA annotated SJs, units B|KB|MB|GB
+  --ht-mem-limit arg                                      Memory limit (hash table + reference)
+  --ht-alt-liftover arg                                   SAM format liftover file of alternate contigs in reference
+  --ht-build-rna-hashtable arg                            Build the RNA hash table
+  --ht-alt-aware-validate arg                             If ref is hg19/hg38, validate that it is/was built with 
+                                                          liftover (default: true)
+  --ht-decoys arg                                         Path to decoys file (FASTA format) - defaults to FASTA in 
+                                                          /opt/edico/liftover
+  --ht-suppress-decoys arg                                Don't include any decoys when building hash table
+  --qc-coverage-region-1 arg                              1st bed file to report coverage on
+  --qc-coverage-region-2 arg                              2nd bed file to report coverage on
+  --qc-coverage-region-3 arg                              3rd bed file to report coverage on
+  --qc-coverage-region-padding-1 arg                      Padding size for qc-coverage-region-1
+  --qc-coverage-region-padding-2 arg                      Padding size for qc-coverage-region-2
+  --qc-coverage-region-padding-3 arg                      Padding size for qc-coverage-region-3
+  --qc-coverage-reports-1 arg                             Coverage reports requested for qc-coverage-region-1
+  --qc-coverage-reports-2 arg                             Coverage reports requested for qc-coverage-region-2
+  --qc-coverage-reports-3 arg                             Coverage reports requested for qc-coverage-region-3
+  --qc-coverage-filters-1 arg                             Filters requested for qc-coverage-region-1
+  --qc-coverage-filters-2 arg                             Filters requested for qc-coverage-region-2
+  --qc-coverage-filters-3 arg                             Filters requested for qc-coverage-region-3
+  --qc-cross-cont-vcf arg                                 Variant file (.vcf/.vcf.gz) with population allele 
+                                                          frequencies to estimate sample contamination
+  --enable-rna-quantification arg                         Enable rna abundance quantification (Default=false)
+  --rna-quantification-fld-max arg                        Fragment length distribution max for single-ended library 
+                                                          runs
+  --rna-quantification-fld-mean arg                       Fragment length distribution mean for signle-ended library 
+                                                          runs
+  --rna-quantification-fld-sd arg                         Fragment length distribution standard deviation for 
+                                                          signle-ended library runs
+  --rna-quantification-gc-bias arg                        Correct for GC bias in fragment counts (Default=true)
+  --rna-quantification-library-type arg                   RNA-seq library type: A for autodetect (default).
+  --enable-metrics-compression arg                        Enable compression of large metric files (default=false)
+
+  -f [ --force ]                 Force overwrite of existing output file
+  -l [ --force-load-reference ]  Load the reference, even if it appears to already be loaded
+  --skip-load-reference          Skip loading the reference
+  -i [ --interleaved ]           Interleaved paired-end reads in single FASTQ
+  -h [ --help ]                  Print this help message
+  -v [ --verbose ]               Be talkative
+  -V [ --version ]               Print the version and exit
+  --lic-no-print                 Do not print license status at the end of a run
+  -T [ --type ]                  Print the dragen type and exit
+```
