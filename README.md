@@ -88,3 +88,22 @@ export IAP_TOKEN='...'
 # run the container
 docker run --rm --env IAP_TOKEN -p 3000:3000 umccr/illumination:latest
 ```
+
+bashrc
+------
+
+Simply type `run_illumination` in order to run the illumination command.
+
+```
+# IAP token
+if [[ -f ~/.iap/.session.yaml ]]; then
+        export IAP_TOKEN=$(cat ~/.iap/.session.yaml | {
+                             grep '^access-token: '
+                           } | {
+                             cut -d' ' -f2
+                           })
+fi
+
+# ILLUMINATION ALIAS
+alias run_illumination="docker run --rm -i -t --env IAP_TOKEN --publish 3000:3000 umccr/illumination:latest"
+```
