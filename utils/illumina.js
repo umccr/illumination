@@ -21,10 +21,12 @@ const id2username = function(id) {
     "6696900a-96ea-372a-bc00-ca6bbe19bf7b": "Kym",
     "ef928f99-662d-3e9f-8476-303131e9a58a": "Karey",
     "a46c2704-4568-3a39-b934-45bc9b352ac8": "Voula",
-    "3ed6bc8a-ba5a-3ec3-9e25-361703c7ba20": "EganIllum",
-    "aa9f1c02-3963-3c3b-ad0d-9b6f6e26a405": "PratikIllum",
-    "e3c89a8a-23a7-36cf-a1dc-281d96ed1aab": "YinanIllum",
-    "e44e09eb-60c7-3a0f-9313-46f7454ede92": "AndreiIllum",
+    "3ed6bc8a-ba5a-3ec3-9e25-361703c7ba20": "Egan_Illum",
+    "aa9f1c02-3963-3c3b-ad0d-9b6f6e26a405": "Pratik_Illum",
+    "7bc5755d-b316-3e7f-b25a-549f7015c142": "Pratik_Illum?",
+    "e3c89a8a-23a7-36cf-a1dc-281d96ed1aab": "Yinan_Illum",
+    "e44e09eb-60c7-3a0f-9313-46f7454ede92": "Andrei_Illum",
+    "41fc4571-741c-386e-be44-cf9ae7313f53": "VL"
   };
 
   return username[id];
