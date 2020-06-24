@@ -11,6 +11,7 @@
     <tr>
       <th>N</th>
       <th>ID</th>
+      <th>Name</th>
       <th>History</th>
       <th>Status</th>
       <th>Error</th>
@@ -29,6 +30,7 @@
       <td>
         <a href="/workflows/runs/<%= wruns[i].id %>"><%= wruns[i].id %></a>
       </td>
+      <td><%= wruns[i].name %></td>
       <td>
         <a
           href="/workflows/runs/<%= wruns[i].id %>/history?pageSize=100&sort=eventId asc"
@@ -54,7 +56,7 @@
       pageLength: 25,
       columnDefs: [
         {
-          targets: 5,
+          targets: 6,
           render: $.fn.dataTable.render.ellipsis(10, true)
         }
       ]
