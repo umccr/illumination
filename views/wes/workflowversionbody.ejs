@@ -6,4 +6,10 @@
 <%- jsonSyntaxHighlight(JSON.stringify(version, null, 2)) %>
 </pre>
 
+<h2>Definition JSON</h1>
+
+<pre>
+<%- jsonSyntaxHighlight(JSON.stringify(JSON.parse(version.definition), null, 2)) %>
+</pre>
+
 <% include ../partials/footer %>

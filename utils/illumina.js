@@ -3,7 +3,9 @@ const yaml = require("js-yaml"),
   path = require("path"),
   os = require("os");
 
-const id2username = function(id) {
+const base_url = "https://aps2.platform.illumina.com/v1";
+
+const id2username = function (id) {
   let username = {
     "567d89e4-de8b-3688-a733-d2a979eb510e": "PD_uni",
     "bd68e368-7587-3e22-a30e-9a2e1714b7c1": "PD",
@@ -26,15 +28,12 @@ const id2username = function(id) {
     "7bc5755d-b316-3e7f-b25a-549f7015c142": "Pratik_Illum?",
     "e3c89a8a-23a7-36cf-a1dc-281d96ed1aab": "Yinan_Illum",
     "e44e09eb-60c7-3a0f-9313-46f7454ede92": "Andrei_Illum",
-    "41fc4571-741c-386e-be44-cf9ae7313f53": "VL"
+    "41fc4571-741c-386e-be44-cf9ae7313f53": "VL",
   };
-
   return username[id];
 };
 
-const base_url = "https://aps2.platform.illumina.com/v1";
-
-const token = (function() {
+const token = (function () {
   console.log("Loading IAP token");
   let token;
   token = process.env.IAP_TOKEN;
@@ -42,7 +41,7 @@ const token = (function() {
     console.log("Using token from ENV");
   } else {
     try {
-      var session_file = path.join(os.homedir(), ".iap/.session.yaml");
+      let session_file = path.join(os.homedir(), ".iap/.session.yaml");
       token = yaml.safeLoad(fs.readFileSync(session_file, "utf8"));
       token = token["access-token"];
     } catch (e) {
@@ -53,20 +52,17 @@ const token = (function() {
   return token;
 })();
 
-const request_opts = function() {
-  // const base_url = module.exports.base_url;
-  // const t = module.exports.token;
+const request_opts = function () {
   return {
     headers: {
       Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     },
-    baseUrl: base_url,
-    json: true
+    baseURL: base_url,
   };
 };
 
-const total_period_usage = function(periods) {
+const total_period_usage = function (periods) {
   let arr = [];
   for (let p = 0; p < periods.length; p++) {
     let x = periods[p];
@@ -76,13 +72,13 @@ const total_period_usage = function(periods) {
     let tot = x["totalUsages"];
 
     for (let i = 0; i < tot.length; i++) {
-      tot.forEach(t => {
+      tot.forEach((t) => {
         arr.push({
           // periodName: pn,
           periodStart: ps,
           periodEnd: pe,
           type: t["type"],
-          amount: `${t["amount"]} ${t["unit"]}`
+          amount: `${t["amount"]} ${t["unit"]}`,
         });
       });
     }
@@ -90,7 +86,7 @@ const total_period_usage = function(periods) {
   return arr;
 };
 
-const user_aggregated_period_usage = function(periods) {
+const user_aggregated_period_usage = function (periods) {
   let arr = [];
   for (let p = 0; p < periods.length; p++) {
     let x = periods[p];
@@ -108,7 +104,7 @@ const user_aggregated_period_usage = function(periods) {
           amount: `${users[i]["usages"][y]["amount"]} ${users[i]["usages"][y]["unit"]}`,
           // periodName: pn,
           periodStart: ps,
-          periodEnd: pe
+          periodEnd: pe,
         });
       }
     }
@@ -122,5 +118,5 @@ module.exports = {
   request_opts: request_opts,
   id2username: id2username,
   total_period_usage: total_period_usage,
-  user_aggregated_period_usage: user_aggregated_period_usage
+  user_aggregated_period_usage: user_aggregated_period_usage,
 };

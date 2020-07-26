@@ -10,38 +10,39 @@
   <thead>
     <tr>
       <th>N</th>
-      <th>ID</th>
-      <th>Name</th>
-      <th>History</th>
+      <th>RunID</th>
+      <th>RunName (Click for History)</th>
+      <th>VersionName (ParentID)</th>
       <th>Status</th>
-      <th>Error</th>
-      <th>ErrorCause</th>
+      <th>Error (ErrorCause)</th>
       <th>CreatedBy</th>
-      <th>TimeCreated</th>
       <th>TimeStarted</th>
       <th>ModifiedBy</th>
       <th>TimeModified</th>
     </tr>
   </thead>
   <tbody>
-    <% wruns = wruns["items"]; %> <% for (let i = 0; i < wruns.length; i++) { %>
+    <% wruns = wruns["items"]; %>
+    <% for (let i = 0; i < wruns.length; i++) { %>
+    <% hrefToVersion = wruns[i].workflowVersion.href.replace(base_url + '/workflows/', '') %>
+    <% parentid = hrefToVersion.split('/').shift() %>
+    <% error_condensed = wruns[i].error + ' (' + wruns[i].errorCause + ')' %>
+    <% error_empty_presumably = wruns[i].error %>
+    <% error_final = wruns[i].error ? error_condensed : error_empty_presumably %>
     <tr>
       <td><%= `${i + 1}.` %></td>
       <td>
         <a href="/workflows/runs/<%= wruns[i].id %>"><%= wruns[i].id %></a>
       </td>
-      <td><%= wruns[i].name %></td>
       <td>
-        <a
-          href="/workflows/runs/<%= wruns[i].id %>/history?pageSize=100&sort=eventId asc"
-          >history</a
-        >
+        <a href="/workflows/runs/<%= wruns[i].id %>/history?pageSize=200&sort=eventId asc"><%= wruns[i].name %></a>
+      </td>
+      <td>
+        <a href="/workflows/<%= hrefToVersion %>"><%= hrefToVersion.split('/').pop() %></a> (<a href="/workflows/<%= parentid %>"><%= parentid %></a>)
       </td>
       <td><%= wruns[i].status %></td>
-      <td><%= wruns[i].error %></td>
-      <td><%= wruns[i].errorCause %></td>
+      <td><%= error_final %></td>
       <td><%= id2username(wruns[i].createdBy) %></td>
-      <td><%= format_date(wruns[i].timeCreated) %></td>
       <td><%= format_date(wruns[i].timeStarted) %></td>
       <td><%= id2username(wruns[i].modifiedBy) %></td>
       <td><%= format_date(wruns[i].timeModified) %></td>
@@ -56,7 +57,7 @@
       pageLength: 25,
       columnDefs: [
         {
-          targets: 6,
+          targets: 5,
           render: $.fn.dataTable.render.ellipsis(10, true)
         }
       ]

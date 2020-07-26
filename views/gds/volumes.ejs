@@ -19,17 +19,15 @@
     <% firstPageToken = volumes["firstPageToken"] %>
     <% nextPageToken = volumes["nextPageToken"] %>
     <% prevPageToken = volumes["prevPageToken"] %>
-    <ul>
-      <% if (firstPageToken) {%>
-        <li><a href="/volumes?pageToken=<%= firstPageToken %>">FirstPage</a></li>
-       <% } %>
-      <% if (nextPageToken) {%>
-        <li><a href="/volumes?pageToken=<%= nextPageToken %>">NextPage</a></li>
-       <% } %>
-      <% if (prevPageToken) {%>
-        <li><a href="/volumes?pageToken=<%= prevPageToken %>">PreviousPage</a></li>
-       <% } %>
-    </ul>
+    <% if (firstPageToken) {%>
+        <a href="/volumes?pageToken=<%= firstPageToken %>" class="ui toggle compact blue button">FirstPage</a>
+    <% } %>
+    <% if (nextPageToken) {%>
+        <a href="/volumes?pageToken=<%= nextPageToken %>" class="ui toggle compact green button">NextPage</a>
+    <% } %>
+    <% if (prevPageToken) {%>
+        <a href="/volumes?pageToken=<%= prevPageToken %>" class="ui toggle compact orange button">PreviousPage</a>
+    <% } %>
 
     <% for (let i = 0; i < vols.length; i++) { %>
     <tr>
@@ -56,7 +54,7 @@
 <script>
   $(document).ready(function() {
     $("#vol_table").DataTable({
-      pageLength: 25
+      pageLength: 100
     });
   });
 </script>

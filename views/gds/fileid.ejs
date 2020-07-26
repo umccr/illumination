@@ -1,10 +1,7 @@
 <% include ../partials/header %>
 
 <h1 class="title"><%= `Info about file with ID ${fileid}` %></h1>
-
-<ul>
-  <li><a href="<%= finfo.presignedUrl %>">Download via Presigned URL</a></li>
-</ul>
+  <a href="<%= finfo.presignedUrl %>" class="ui toggle compact purple button">Download via Presigned URL</a>
 
 <pre>
 <%- jsonSyntaxHighlight(JSON.stringify(finfo, null, 2)) %>

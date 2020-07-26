@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const request = require("request");
+const axios = require("axios").default;
 const illumina = require("../utils/illumina");
 const utils = require("../utils/utils");
 const request_opts = illumina.request_opts();
@@ -10,23 +10,22 @@ router.get("/", (req, res) => {
   let opts = request_opts;
   let qs = req.query;
   opts.url = "/files";
-  opts.qs = qs;
+  opts.params = qs;
 
-  request.get(opts, (error, response, body) => {
-    if (!error && response.statusCode == 200) {
+  axios(opts)
+    .then((response) => {
+      // res.send(response.data);
       res.render("gds/files", {
-        files: body,
+        files: response.data,
         queryString: queryString,
         qs: qs,
-        vname: opts.qs["volume.name"],
+        vname: opts.params["volume.name"],
         id2username: illumina.id2username,
         format_date: utils.format_date,
-        format_bytes: utils.format_bytes
+        format_bytes: utils.format_bytes,
       });
-    } else {
-      utils.print_error(error);
-    }
-  });
+    })
+    .catch((error) => utils.print_error(error));
 });
 
 router.get("/:fileid", (req, res) => {
@@ -34,19 +33,17 @@ router.get("/:fileid", (req, res) => {
   let qs = req.query;
   const fileid = req.params.fileid;
   opts.url = `/files/${fileid}`;
-  opts.qs = qs;
+  opts.params = qs;
 
-  request.get(opts, (error, response, body) => {
-    if (!error && response.statusCode == 200) {
+  axios(opts)
+    .then((response) => {
       res.render("gds/fileid", {
-        finfo: body,
+        finfo: response.data,
         fileid: fileid,
-        jsonSyntaxHighlight: utils.jsonSyntaxHighlight
+        jsonSyntaxHighlight: utils.jsonSyntaxHighlight,
       });
-    } else {
-      utils.print_error(error);
-    }
-  });
+    })
+    .catch((error) => utils.print_error(error));
 });
 
 module.exports = router;
