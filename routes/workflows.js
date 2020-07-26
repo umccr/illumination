@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const request = require("request");
+const axios = require("axios").default;
 const illumina = require("../utils/illumina");
 const utils = require("../utils/utils");
 const request_opts = illumina.request_opts();
@@ -9,38 +9,37 @@ router.get("/", (req, res) => {
   let opts = request_opts;
   let qs = req.query;
   opts.url = "/workflows";
-  opts.qs = qs;
+  opts.params = qs;
 
-  request.get(opts, (error, response, body) => {
-    if (!error && response.statusCode == 200) {
+  axios(opts)
+    .then((response) => {
+      // res.send(response.data);
       res.render("wes/workflows", {
-        wflows: body,
+        wflows: response.data,
         id2username: illumina.id2username,
-        format_date: utils.format_date
+        format_date: utils.format_date,
       });
-    } else {
-      utils.print_error(error);
-    }
-  });
+    })
+    .catch((error) => utils.print_error(error));
 });
 
 router.get("/runs", (req, res) => {
   let opts = request_opts;
   let qs = req.query;
   opts.url = "/workflows/runs";
-  opts.qs = qs;
+  opts.params = qs;
 
-  request.get(opts, (error, response, body) => {
-    if (!error && response.statusCode == 200) {
+  axios(opts)
+    .then((response) => {
+      // res.send(response.data);
       res.render("wes/workflowruns", {
-        wruns: body,
+        wruns: response.data,
+        base_url: illumina.base_url,
         id2username: illumina.id2username,
-        format_date: utils.format_date
+        format_date: utils.format_date,
       });
-    } else {
-      utils.print_error(error);
-    }
-  });
+    })
+    .catch((error) => utils.print_error(error));
 });
 
 router.get("/runs/:runid", (req, res) => {
@@ -48,19 +47,18 @@ router.get("/runs/:runid", (req, res) => {
   let qs = req.query;
   const runid = req.params.runid;
   opts.url = `/workflows/runs/${runid}`;
-  opts.qs = qs;
+  opts.params = qs;
 
-  request.get(opts, (error, response, body) => {
-    if (!error && response.statusCode == 200) {
+  axios(opts)
+    .then((response) => {
+      // res.send(response.data);
       res.render("wes/workflowrunid", {
-        wrun_info: body,
+        wrun_info: response.data,
         runid: runid,
-        jsonSyntaxHighlight: utils.jsonSyntaxHighlight
+        jsonSyntaxHighlight: utils.jsonSyntaxHighlight,
       });
-    } else {
-      utils.print_error(error);
-    }
-  });
+    })
+    .catch((error) => utils.print_error(error));
 });
 
 router.get("/runs/:runid/history", (req, res) => {
@@ -68,56 +66,51 @@ router.get("/runs/:runid/history", (req, res) => {
   let qs = req.query;
   const runid = req.params.runid;
   opts.url = `/workflows/runs/${runid}/history`;
-  opts.qs = qs;
+  opts.params = qs;
 
-  request.get(opts, (error, response, body) => {
-    if (!error && response.statusCode == 200) {
+  axios(opts)
+    .then((response) => {
       res.render("wes/workflowrunhistory", {
-        history: body,
+        history: response.data,
         runid: runid,
-        jsonSyntaxHighlight: utils.jsonSyntaxHighlight
+        jsonSyntaxHighlight: utils.jsonSyntaxHighlight,
       });
-    } else {
-      utils.print_error(error);
-    }
-  });
+    })
+    .catch((error) => utils.print_error(error));
 });
 
 router.get("/versions", (req, res) => {
   let opts = request_opts;
   let qs = req.query;
   opts.url = "/workflows/versions";
-  opts.qs = qs;
+  opts.params = qs;
 
-  request.get(opts, (error, response, body) => {
-    if (!error && response.statusCode == 200) {
+  axios(opts)
+    .then((response) => {
+      // res.send(response.data);
       res.render("wes/workflowversionsall", {
-        versions: body,
+        versions: response.data,
         id2username: illumina.id2username,
-        format_date: utils.format_date
+        format_date: utils.format_date,
       });
-    } else {
-      utils.print_error(error);
-    }
-  });
+    })
+    .catch((error) => utils.print_error(error));
 });
 
 router.get("/signals", (req, res) => {
   let opts = request_opts;
   let qs = req.query;
   opts.url = "/workflows/signals";
-  opts.qs = qs;
+  opts.params = qs;
 
-  request.get(opts, (error, response, body) => {
-    if (!error && response.statusCode == 200) {
+  axios(opts)
+    .then((response) => {
       res.render("wes/workflowsignals", {
-        signals: body,
-        jsonSyntaxHighlight: utils.jsonSyntaxHighlight
+        signals: response.data,
+        jsonSyntaxHighlight: utils.jsonSyntaxHighlight,
       });
-    } else {
-      utils.print_error(error);
-    }
-  });
+    })
+    .catch((error) => utils.print_error(error));
 });
 
 router.get("/signals/:signalid", (req, res) => {
@@ -125,19 +118,17 @@ router.get("/signals/:signalid", (req, res) => {
   let qs = req.query;
   const signalid = req.params.signalid;
   opts.url = `/workflows/signals/${signalid}`;
-  opts.qs = qs;
+  opts.params = qs;
 
-  request.get(opts, (error, response, body) => {
-    if (!error && response.statusCode == 200) {
+  axios(opts)
+    .then((response) => {
       res.render("wes/workflowsignalid", {
-        signal: body,
+        signal: response.data,
         signalid: signalid,
-        jsonSyntaxHighlight: utils.jsonSyntaxHighlight
+        jsonSyntaxHighlight: utils.jsonSyntaxHighlight,
       });
-    } else {
-      utils.print_error(error);
-    }
-  });
+    })
+    .catch((error) => utils.print_error(error));
 });
 
 router.get("/:workflowid", (req, res) => {
@@ -145,19 +136,17 @@ router.get("/:workflowid", (req, res) => {
   let qs = req.query;
   const wflowid = req.params.workflowid;
   opts.url = `/workflows/${wflowid}`;
-  opts.qs = qs;
+  opts.params = qs;
 
-  request.get(opts, (error, response, body) => {
-    if (!error && response.statusCode == 200) {
+  axios(opts)
+    .then((response) => {
       res.render("wes/workflowid", {
-        wflow_info: body,
+        wflow_info: response.data,
         wflowid: wflowid,
-        jsonSyntaxHighlight: utils.jsonSyntaxHighlight
+        jsonSyntaxHighlight: utils.jsonSyntaxHighlight,
       });
-    } else {
-      utils.print_error(error);
-    }
-  });
+    })
+    .catch((error) => utils.print_error(error));
 });
 
 router.get("/:workflowid/versions", (req, res) => {
@@ -165,21 +154,19 @@ router.get("/:workflowid/versions", (req, res) => {
   let qs = req.query;
   const workflowid = req.params.workflowid;
   opts.url = `/workflows/${workflowid}/versions`;
-  opts.qs = qs;
+  opts.params = qs;
 
-  request.get(opts, (error, response, body) => {
-    if (!error && response.statusCode == 200) {
-      // res.send(body);
+  axios(opts)
+    .then((response) => {
+      // res.send(response.data);
       res.render("wes/workflowversions", {
-        versions: body,
+        versions: response.data,
         workflowid: workflowid,
         id2username: illumina.id2username,
-        format_date: utils.format_date
+        format_date: utils.format_date,
       });
-    } else {
-      utils.print_error(error);
-    }
-  });
+    })
+    .catch((error) => utils.print_error(error));
 });
 
 router.get("/:workflowid/versions/:versionid", (req, res) => {
@@ -188,20 +175,18 @@ router.get("/:workflowid/versions/:versionid", (req, res) => {
   const workflowid = req.params.workflowid;
   const versionid = req.params.versionid;
   opts.url = `/workflows/${workflowid}/versions/${versionid}`;
-  opts.qs = qs;
+  opts.params = qs;
 
-  request.get(opts, (error, response, body) => {
-    if (!error && response.statusCode == 200) {
+  axios(opts)
+    .then((response) => {
       res.render("wes/workflowversionbody", {
         workflowid: workflowid,
         versionid: versionid,
-        version: body,
-        jsonSyntaxHighlight: utils.jsonSyntaxHighlight
+        version: response.data,
+        jsonSyntaxHighlight: utils.jsonSyntaxHighlight,
       });
-    } else {
-      utils.print_error(error);
-    }
-  });
+    })
+    .catch((error) => utils.print_error(error));
 });
 
 module.exports = router;

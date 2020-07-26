@@ -100,7 +100,7 @@ router.get("/:taskid/versions/:versionid", (req, res) => {
   const taskid = req.params.taskid;
   const versionid = req.params.versionid;
   opts.url = `/tasks/${taskid}/versions/${versionid}`;
-  opts.qs = qs;
+  opts.params = qs;
 
   axios(opts)
     .then((response) => {
