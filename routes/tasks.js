@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const request = require("request");
+const axios = require("axios").default;
 const illumina = require("../utils/illumina");
 const utils = require("../utils/utils");
 const request_opts = illumina.request_opts();
@@ -9,38 +9,34 @@ router.get("/", (req, res) => {
   let opts = request_opts;
   let qs = req.query;
   opts.url = "/tasks";
-  opts.qs = qs;
+  opts.params = qs;
 
-  request.get(opts, (error, response, body) => {
-    if (!error && response.statusCode == 200) {
+  axios(opts)
+    .then((response) => {
       res.render("tes/tasks", {
-        tasks: body,
+        tasks: response.data,
         id2username: illumina.id2username,
-        format_date: utils.format_date
+        format_date: utils.format_date,
       });
-    } else {
-      utils.print_error(error);
-    }
-  });
+    })
+    .catch((error) => utils.print_error(error));
 });
 
 router.get("/runs", (req, res) => {
   let opts = request_opts;
   let qs = req.query;
   opts.url = "/tasks/runs";
-  opts.qs = qs;
+  opts.params = qs;
 
-  request.get(opts, (error, response, body) => {
-    if (!error && response.statusCode == 200) {
+  axios(opts)
+    .then((response) => {
       res.render("tes/taskruns", {
-        truns: body,
+        truns: response.data,
         id2username: illumina.id2username,
-        format_date: utils.format_date
+        format_date: utils.format_date,
       });
-    } else {
-      utils.print_error(error);
-    }
-  });
+    })
+    .catch((error) => utils.print_error(error));
 });
 
 router.get("/runs/:runid", (req, res) => {
@@ -48,19 +44,17 @@ router.get("/runs/:runid", (req, res) => {
   let qs = req.query;
   const runid = req.params.runid;
   opts.url = `/tasks/runs/${runid}`;
-  opts.qs = qs;
+  opts.params = qs;
 
-  request.get(opts, (error, response, body) => {
-    if (!error && response.statusCode == 200) {
+  axios(opts)
+    .then((response) => {
       res.render("tes/taskrunid", {
-        trun_info: body,
+        trun_info: response.data,
         runid: runid,
-        jsonSyntaxHighlight: utils.jsonSyntaxHighlight
+        jsonSyntaxHighlight: utils.jsonSyntaxHighlight,
       });
-    } else {
-      utils.print_error(error);
-    }
-  });
+    })
+    .catch((error) => utils.print_error(error));
 });
 
 router.get("/:taskid", (req, res) => {
@@ -68,19 +62,17 @@ router.get("/:taskid", (req, res) => {
   let qs = req.query;
   const taskid = req.params.taskid;
   opts.url = `/tasks/${taskid}`;
-  opts.qs = qs;
+  opts.params = qs;
 
-  request.get(opts, (error, response, body) => {
-    if (!error && response.statusCode == 200) {
+  axios(opts)
+    .then((response) => {
       res.render("tes/taskid", {
-        task_info: body,
+        task_info: response.data,
         taskid: taskid,
-        jsonSyntaxHighlight: utils.jsonSyntaxHighlight
+        jsonSyntaxHighlight: utils.jsonSyntaxHighlight,
       });
-    } else {
-      utils.print_error(error);
-    }
-  });
+    })
+    .catch((error) => utils.print_error(error));
 });
 
 router.get("/:taskid/versions", (req, res) => {
@@ -88,20 +80,18 @@ router.get("/:taskid/versions", (req, res) => {
   let qs = req.query;
   const taskid = req.params.taskid;
   opts.url = `/tasks/${taskid}/versions`;
-  opts.qs = qs;
+  opts.params = qs;
 
-  request.get(opts, (error, response, body) => {
-    if (!error && response.statusCode == 200) {
+  axios(opts)
+    .then((response) => {
       res.render("tes/taskversions", {
-        versions: body,
+        versions: response.data,
         taskid: taskid,
         id2username: illumina.id2username,
-        format_date: utils.format_date
+        format_date: utils.format_date,
       });
-    } else {
-      utils.print_error(error);
-    }
-  });
+    })
+    .catch((error) => utils.print_error(error));
 });
 
 router.get("/:taskid/versions/:versionid", (req, res) => {
@@ -112,18 +102,16 @@ router.get("/:taskid/versions/:versionid", (req, res) => {
   opts.url = `/tasks/${taskid}/versions/${versionid}`;
   opts.qs = qs;
 
-  request.get(opts, (error, response, body) => {
-    if (!error && response.statusCode == 200) {
+  axios(opts)
+    .then((response) => {
       res.render("tes/taskversionbody", {
         taskid: taskid,
         versionid: versionid,
-        version: body,
-        jsonSyntaxHighlight: utils.jsonSyntaxHighlight
+        version: response.data,
+        jsonSyntaxHighlight: utils.jsonSyntaxHighlight,
       });
-    } else {
-      utils.print_error(error);
-    }
-  });
+    })
+    .catch((error) => utils.print_error(error));
 });
 
 module.exports = router;
