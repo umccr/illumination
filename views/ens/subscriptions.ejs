@@ -13,6 +13,9 @@
       <th>Actions</th>
       <th>CreatedBy</th>
       <th>TimeCreated</th>
+      <th>DeliveryTarget</th>
+      <th>FilterExpression</th>
+      <th>URN</th>
     </tr>
   </thead>
   <tbody>
@@ -29,6 +32,9 @@
         <%= id2username(subs[i].createdByUserId) %>
       </td>
       <td><%= format_date(subs[i].timeCreated) %></td>
+      <td><%= JSON.stringify(subs[i].deliveryTarget) %></td>
+      <td><%= JSON.stringify(JSON.parse(subs[i].filterExpression)) %></td>
+      <td><%= subs[i].urn %></td>
     </tr>
     <% } %>
   </tbody>
