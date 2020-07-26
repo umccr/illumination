@@ -27,11 +27,9 @@
     <% delete qs.pageSize %>
     <% delete qs.pageToken %>
     <% qs_new = queryString.stringify(qs) %>
-    <ul>
-      <% if (firstPageToken) {%> <li><a href="/files?pageToken=<%= firstPageToken %>&<%= qs_new %>">FirstPage</a></li> <% } %>
-      <% if (nextPageToken) {%> <li><a href="/files?pageToken=<%= nextPageToken %>&<%= qs_new %>">NextPage</a></li> <% } %>
-      <% if (prevPageToken) {%> <li><a href="/files?pageToken=<%= prevPageToken %>&<%= qs_new %>">PrevPage</a></li> <% } %>
-    </ul>
+    <% if (firstPageToken) {%> <a href="/files?pageToken=<%= firstPageToken %>&<%= qs_new %>" class="ui toggle compact blue button">FirstPage</a> <% } %>
+    <% if (nextPageToken) {%> <a href="/files?pageToken=<%= nextPageToken %>&<%= qs_new %>" class="ui toggle compact green button">NextPage</a> <% } %>
+    <% if (prevPageToken) {%> <a href="/files?pageToken=<%= prevPageToken %>&<%= qs_new %>" class="ui toggle compact orange button">PrevPage</a> <% } %>
 
 
     <% for (let i = 0; i < fs.length; i++) { %>
