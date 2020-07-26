@@ -1,6 +1,6 @@
 {
   "name": "illumination",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Interacting with Illumina Stratus API",
   "main": "app.js",
   "scripts": {
@@ -20,10 +20,9 @@
   "dependencies": {
     "axios": "^0.19.2",
     "chalk": "^4.1.0",
-    "ejs": "^2.7.1",
+    "ejs": "^2.7.4",
     "express": "^4.17.1",
-    "js-yaml": "^3.13.1",
-    "request": "^2.88.0"
+    "js-yaml": "^3.14.0"
   },
   "devDependencies": {
     "express-list-endpoints": "^4.0.1",
