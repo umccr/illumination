@@ -3,7 +3,11 @@
 <h1 class="title">Health status for all services</h1>
 <h2>Status: <%= health["status"]; %></h2>
 
-<table id="health_table" class="cell-border display compact">
+<table
+  id="health_table"
+  class="ui striped selectable celled compact table"
+  style="width:100%"
+>
   <thead>
     <tr>
       <th>N</th>

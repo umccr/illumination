@@ -35,3 +35,7 @@ pre {
 .key_pre {
   color: red;
 }
+
+div.container {
+  width: 80%;
+}
