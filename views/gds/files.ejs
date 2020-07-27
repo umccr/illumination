@@ -68,7 +68,8 @@
 <script>
   $(document).ready(function() {
     $("#file_table").DataTable({
-      pageLength: 25,
+      pageLength: 200,
+      lengthMenu: [ [10, 25, 50, 100, 200, 300, -1], [10, 25, 50, 100, 200, 300, "All"] ],
       columnDefs: [{ type: "file-size", targets: 3 }]
     });
   });
