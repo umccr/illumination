@@ -2,6 +2,7 @@
 
 - [Illumination](#illumination)
   - [Installation](#installation)
+    - [Updating](#updating)
   - [Running](#running)
   - [Routes Supported](#routes-supported)
   - [Docker](#docker)
@@ -34,6 +35,16 @@ node --version
 ```bash
 git clone https://github.com/umccr/illumination
 cd illumination
+npm install
+```
+
+### Updating
+
+Pull latest code changes and install/update newer dependencies:
+
+```bash
+cd illumination
+git pull
 npm install
 ```
 
