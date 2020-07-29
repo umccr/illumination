@@ -1,9 +1,9 @@
 const chalk = require("chalk");
-const moment = require("moment");
+const dayjs = require("dayjs");
 
-// moment uses the local time by default
+// dayjs uses the local time by default
 const format_date = function (date) {
-  return moment(date).format();
+  return dayjs(date).format();
 };
 
 const print_error = function (e) {
