@@ -11,6 +11,7 @@
     <tr>
       <th>N</th>
       <th>Name</th>
+      <th>ListFolders</th>
       <th>CreatedBy</th>
       <th>TimeCreated</th>
       <th>ModifiedBy</th>
@@ -38,6 +39,11 @@
       <td><%= `${i + 1}.` %></td>
       <td>
         <a href="/files?volume.name=<%= vols[i].name %>&pageSize=1000">
+          <%= vols[i].name %>
+        </a>
+      </td>
+      <td>
+        <a href="/folders?volume.name=<%= vols[i].name %>&pageSize=100&recursive=false">
           <%= vols[i].name %>
         </a>
       </td>
