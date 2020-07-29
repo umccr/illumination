@@ -1,13 +1,9 @@
 const chalk = require("chalk");
+const moment = require("moment");
 
+// moment uses the local time by default
 const format_date = function (date) {
-  // convert UTC to AEST
-  let d = new Date(Date.parse(date));
-  return d.toLocaleString("en-AU", {
-    timeZone: "Australia/Melbourne",
-    timeZoneName: "short",
-    hour12: false,
-  });
+  return moment(date).format();
 };
 
 const print_error = function (e) {
