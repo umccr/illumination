@@ -39,3 +39,19 @@ pre {
 div.container {
   width: 80%;
 }
+
+td.completed {
+  background-color: #d2f8d2;
+}
+
+td.pending {
+  background-color: #ffed83;
+}
+
+td.failed {
+  background-color: #ffcccb;
+}
+
+td.running {
+  color: green;
+}
