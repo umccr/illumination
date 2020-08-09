@@ -15,8 +15,8 @@ const id2username = function (id) {
     "9c925fa3-9b93-3f14-92a3-d35488ab1cc4": "RV",
     "8abf754b-e94f-3841-b44b-75d10d33588b": "SK_uni",
     "d24913a8-676f-39f3-9250-7cf22fbc48c8": "SK",
-    "c9688651-7872-3753-8146-ffa41c177aa1": "VS_uni",
-    "590dfb6c-6e4f-3db8-9e23-2d1039821653": "VS",
+    "c9688651-7872-3753-8146-ffa41c177aa1": "VSav_uni",
+    "590dfb6c-6e4f-3db8-9e23-2d1039821653": "VSav",
     "57a99faa-ae79-33f8-9736-454a36b06a43": "SU",
     "46258763-7c48-3a1c-8c5f-04003bf74e5a": "AL_uni",
     "b2f0ff65-c77b-37bc-af87-68a89c2f8d27": "AL",
@@ -28,7 +28,7 @@ const id2username = function (id) {
     "7bc5755d-b316-3e7f-b25a-549f7015c142": "Pratik_Illum?",
     "e3c89a8a-23a7-36cf-a1dc-281d96ed1aab": "Yinan_Illum",
     "e44e09eb-60c7-3a0f-9313-46f7454ede92": "Andrei_Illum",
-    "41fc4571-741c-386e-be44-cf9ae7313f53": "VL",
+    "41fc4571-741c-386e-be44-cf9ae7313f53": "VLin",
   };
   return username[id];
 };
