@@ -22,7 +22,20 @@
     </tr>
   </thead>
   <tbody>
-    <% wruns = wruns["items"]; %>
+    <% wruns = wflruns["items"]; %>
+    <% firstPageToken = wflruns["firstPageToken"] %>
+    <% nextPageToken = wflruns["nextPageToken"] %>
+    <% prevPageToken = wflruns["prevPageToken"] %>
+    <% if (firstPageToken) {%>
+        <a href="/workflows/runs?pageToken=<%= firstPageToken %>&sort=timeCreated desc" class="ui toggle compact blue button">FirstPage</a>
+    <% } %>
+    <% if (nextPageToken) {%>
+        <a href="/workflows/runs?pageToken=<%= nextPageToken %>&sort=timeCreated desc" class="ui toggle compact green button">NextPage</a>
+    <% } %>
+    <% if (prevPageToken) {%>
+        <a href="/workflows/runs?pageToken=<%= prevPageToken %>&sort=timeCreated desc" class="ui toggle compact orange button">PreviousPage</a>
+    <% } %>
+
     <% for (let i = 0; i < wruns.length; i++) { %>
     <% hrefToVersion = wruns[i].workflowVersion.href.replace(base_url + '/workflows/', '') %>
     <% parentid = hrefToVersion.split('/').shift() %>

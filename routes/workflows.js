@@ -33,7 +33,7 @@ router.get("/runs", (req, res) => {
     .then((response) => {
       // res.send(response.data);
       res.render("wes/workflowruns", {
-        wruns: response.data,
+        wflruns: response.data,
         base_url: illumina.base_url,
         id2username: illumina.id2username,
         format_date: utils.format_date,
