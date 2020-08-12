@@ -22,7 +22,21 @@
     </tr>
   </thead>
   <tbody>
-    <% truns = truns["items"]; %> <% for (let i = 0; i < truns.length; i++) { %>
+    <% truns = taskruns["items"]; %>
+    <% firstPageToken = taskruns["firstPageToken"] %>
+    <% nextPageToken = taskruns["nextPageToken"] %>
+    <% prevPageToken = taskruns["prevPageToken"] %>
+    <% if (firstPageToken) {%>
+        <a href="/tasks/runs?pageToken=<%= firstPageToken %>&sort=timeCreated desc" class="ui toggle compact blue button">FirstPage</a>
+    <% } %>
+    <% if (nextPageToken) {%>
+        <a href="/tasks/runs?pageToken=<%= nextPageToken %>&sort=timeCreated desc" class="ui toggle compact green button">NextPage</a>
+    <% } %>
+    <% if (prevPageToken) {%>
+        <a href="/tasks/runs?pageToken=<%= prevPageToken %>&sort=timeCreated desc" class="ui toggle compact orange button">PreviousPage</a>
+    <% } %>
+
+    <% for (let i = 0; i < truns.length; i++) { %>
     <tr>
       <td><%= `${i + 1}.` %></td>
       <td><a href="/tasks/runs/<%= truns[i].id %>"><%= truns[i].id %></a></td>

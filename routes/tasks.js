@@ -31,7 +31,7 @@ router.get("/runs", (req, res) => {
   axios(opts)
     .then((response) => {
       res.render("tes/taskruns", {
-        truns: response.data,
+        taskruns: response.data,
         id2username: illumina.id2username,
         format_date: utils.format_date,
       });
