@@ -25,7 +25,9 @@
     i++) { %>
     <tr>
       <td><%= `${i + 1}.` %></td>
-      <td><%= versions[i].id %></td>
+      <td>
+        <a href="/workflows/versions/<%= versions[i].id %>?pageSize=200&sort=timeCreated desc"><%= versions[i].id %></a>
+      </td>
       <td><%= versions[i].version %></td>
       <td><%= versions[i].language.name %></td>
       <td><%= versions[i].status %></td>

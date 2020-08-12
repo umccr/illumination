@@ -1,0 +1,98 @@
+<% include ../partials/header %>
+
+<h1 class="title">List of Workflow Runs for Version <%= versionid %></h1>
+
+<table
+  id="workflowrun_table"
+  class="ui striped selectable celled compact table"
+  style="width:100%"
+>
+  <thead>
+    <tr>
+      <th>N</th>
+      <th>RunID</th>
+      <th>RunName (Click for History)</th>
+      <th>ParentID --- [VersionName]</th>
+      <th>Status</th>
+      <th>Error (ErrorCause)</th>
+      <th>CreatedBy</th>
+      <th>TimeStarted</th>
+      <th>ModifiedBy</th>
+      <th>TimeModified</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%  filt = wflruns.items.filter((el) => { %>
+    <%    return el.workflowVersion.id === versionid; %>
+    <% }); %>
+
+    <% wruns = filt; %>
+    <% firstPageToken = wflruns["firstPageToken"] %>
+    <% nextPageToken = wflruns["nextPageToken"] %>
+    <% prevPageToken = wflruns["prevPageToken"] %>
+    <% if (firstPageToken) {%>
+        <a href="/workflows/versions/<%= versionid %>?pageToken=<%= firstPageToken %>&sort=timeCreated desc" class="ui toggle compact blue button">FirstPage</a>
+    <% } %>
+    <% if (nextPageToken) {%>
+        <a href="/workflows/versions/<%= versionid %>?pageToken=<%= nextPageToken %>&sort=timeCreated desc" class="ui toggle compact green button">NextPage</a>
+    <% } %>
+    <% if (prevPageToken) {%>
+        <a href="/workflows/versions/<%= versionid %>?pageToken=<%= prevPageToken %>&sort=timeCreated desc" class="ui toggle compact orange button">PreviousPage</a>
+    <% } %>
+
+    <% for (let i = 0; i < wruns.length; i++) { %>
+    <% hrefToVersion = wruns[i].workflowVersion.href.replace(base_url + '/workflows/', '') %>
+    <% parentid = hrefToVersion.split('/').shift() %>
+    <% error_condensed = wruns[i].error + ' (' + wruns[i].errorCause + ')' %>
+    <% error_empty_presumably = wruns[i].error %>
+    <% error_final = wruns[i].error ? error_condensed : error_empty_presumably %>
+    <tr>
+      <td><%= `${i + 1}.` %></td>
+      <td>
+        <a href="/workflows/runs/<%= wruns[i].id %>"><%= wruns[i].id %></a>
+      </td>
+      <td>
+        <a href="/workflows/runs/<%= wruns[i].id %>/history?pageSize=200&sort=eventId asc"><%= wruns[i].name %></a>
+      </td>
+      <td>
+         <a href="/workflows/<%= parentid %>"><%= parentid %></a> --- [<a href="/workflows/<%= hrefToVersion %>"><%= hrefToVersion.split('/').pop() %></a>]
+      </td>
+      <td><%= wruns[i].status %></td>
+      <td><%= error_final %></td>
+      <td><%= id2username(wruns[i].createdBy) %></td>
+      <td><%= format_date(wruns[i].timeStarted) %></td>
+      <td><%= id2username(wruns[i].modifiedBy) %></td>
+      <td><%= format_date(wruns[i].timeModified) %></td>
+    </tr>
+    <% } %>
+  </tbody>
+</table>
+
+<script>
+  $(document).ready(function() {
+    $("#workflowrun_table").DataTable({
+      pageLength: 100,
+      lengthMenu: [ [10, 50, 100, 300, -1], [10, 50, 100, 300, "All"] ],
+      columnDefs: [
+        {
+          targets: 5,
+          render: $.fn.dataTable.render.ellipsis(10, true)
+        }
+      ],
+      "createdRow": function ( row, data, index ) {
+          if ( data[4] === "Succeeded" ) {
+              $('td', row).eq(4).addClass('completed');
+          } else if (data[4] === "Pending") {
+              $('td', row).eq(4).addClass('pending');
+          } else if (data[4] === "Failed" || data[4] === "Aborted") {
+              $('td', row).eq(4).addClass('failed');
+          } else if (data[4] === "Running") {
+              $('td', row).eq(4).addClass('running');
+          }
+
+      }
+    });
+  });
+</script>
+
+<% include ../partials/footer %>

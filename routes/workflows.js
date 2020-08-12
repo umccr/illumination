@@ -97,6 +97,27 @@ router.get("/versions", (req, res) => {
     .catch((error) => utils.print_error(error));
 });
 
+router.get("/versions/:versionid", (req, res) => {
+  let opts = request_opts;
+  let qs = req.query;
+  const versionid = req.params.versionid;
+  opts.url = "/workflows/runs";
+  opts.params = qs;
+
+  axios(opts)
+    .then((response) => {
+      // res.send(filt);
+      res.render("wes/workflowruns4version", {
+        wflruns: response.data,
+        base_url: illumina.base_url,
+        versionid: versionid,
+        id2username: illumina.id2username,
+        format_date: utils.format_date,
+      });
+    })
+    .catch((error) => utils.print_error(error));
+});
+
 router.get("/signals", (req, res) => {
   let opts = request_opts;
   let qs = req.query;
