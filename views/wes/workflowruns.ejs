@@ -39,6 +39,7 @@
     <% for (let i = 0; i < wruns.length; i++) { %>
     <% hrefToVersion = wruns[i].workflowVersion.href.replace(base_url + '/workflows/', '') %>
     <% parentid = hrefToVersion.split('/').shift() %>
+    <% versionName = wruns[i].workflowVersion.version %>
     <% error_condensed = wruns[i].error + ' (' + wruns[i].errorCause + ')' %>
     <% error_empty_presumably = wruns[i].error %>
     <% error_final = wruns[i].error ? error_condensed : error_empty_presumably %>
@@ -51,7 +52,7 @@
         <a href="/workflows/runs/<%= wruns[i].id %>/history?pageSize=200&sort=eventId asc"><%= wruns[i].name %></a>
       </td>
       <td>
-         <a href="/workflows/<%= parentid %>"><%= parentid %></a> --- [<a href="/workflows/<%= hrefToVersion %>"><%= hrefToVersion.split('/').pop() %></a>]
+         <a href="/workflows/<%= parentid %>"><%= parentid %></a> --- [<a href="/workflows/<%= hrefToVersion %>"><%= versionName %></a>]
       </td>
       <td><%= wruns[i].status %></td>
       <td><%= error_final %></td>
