@@ -12,7 +12,7 @@
       <th>N</th>
       <th>RunID</th>
       <th>RunName (Click for History)</th>
-      <th>ParentID --- [VersionName]</th>
+      <th>Results</th>
       <th>Status</th>
       <th>Error (ErrorCause)</th>
       <th>CreatedBy</th>
@@ -50,7 +50,7 @@
         <a href="/workflows/runs/<%= wruns[i].id %>/history?pageSize=200&sort=eventId asc"><%= wruns[i].name %></a>
       </td>
       <td>
-         <a href="/workflows/<%= parentid %>"><%= parentid %></a> --- [<a href="/workflows/<%= hrefToVersion %>"><%= versionName %></a>]
+         <a href="/files/?volume.name=<%= wruns[i].id %>&pageSize=1000">Results</a>
       </td>
       <td><%= wruns[i].status %></td>
       <td><%= error_final %></td>
