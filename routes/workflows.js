@@ -106,9 +106,21 @@ router.get("/versions/:versionid", (req, res) => {
 
   axios(opts)
     .then((response) => {
-      // res.send(filt);
+      let all_data = response.data;
+      let filt_data = all_data.items.filter((el) => {
+        return el.workflowVersion.id === versionid;
+      });
+      // res.send({
+      //   filt_data: filt_data,
+      //   firstPageToken: all_data["firstPageToken"],
+      //   nextPageToken: all_data["nextPageToken"],
+      //   prevPageToken: all_data["prevPageToken"],
+      // });
       res.render("wes/workflowruns4version", {
-        wflruns: response.data,
+        filt_data: filt_data,
+        firstPageToken: all_data["firstPageToken"],
+        nextPageToken: all_data["nextPageToken"],
+        prevPageToken: all_data["prevPageToken"],
         base_url: illumina.base_url,
         versionid: versionid,
         id2username: illumina.id2username,

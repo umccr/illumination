@@ -22,14 +22,8 @@
     </tr>
   </thead>
   <tbody>
-    <%  filt = wflruns.items.filter((el) => { %>
-    <%    return el.workflowVersion.id === versionid; %>
-    <% }); %>
 
-    <% wruns = filt; %>
-    <% firstPageToken = wflruns["firstPageToken"] %>
-    <% nextPageToken = wflruns["nextPageToken"] %>
-    <% prevPageToken = wflruns["prevPageToken"] %>
+    <% wruns = filt_data; %>
     <% if (firstPageToken) {%>
         <a href="/workflows/versions/<%= versionid %>?pageToken=<%= firstPageToken %>&sort=timeCreated desc" class="ui toggle compact blue button">FirstPage</a>
     <% } %>
