@@ -10,7 +10,7 @@
   <thead>
     <tr>
       <th>N</th>
-      <th>Path</th>
+      <th>Path (Click for files recursive)</th>
       <th>Name</th>
       <th>Size</th>
       <th>ID</th>
@@ -45,7 +45,7 @@
     <% for (let i = 0; i < fs.length; i++) { %>
     <tr>
       <td><%= `${i + 1}.` %></td>
-      <td><%= fs[i].path %></td>
+      <td><a href="/files?volume.name=<%= vname %>&path=<%= fs[i].path %>*&pageSize=1000"><%= fs[i].path %></a></td>
       <td><%= fs[i].name %></td>
       <td></td>
       <td><a href="/folders/<%= fs[i].id %>"><%= fs[i].id %></a></td>
