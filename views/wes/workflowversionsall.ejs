@@ -46,7 +46,10 @@
 
 <script>
   $(document).ready(function() {
-    $("#version_table").DataTable();
+    $("#version_table").DataTable({
+      "dom": '<"top"flip>t<"bottom"flip>'
+    }
+    );
   });
 </script>
 

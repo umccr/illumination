@@ -50,7 +50,8 @@
 <script>
   $(document).ready(function() {
     $("#workflow_table").DataTable({
-      pageLength: 25
+      pageLength: 25,
+      "dom": '<"top"flip>t<"bottom"flip>'
     });
   });
 </script>

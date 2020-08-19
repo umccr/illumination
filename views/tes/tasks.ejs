@@ -44,7 +44,8 @@
 <script>
   $(document).ready(function() {
     $("#task_table").DataTable({
-      pageLength: 25
+      pageLength: 25,
+      "dom": '<"top"flip>t<"bottom"flip>'
     });
   });
 </script>

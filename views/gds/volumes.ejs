@@ -65,7 +65,8 @@
   $(document).ready(function() {
     $("#vol_table").DataTable({
       pageLength: 300,
-      lengthMenu: [ [10, 50, 100, 200, 300, -1], [10, 50, 100, 200, 300, "All"] ]
+      lengthMenu: [ [10, 50, 100, 200, 300, -1], [10, 50, 100, 200, 300, "All"] ],
+      "dom": '<"top"flip>t<"bottom"flip>'
     });
   });
 </script>
