@@ -3,7 +3,7 @@ const dayjs = require("dayjs");
 
 // dayjs uses the local time by default
 const format_date = function (date) {
-  return dayjs(date).format();
+  return dayjs(date).format("YYYY-MM-DD HH:mm:ss ZZ");
 };
 
 const print_error = function (e) {
