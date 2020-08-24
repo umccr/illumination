@@ -50,7 +50,7 @@
         <a href="/workflows/runs/<%= wruns[i].id %>/history?pageSize=200&sort=eventId asc"><%= wruns[i].name %></a>
       </td>
       <td>
-         <a href="/files/?volume.name=<%= wruns[i].id %>&pageSize=1000">Results</a>
+         <a href="/files/?volume.name=<%= wruns[i].id %>&pageSize=1000&path=/*">Results</a>
       </td>
       <td><%= wruns[i].status %></td>
       <td><%= error_final %></td>
