@@ -30,7 +30,16 @@
 
 <script>
   $(document).ready(function() {
-    $("#health_table").DataTable();
+    $("#health_table").DataTable({
+      "createdRow": function ( row, data, index ) {
+          if ( data[2] === "Healthy" ) {
+              $('td', row).eq(2).addClass('completed');
+          } else {
+              $('td', row).eq(2).addClass('failed');
+          }
+
+      }
+  });
   });
 </script>
 
