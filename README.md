@@ -152,6 +152,7 @@ console.log(listEndpoints(app));
   { path: '/subscriptions/:subscriptionid', methods: [ 'GET' ] },
   { path: '/tokens/details', methods: [ 'GET' ] },
   { path: '/workgroups', methods: [ 'GET' ] },
+  { path: '/projects', methods: [ 'GET' ] },
   { path: '*', methods: [ 'GET' ] }
 ];
 ```
