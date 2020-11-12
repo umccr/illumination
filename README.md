@@ -2,13 +2,16 @@
 
 - [Illumination](#illumination)
   - [Installation](#installation)
-    - [Updating](#updating)
   - [Running](#running)
-  - [Routes Supported](#routes-supported)
-  - [Docker](#docker)
+    - [Updating](#updating)
   - [Features](#features)
     - [Display JSON of Workflow Version Definitions](#display-json-of-workflow-version-definitions)
     - [Display Summarised JSON Information In Tables](#display-summarised-json-information-in-tables)
+    - [Docker Shortcuts](#docker-shortcuts)
+  - [Developer Notes](#developer-notes)
+    - [Adding new endpoints](#adding-new-endpoints)
+    - [Resources](#resources)
+  - [Routes Supported](#routes-supported)
 
 Node.js Express app that interacts with the Illumina Stratus API.
 Currently supports only `GET` endpoints.
@@ -38,57 +41,7 @@ cd illumination
 npm install
 ```
 
-### Updating
-
-Pull latest code changes and install/update newer dependencies:
-
-```bash
-cd illumination
-git pull
-npm install
-```
-
-## Running
-
-```bash
-npm start # or node app.js
-```
-
-## Routes Supported
-
-```js
-[
-  { path: "/", methods: ["GET"] },
-  { path: "/tasks", methods: ["GET"] },
-  { path: "/tasks/runs", methods: ["GET"] },
-  { path: "/tasks/runs/:runid", methods: ["GET"] },
-  { path: "/tasks/:taskid", methods: ["GET"] },
-  { path: "/tasks/:taskid/versions", methods: ["GET"] },
-  { path: "/tasks/:taskid/versions/:versionid", methods: ["GET"] },
-  { path: "/workflows", methods: ["GET"] },
-  { path: "/workflows/runs", methods: ["GET"] },
-  { path: "/workflows/runs/:runid", methods: ["GET"] },
-  { path: "/workflows/runs/:runid/history", methods: ["GET"] },
-  { path: "/workflows/versions", methods: ["GET"] },
-  { path: "/workflows/signals", methods: ["GET"] },
-  { path: "/workflows/signals/:signalid", methods: ["GET"] },
-  { path: "/workflows/:workflowid", methods: ["GET"] },
-  { path: "/workflows/:workflowid/versions", methods: ["GET"] },
-  { path: "/workflows/:workflowid/versions/:versionid", methods: ["GET"] },
-  { path: "/usages", methods: ["GET"] },
-  { path: "/health", methods: ["GET"] },
-  { path: "/regions", methods: ["GET"] },
-  { path: "/files", methods: ["GET"] },
-  { path: "/files/:fileid", methods: ["GET"] },
-  { path: "/volumes", methods: ["GET"] },
-  { path: "/volumes/:volumeid", methods: ["GET"] },
-  { path: "/subscriptions", methods: ["GET"] },
-  { path: "/subscriptions/:subscriptionid", methods: ["GET"] },
-  { path: "*", methods: ["GET"] },
-];
-```
-
-## Docker
+**(Optional) Docker**:
 
 ```bash
 # build the image
@@ -99,6 +52,34 @@ export IAP_TOKEN='...'
 # run the container
 docker run --rm --env IAP_TOKEN -p 3000:3000 umccr/illumination:latest
 ```
+
+## Running
+
+```bash
+npm start # or node app.js
+```
+
+### Updating
+
+Pull latest code changes and install/update newer dependencies:
+
+```bash
+cd illumination
+git pull
+npm install
+```
+
+## Features
+
+### Display JSON of Workflow Version Definitions
+
+<img src="https://i.postimg.cc/7Z40dMrk/workflow-definition-json.png" alt="workflow run table" height="500">
+
+### Display Summarised JSON Information In Tables
+
+<img src="https://i.postimg.cc/26SY3Jpx/workflow-run-table.png" alt="workflow run table" height="500">
+
+### Docker Shortcuts
 
 For convenience, enter the following into your `~/.bashrc`. Then you can
 simply type `run_illumination` in order to run the illumination docker command.
@@ -117,12 +98,60 @@ fi
 alias run_illumination="docker run --rm -i -t --env IAP_TOKEN --publish 3000:3000 umccr/illumination:latest"
 ```
 
-## Features
+## Developer Notes
 
-### Display JSON of Workflow Version Definitions
+### Adding new endpoints
 
-<img src="https://i.postimg.cc/7Z40dMrk/workflow-definition-json.png" alt="workflow run table" height="500">
+Check out how to add/edit endpoints via the following commits:
 
-### Display Summarised JSON Information In Tables
+- `/workgroups` endpoint [commit](https://github.com/umccr/illumination/commit/8c66dbbd193625db365b20e0f5017608bf82e555)
+- `/tokens/details` endpoint [commit](https://github.com/umccr/illumination/commit/bf02c9e908f0e481b7f12c68e9a29a292e180fbd)
 
-<img src="https://i.postimg.cc/26SY3Jpx/workflow-run-table.png" alt="workflow run table" height="500">
+### Resources
+
+- Express.js: <https://expressjs.com/>
+- EJS: <https://ejs.co/>
+- axios: <https://github.com/axios/axios>
+
+## Routes Supported
+
+```js
+// See app.js
+const listEndpoints = require("express-list-endpoints");
+console.log(listEndpoints(app));
+
+[
+  { path: '/', methods: [ 'GET' ] },
+  { path: '/tasks', methods: [ 'GET' ] },
+  { path: '/tasks/runs', methods: [ 'GET' ] },
+  { path: '/tasks/runs/:runid', methods: [ 'GET' ] },
+  { path: '/tasks/:taskid', methods: [ 'GET' ] },
+  { path: '/tasks/:taskid/versions', methods: [ 'GET' ] },
+  { path: '/tasks/:taskid/versions/:versionid', methods: [ 'GET' ] },
+  { path: '/workflows', methods: [ 'GET' ] },
+  { path: '/workflows/runs', methods: [ 'GET' ] },
+  { path: '/workflows/runs/:runid', methods: [ 'GET' ] },
+  { path: '/workflows/runs/:runid/history', methods: [ 'GET' ] },
+  { path: '/workflows/versions', methods: [ 'GET' ] },
+  { path: '/workflows/versions/:versionid', methods: [ 'GET' ] },
+  { path: '/workflows/signals', methods: [ 'GET' ] },
+  { path: '/workflows/signals/:signalid', methods: [ 'GET' ] },
+  { path: '/workflows/:workflowid', methods: [ 'GET' ] },
+  { path: '/workflows/:workflowid/versions', methods: [ 'GET' ] },
+  { path: '/workflows/:workflowid/versions/:versionid', methods: [ 'GET' ] },
+  { path: '/usages', methods: [ 'GET' ] },
+  { path: '/health', methods: [ 'GET' ] },
+  { path: '/regions', methods: [ 'GET' ] },
+  { path: '/files', methods: [ 'GET' ] },
+  { path: '/files/:fileid', methods: [ 'GET' ] },
+  { path: '/folders', methods: [ 'GET' ] },
+  { path: '/folders/:folderid', methods: [ 'GET' ] },
+  { path: '/volumes', methods: [ 'GET' ] },
+  { path: '/volumes/:volumeid', methods: [ 'GET' ] },
+  { path: '/subscriptions', methods: [ 'GET' ] },
+  { path: '/subscriptions/:subscriptionid', methods: [ 'GET' ] },
+  { path: '/tokens/details', methods: [ 'GET' ] },
+  { path: '/workgroups', methods: [ 'GET' ] },
+  { path: '*', methods: [ 'GET' ] }
+];
+```

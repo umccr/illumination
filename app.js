@@ -15,8 +15,7 @@ const indexRouter = require("./routes/index"),
   tokensRouter = require("./routes/tokens"),
   workgroupsRouter = require("./routes/workgroups");
 
-
-// const listEndpoints = require('express-list-endpoints');
+// const listEndpoints = require("express-list-endpoints");
 
 const port = process.env.PORT || 3000;
 
