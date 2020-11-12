@@ -11,7 +11,8 @@ const indexRouter = require("./routes/index"),
   filesRouter = require("./routes/files"),
   foldersRouter = require("./routes/folders"),
   volumesRouter = require("./routes/volumes"),
-  subscriptionsRouter = require("./routes/subscriptions");
+  subscriptionsRouter = require("./routes/subscriptions"),
+  tokensRouter = require("./routes/tokens");
 
 // const listEndpoints = require('express-list-endpoints');
 
@@ -30,6 +31,7 @@ app.use("/files", filesRouter);
 app.use("/folders", foldersRouter);
 app.use("/volumes", volumesRouter);
 app.use("/subscriptions", subscriptionsRouter);
+app.use("/tokens/details", tokensRouter);
 
 app.get("*", (req, res) => {
   res.status(404).render("404");
