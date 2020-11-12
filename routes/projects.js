@@ -16,6 +16,7 @@ router.get("/", (req, res) => {
       // res.send(response.data);
       res.render("dcs/projects", {
         projects: response.data,
+        id2username: illumina.id2username,
         jsonSyntaxHighlight: utils.jsonSyntaxHighlight,
       });
     })
