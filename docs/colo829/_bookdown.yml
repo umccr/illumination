@@ -1,5 +1,0 @@
-rmd_files: ["index.Rmd", "preparation.Rmd", "alignment.Rmd", "qc.Rmd"]
-delete_merged_file: true
-language:
-  ui:
-    chapter_name: "Section "
