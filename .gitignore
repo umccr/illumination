@@ -1,6 +1,6 @@
 ami_license_vccc.txt
 node_modules
-package-lock.json
+
 .Rproj.user
 .Rhistory
 *.html
