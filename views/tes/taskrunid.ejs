@@ -1,4 +1,4 @@
-<% include ../partials/header %>
+<%- include("../partials/header") %>
 
 <h1 class="title"><%= `Task Run with ID ${runid}` %></h1>
 
@@ -6,4 +6,4 @@
 <%- jsonSyntaxHighlight(JSON.stringify(trun_info, null, 2)) %>
 </pre>
 
-<% include ../partials/footer %>
+<%- include("../partials/footer") %>

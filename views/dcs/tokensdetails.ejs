@@ -1,4 +1,4 @@
-<% include ../partials/header %>
+<%- include("../partials/header") %>
 
 <h1 class="title"><%= `Token Details` %></h1>
 
@@ -6,5 +6,5 @@
 <%- jsonSyntaxHighlight(JSON.stringify(tokdet, null, 2)) %>
 </pre>
 
-<% include ../partials/footer %>
+<%- include("../partials/footer") %>
 

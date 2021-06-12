@@ -1,4 +1,4 @@
-<% include ../partials/header %>
+<%- include("../partials/header") %>
 
 <h1 class="title"><%= `Version for Workflow ID: ${workflowid}` %></h1>
 
@@ -12,4 +12,4 @@
 <%- jsonSyntaxHighlight(JSON.stringify(JSON.parse(version.definition), null, 2)) %>
 </pre>
 
-<% include ../partials/footer %>
+<%- include("../partials/footer") %>

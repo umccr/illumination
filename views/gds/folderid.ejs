@@ -1,4 +1,4 @@
-<% include ../partials/header %>
+<%- include("../partials/header") %>
 
 <h1 class="title"><%= `Info about folder with ID ${folderid}` %></h1>
 
@@ -6,5 +6,5 @@
 <%- jsonSyntaxHighlight(JSON.stringify(finfo, null, 2)) %>
 </pre>
 
-<% include ../partials/footer %>
+<%- include("../partials/footer") %>
 

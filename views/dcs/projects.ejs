@@ -1,4 +1,4 @@
-<% include ../partials/header %>
+<%- include("../partials/header") %>
 
 <h1 class="title"><%= `Available Projects` %></h1>
 
@@ -58,6 +58,6 @@
 <%- jsonSyntaxHighlight(JSON.stringify(projects, null, 2)) %>
 </pre>
 
-<% include ../partials/footer %>
+<%- include("../partials/footer") %>
 
 
