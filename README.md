@@ -1,5 +1,26 @@
 # Illumination
 
+## TL;DR
+
+- Required [ICA CLI installed and configured](https://support.illumina.com/sequencing/sequencing_software/illumina-connected-analytics.html)
+- Required [Docker Desktop](https://www.docker.com/products/docker-desktop)
+
+```
+ica login
+
+export ICA_ACCESS_TOKEN=$(ica tokens create --project-name development)
+
+docker run --rm -it -e ICA_ACCESS_TOKEN -p 3000:3000 victorskl/illumination
+
+(Ctrl+C to stop)
+unset ICA_ACCESS_TOKEN
+```
+
+- Open http://localhost:3000
+
+
+## TOC
+
 - [Illumination](#illumination)
   - [Installation](#installation)
   - [Running](#running)
@@ -7,7 +28,7 @@
   - [Features](#features)
     - [Display JSON of Workflow Version Definitions](#display-json-of-workflow-version-definitions)
     - [Display Summarised JSON Information In Tables](#display-summarised-json-information-in-tables)
-    - [Docker Shortcuts](#docker-shortcuts)
+  - [Docker](#docker)
   - [Developer Notes](#developer-notes)
     - [Adding new endpoints](#adding-new-endpoints)
     - [Resources](#resources)
@@ -41,23 +62,13 @@ cd illumination
 npm install
 ```
 
-**(Optional) Docker**:
-
-```bash
-# build the image
-docker build -t umccr/illumination:latest .
-
-# set your IAP access token
-export IAP_TOKEN='...'
-# run the container
-docker run --rm --env IAP_TOKEN -p 3000:3000 umccr/illumination:latest
-```
-
 ## Running
 
 ```bash
-npm start # or node app.js
+npm start
 ```
+
+- `Ctrl+C` to stop
 
 ### Updating
 
@@ -79,15 +90,29 @@ npm install
 
 <img src="https://i.postimg.cc/26SY3Jpx/workflow-run-table.png" alt="workflow run table" height="500">
 
+## Docker
+
+### Using Docker
+
+```bash
+# build the image
+docker build -t victorskl/illumination:latest .
+
+# set your ICA access token
+export ICA_ACCESS_TOKEN='...'
+# run the container
+docker run --rm --env ICA_ACCESS_TOKEN -p 3000:3000 victorskl/illumination:latest
+```
+
 ### Docker Shortcuts
 
 For convenience, enter the following into your `~/.bashrc`. Then you can
 simply type `run_illumination` in order to run the illumination docker command.
 
 ```bash
-# IAP token
-if [[ -f ~/.iap/.session.yaml ]]; then
-        export IAP_TOKEN=$(cat ~/.iap/.session.yaml | {
+# ICA access token
+if [[ -f ~/.ica/.session.aps2.yaml ]]; then
+        export ICA_ACCESS_TOKEN=$(cat ~/.ica/.session.aps2.yaml | {
                              grep '^access-token: '
                            } | {
                              cut -d' ' -f2
@@ -95,8 +120,10 @@ if [[ -f ~/.iap/.session.yaml ]]; then
 fi
 
 # ILLUMINATION ALIAS
-alias run_illumination="docker run --rm -i -t --env IAP_TOKEN --publish 3000:3000 umccr/illumination:latest"
+alias run_illumination="docker run --rm -i -t --env ICA_ACCESS_TOKEN --publish 3000:3000 victorskl/illumination:latest"
 ```
+
+> Note: there can be many variations on how you would like to automate ICA token generation then launch illumination into a specific ICA project context. i.e., bash-ing, alias-ing, zZZ-ing, etc... See relevant [wiki entry](https://github.com/umccr/wiki/tree/master/computing/cloud/illumina) and/or https://github.com/umccr/ica-ica-lazy for more pointers.
 
 ## Developer Notes
 

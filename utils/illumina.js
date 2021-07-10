@@ -35,15 +35,15 @@ const id2username = function (id) {
 };
 
 const token = (function () {
-  console.log("Loading IAP token");
+  console.log("Loading ICA token");
   let token;
-  token = process.env.IAP_TOKEN;
+  token = process.env.ICA_ACCESS_TOKEN;
   if (token) {
     console.log("Using token from ENV");
   } else {
     try {
-      let session_file = path.join(os.homedir(), ".iap/.session.yaml");
-      token = yaml.safeLoad(fs.readFileSync(session_file, "utf8"));
+      let session_file = path.join(os.homedir(), ".ica/.session.aps2.yaml");
+      token = yaml.load(fs.readFileSync(session_file, "utf8"));
       token = token["access-token"];
     } catch (e) {
       console.log(e);

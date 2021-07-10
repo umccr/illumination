@@ -1,5 +1,5 @@
 ami_license_vccc.txt
-node_modules
+node_modules/
 
 .Rproj.user
 .Rhistory
