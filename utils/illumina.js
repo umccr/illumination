@@ -30,6 +30,9 @@ const id2username = function (id) {
     "e44e09eb-60c7-3a0f-9313-46f7454ede92": "Andrei_Illum",
     "290ed655-8d6f-3bce-b850-1f8673ddd6a6": "Charles_Illum",
     "41fc4571-741c-386e-be44-cf9ae7313f53": "VLin",
+    "bc70451e-72c1-3956-80a9-00da82865d11": "HM",
+    "877a7b1e-c57e-37d5-ab81-dbaba8577414": "SW",
+    "bc99b89c-3bb7-334b-80d1-20ef9e65f0b0": "🤖"
   };
   return username[id];
 };
