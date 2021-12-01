@@ -3,7 +3,10 @@ const yaml = require("js-yaml"),
   path = require("path"),
   os = require("os");
 
-const base_url = "https://aps2.platform.illumina.com/v1";
+const aps2_url = "https://aps2.platform.illumina.com";
+const ica_api_version = process.env.ICA_API_VERSION || "v1";
+const ica_base_url = process.env.ICA_BASE_URL || aps2_url;
+const base_url = `${ica_base_url}/${ica_api_version}`;
 
 const id2username = function (id) {
   let username = {
