@@ -3,7 +3,7 @@
 <h1 class="title"><%= `Available Projects` %></h1>
 
 <table
-  id="projects_table"
+  id="tab"
   class="ui striped selectable celled compact table"
   style="width:100%"
 >
@@ -27,10 +27,10 @@
     </tr>
   </thead>
   <tbody>
-    <% p = projects["items"]; %>
-    <% firstPageToken = projects["firstPageToken"] %>
-    <% nextPageToken = projects["nextPageToken"] %>
-    <% prevPageToken = projects["prevPageToken"] %>
+    <% p = data["items"]; %>
+    <% firstPageToken = data["firstPageToken"] %>
+    <% nextPageToken = data["nextPageToken"] %>
+    <% prevPageToken = data["prevPageToken"] %>
     <% if (firstPageToken) {%>
         <a href="/projects?pageToken=<%= firstPageToken %>" class="ui toggle compact blue button">FirstPage</a>
     <% } %>
@@ -45,7 +45,7 @@
       <td><%= `${i + 1}.` %></td>
       <td><%= p[i].name %></td>
       <td><%= p[i].id %></td>
-      <td><%= p[i].ownerId %></td>
+      <td><%= id2username(p[i].ownerId) %></td>
       <td><%= p[i].tenantId %></td>
       <td><%= p[i].tenantName %></td>
       <td><%= p[i].active %></td>
@@ -64,7 +64,7 @@
 
 <script>
   $(document).ready(function() {
-    $("#projects_table").DataTable({
+    $("#tab").DataTable({
       pageLength: 10,
       lengthMenu: [ [10, -1], [10, "All"] ],
       "dom": '<"top"flip>t<"bottom"flip>'
@@ -73,7 +73,7 @@
 </script>
 
 <pre>
-<%- jsonSyntaxHighlight(JSON.stringify(projects, null, 2)) %>
+<%- jsonSyntaxHighlight(JSON.stringify(data, null, 2)) %>
 </pre>
 
 <%- include("partials/footer") %>

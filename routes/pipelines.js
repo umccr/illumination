@@ -4,6 +4,7 @@ const axios = require("axios").default;
 const illumina = require("../utils/illumina");
 const utils = require("../utils/utils");
 const request_opts = illumina.request_opts();
+const id2username = require("../utils/id2username");
 
 router.get("/", (req, res) => {
   let opts = request_opts;
@@ -15,6 +16,7 @@ router.get("/", (req, res) => {
       // res.send(response.data);
       res.render("pipelines", {
        data: response.data,
+       id2username: id2username.id2username,
        jsonSyntaxHighlight: utils.jsonSyntaxHighlight,
        });
     })

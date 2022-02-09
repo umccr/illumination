@@ -13,8 +13,10 @@
       <th>Email</th>
       <th>ID</th>
       <th>OwnerID</th>
+      <th>Code</th>
+      <th>Description</th>
+      <th>Language</th>
       <th>TenantID</th>
-      <th>UserName</th>
       <th>TimeCreated</th>
       <th>TimeModified</th>
     </tr>
@@ -26,9 +28,11 @@
       <td><%= `${i + 1}.` %></td>
       <td><%= p[i].email %></td>
       <td><%= p[i].id %></td>
-      <td><%= p[i].ownerId %></td>
+      <td><%= id2username(p[i].ownerId) %></td>
+      <td><%= p[i].code %></td>
+      <td><%= p[i].description %></td>
+      <td><%= p[i].language %></td>
       <td><%= p[i].tenantId %></td>
-      <td><%= p[i].username %></td>
       <td><%= p[i].timeCreated %></td>
       <td><%= p[i].timeModified %></td>
     </tr>
