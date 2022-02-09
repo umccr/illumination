@@ -1,9 +1,0 @@
-<%- include("../partials/header") %>
-
-<h1 class="title"><%= `History for Workflow Run with ID ${runid}` %></h1>
-
-<pre>
-<%- jsonSyntaxHighlight(JSON.stringify(history, null, 2)) %>
-</pre>
-
-<%- include("../partials/footer") %>
