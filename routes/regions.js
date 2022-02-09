@@ -8,13 +8,13 @@ const request_opts = illumina.request_opts();
 router.get("/", (req, res) => {
   let opts = request_opts;
   let qs = req.query;
-  opts.url = "/projects";
+  opts.url = "/regions";
   opts.params = qs;
   axios(opts)
     .then((response) => {
-      //res.send(response.data);
-      res.render("projects", {
-       projects: response.data,
+      // res.send(response.data);
+      res.render("regions", {
+       data: response.data,
        jsonSyntaxHighlight: utils.jsonSyntaxHighlight,
        });
     })
