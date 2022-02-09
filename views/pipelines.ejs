@@ -1,0 +1,54 @@
+<%- include("partials/header") %>
+
+<h1 class="title"><%= `Pipelines` %></h1>
+
+<table
+  id="tab"
+  class="ui striped selectable celled compact table"
+  style="width:100%"
+>
+  <thead>
+    <tr>
+      <th>N</th>
+      <th>Email</th>
+      <th>ID</th>
+      <th>OwnerID</th>
+      <th>TenantID</th>
+      <th>UserName</th>
+      <th>TimeCreated</th>
+      <th>TimeModified</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% p = data["items"]; %>
+    <% for (let i = 0; i < p.length; i++) { %>
+    <tr>
+      <td><%= `${i + 1}.` %></td>
+      <td><%= p[i].email %></td>
+      <td><%= p[i].id %></td>
+      <td><%= p[i].ownerId %></td>
+      <td><%= p[i].tenantId %></td>
+      <td><%= p[i].username %></td>
+      <td><%= p[i].timeCreated %></td>
+      <td><%= p[i].timeModified %></td>
+    </tr>
+    <% } %>
+  </tbody>
+</table>
+
+<script>
+  $(document).ready(function() {
+    $("#tab").DataTable({
+      pageLength: 10,
+      lengthMenu: [ [10, -1], [10, "All"] ],
+      "dom": '<"top"flip>t<"bottom"flip>'
+    });
+  });
+</script>
+
+<pre>
+<%- jsonSyntaxHighlight(JSON.stringify(data, null, 2)) %>
+</pre>
+
+<%- include("partials/footer") %>
+

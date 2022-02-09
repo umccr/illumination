@@ -1,4 +1,4 @@
-<%- include("../partials/header") %>
+<%- include("partials/header") %>
 
 <h1 class="title"><%= `Available Projects` %></h1>
 
@@ -12,9 +12,18 @@
       <th>N</th>
       <th>Name</th>
       <th>ID</th>
-      <th>Owner</th>
+      <th>OwnerID</th>
+      <th>TenantID</th>
+      <th>TenantName</th>
+      <th>Active</th>
+      <th>Information</th>
       <th>TimeCreated</th>
       <th>TimeModified</th>
+      <th>BillingMode</th>
+      <th>DataSharingEnabled</th>
+      <th>StBunID</th>
+      <th>StBunName</th>
+      <th>StBunOwnerID</th>
     </tr>
   </thead>
   <tbody>
@@ -36,9 +45,18 @@
       <td><%= `${i + 1}.` %></td>
       <td><%= p[i].name %></td>
       <td><%= p[i].id %></td>
-      <td><%= id2username(p[i].owner) %></td>
+      <td><%= p[i].ownerId %></td>
+      <td><%= p[i].tenantId %></td>
+      <td><%= p[i].tenantName %></td>
+      <td><%= p[i].active %></td>
+      <td><%= p[i].information %></td>
       <td><%= p[i].timeCreated %></td>
       <td><%= p[i].timeModified %></td>
+      <td><%= p[i].billingMode %></td>
+      <td><%= p[i].dataSharingEnabled %></td>
+      <td><%= p[i].storageBundle.id %></td>
+      <td><%= p[i].storageBundle.bundleName %></td>
+      <td><%= p[i].storageBundle.ownerId %></td>
     </tr>
     <% } %>
   </tbody>
@@ -58,6 +76,5 @@
 <%- jsonSyntaxHighlight(JSON.stringify(projects, null, 2)) %>
 </pre>
 
-<%- include("../partials/footer") %>
-
+<%- include("partials/footer") %>
 
