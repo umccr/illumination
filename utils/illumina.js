@@ -1,11 +1,11 @@
 const yaml = require("js-yaml"),
   fs = require("fs"),
   path = require("path"),
-  os = require("os");
+  os = require("os"),
+  combineURLs = require("axios/lib/helpers/combineURLs");
 
-const ica_base_url_v2 = "https://ica.illumina.com/ica/rest/api";
-const ica_v2_server_url = process.env.ICAV2_SERVER_URL || ica_base_url_v2;
-const base_url = ica_v2_server_url;
+const ica_v2_server_url = process.env.ICAV2_SERVER_URL || "https://ica.illumina.com";
+const base_url = combineURLs(ica_v2_server_url, "ica/rest/api");
 
 const token = (function () {
   console.log("Loading ICAV2 token");
