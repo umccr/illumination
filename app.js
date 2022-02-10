@@ -12,6 +12,13 @@ const indexRouter = require("./routes/index"),
   samplesRouter = require("./routes/samples"),
   pipelinesRouter = require("./routes/pipelines"),
   metadatamodelsRouter = require("./routes/metadatamodels"),
+  dataformatsRouter = require("./routes/dataformats"),
+  eventcodesRouter = require("./routes/eventcodes"),
+  eventlogRouter = require("./routes/eventlog"),
+  notificationchannelsRouter = require("./routes/notificationchannels"),
+  storagebundlesRouter = require("./routes/storagebundles"),
+  storageconfigurationsRouter = require("./routes/storageconfigurations"),
+  storagecredentialsRouter = require("./routes/storagecredentials"),
   connectorsRouter = require("./routes/connectors");
 // const listEndpoints = require("express-list-endpoints");
 
@@ -30,6 +37,13 @@ app.use("/regions", regionsRouter);
 app.use("/samples", samplesRouter);
 app.use("/pipelines", pipelinesRouter);
 app.use("/metadatamodels", metadatamodelsRouter);
+app.use("/dataformats", dataformatsRouter);
+app.use("/eventcodes", eventcodesRouter);
+app.use("/eventlog", eventlogRouter);
+app.use("/notificationchannels", notificationchannelsRouter);
+app.use("/storagebundles", storagebundlesRouter);
+app.use("/storageconfigurations", storageconfigurationsRouter);
+app.use("/storagecredentials", storagecredentialsRouter);
 app.use("/connectors", connectorsRouter);
 
 app.get("*", (req, res) => {

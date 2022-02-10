@@ -1,6 +1,6 @@
 <%- include("partials/header") %>
 
-<h1 class="title"><%= `Regions` %></h1>
+<h1 class="title"><%= `Event Log` %></h1>
 
 <table
   id="tab"
@@ -10,9 +10,11 @@
   <thead>
     <tr>
       <th>N</th>
-      <th>Region</th>
-      <th>TenantName</th>
-      <th>CountryTenantName</th>
+      <th>UserId</th>
+      <th>Description</th>
+      <th>ID</th>
+      <th>Code</th>
+      <th>EventTypeCategory</th>
       <th>TimeCreated</th>
       <th>TimeModified</th>
     </tr>
@@ -22,9 +24,11 @@
     <% for (let i = 0; i < p.length; i++) { %>
     <tr>
       <td><%= `${i + 1}.` %></td>
-      <td><%= `${p[i].cityName}, ${p[i].country.name}  (${p[i].code}), ${p[i].country.region}` %></td>
-      <td><%= p[i].tenantName %></td>
-      <td><%= p[i].country.tenantName %></td>
+      <td><%= `${id2username(p[i].userId) || p[i].userId}` %></td>
+      <td><%= p[i].description %></td>
+      <td><%= p[i].id %></td>
+      <td><%= p[i].code %></td>
+      <td><%= p[i].eventTypeCategory %></td>
       <td><%= p[i].timeCreated %></td>
       <td><%= p[i].timeModified %></td>
     </tr>
