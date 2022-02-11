@@ -3,10 +3,7 @@
 **IMPORTANT**: The `main` branch of this repo currently handles **ICA V1**.
 For **ICA V2**, see the [v2 branch](https://github.com/umccr/illumination/tree/v2).
 
-- Open <http://localhost:3000>
-
-
-## TOC
+<!-- vim-markdown-toc GFM -->
 
 * [Installation](#installation)
 * [Running](#running)
@@ -21,6 +18,8 @@ For **ICA V2**, see the [v2 branch](https://github.com/umccr/illumination/tree/v
     * [Adding new endpoints](#adding-new-endpoints)
     * [Resources](#resources)
 * [Routes Supported](#routes-supported)
+
+<!-- vim-markdown-toc -->
 
 Node.js Express app that interacts with the Illumina Connected Analytics (ICA) API.
 Supports only `GET` endpoints.
