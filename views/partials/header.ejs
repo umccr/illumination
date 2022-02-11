@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <title>Illumination</title>
+  <title>IlluminationV2</title>
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" />
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" />
   <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -16,24 +16,8 @@
 </head>
 
 <body>
-  <div class="ui fixed inverted menu">
-    <a href="/" class="item"><i class="sun outline icon"></i>Illumination</a>
-    <div class="ui simple dropdown item">
-      TES
-      <i class="dropdown icon"></i>
-      <div class="ui inverted menu">
-        <a href="/tasks/runs?pageSize=200&sort=timeCreated desc" class="item">Task Runs</a>
-        <a href="/tasks?pageSize=100&sort=timeCreated desc" class="item">Tasks</a>
-      </div>
-    </div>
-    <div class="ui simple dropdown item">
-      WES
-      <i class="dropdown icon"></i>
-      <div class="ui inverted menu">
-        <a href="/workflows/runs?pageSize=200&sort=timeCreated desc" class="item">Workflow Runs</a>
-        <a href="/workflows?pageSize=100&sort=timeCreated desc" class="item">Workflows</a>
-        <a href="/workflows/versions?pageSize=100&sort=timeCreated desc" class="item">Workflow Versions</a>
-      </div>
-    </div>
-    <div><a href="/volumes?pageSize=300" class="item">Volumes</a></div>
+  <div class="ui violet fixed inverted menu">
+    <a href="/" class="item"><i class="sun outline icon"></i>IlluminationV2</a>
+    <div><a href="/projects?pageSize=300" class="item">Projects</a></div>
+    <div><a href="/pipelines?pageSize=300" class="item">Pipelines</a></div>
   </div>
