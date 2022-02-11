@@ -1,0 +1,30 @@
+<%- include("../partials/header") %>
+
+<h1 class="title"><%= `Project ${projectid}` %></h1>
+
+<% region = data.region %>
+<% country = region.country %>
+<% location = `${region.cityName}, ${country.name} (${country.code} - ${country.region})` %>
+<ul>
+	<li><strong>Name: </strong> <%= data.name %></li>
+	<li><strong>OwnerID: </strong> <%= data.ownerId %></li>
+	<li><strong>TenantID: </strong> <%= data.tenantId %></li>
+	<li><strong>TenantName: </strong> <%= data.tenantName %></li>
+	<li><strong>Info: </strong> <%= data.information %></li>
+	<li><strong>Active: </strong> <%= data.active %></li>
+	<li><strong>TimeCreated: </strong><%= data.timeCreated %></li>
+	<li><strong>TimeModified: </strong><%= data.timeModified %></li>
+	<li><strong>Location: </strong><%= location %></li>
+</ul>
+
+<ul>
+	<li><a href="/projects/<%= data.id %>/analyses">Analyses</a></li>
+	<li><a href="/projects/<%= data.id %>/base/jobs">Base Jobs</a></li>
+</ul>
+
+<pre>
+<%- jsonSyntaxHighlight(JSON.stringify(data, null, 2)) %>
+</pre>
+
+<%- include("../partials/footer") %>
+

@@ -1,0 +1,46 @@
+<%- include("../partials/header") %>
+
+<h1 class="title"><%= `Steps` %></h1>
+<ul>
+  <li>AnalysisID: <a href="/projects/<%= projectid %>/analyses/<%= analysisid %>"><%= analysisid %></a></li>
+  <li>ProjectID: <a href="/projects/<%= projectid %>"><%= projectid %></a></li>
+</ul>
+
+<table
+  id="tab"
+  class="ui striped selectable celled compact table"
+  style="width:100%"
+>
+  <thead>
+    <tr>
+      <th>N</th>
+      <th>ID</th>
+      <th>Status</th>
+      <th>QueueDate</th>
+      <th>StartDate</th>
+      <th>EndDate</th>
+      <th>Technical</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% p = data["items"]; %>
+    <% for (let i = 0; i < p.length; i++) { %>
+    <tr>
+      <td><%= `${i + 1}.` %></td>
+      <td><%= p[i].id %></td>
+      <td><%= p[i].status %></td>
+      <td><%= p[i].queueDate %></td>
+      <td><%= p[i].startDate %></td>
+      <td><%= p[i].endDate %></td>
+      <td><%= p[i].technical %></td>
+    </tr>
+    <% } %>
+  </tbody>
+</table>
+
+<pre>
+<%- jsonSyntaxHighlight(JSON.stringify(data, null, 2)) %>
+</pre>
+
+<%- include("../partials/footer") %>
+
