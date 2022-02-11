@@ -14,9 +14,28 @@ router.get("/", (req, res) => {
   axios(opts)
     .then((response) => {
       // res.send(response.data);
-      res.render("pipelines", {
+      res.render("pipelines/pipelines", {
        data: response.data,
        id2username: id2username.id2username,
+       jsonSyntaxHighlight: utils.jsonSyntaxHighlight,
+       });
+    })
+    .catch((error) => utils.print_error(error));
+});
+
+router.get("/:pipelineid", (req, res) => {
+  let opts = request_opts;
+  let qs = req.query;
+  const pipelineid = req.params.pipelineid;
+  opts.url = `/pipelines/${pipelineid}`;
+  opts.params = qs;
+  axios(opts)
+    .then((response) => {
+      // res.send(response.data);
+      res.render("pipelines/pipelineid", {
+       data: response.data,
+       id2username: id2username.id2username,
+       pipelineid: pipelineid,
        jsonSyntaxHighlight: utils.jsonSyntaxHighlight,
        });
     })
