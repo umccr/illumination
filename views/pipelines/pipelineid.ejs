@@ -1,0 +1,24 @@
+<%- include("../partials/header") %>
+
+<h1 class="title"><%= `Pipeline ${pipelineid}` %></h1>
+
+<% s1 = data.analysisStorage %>
+<% s2 = `${s1.name} (${s1.description})` %>
+<ul>
+  <li><strong>OwnerID: </strong> <%= data.ownerId %></li>
+  <li><strong>TenantID: </strong> <%= data.tenantId %></li>
+  <li><strong>TenantName: </strong> <%= data.tenantName %></li>
+  <li><strong>Language: </strong> <%= data.language %></li>
+  <li><strong>Code: </strong> <%= data.code %></li>
+  <li><strong>Description: </strong> <%= data.description %></li>
+  <li><strong>TimeCreated: </strong><%= data.timeCreated %></li>
+  <li><strong>TimeModified: </strong><%= data.timeModified %></li>
+  <li><strong>AnalysisStorage: </strong><%= s2 %></li>
+</ul>
+
+<pre>
+<%- jsonSyntaxHighlight(JSON.stringify(data, null, 2)) %>
+</pre>
+
+<%- include("../partials/footer") %>
+

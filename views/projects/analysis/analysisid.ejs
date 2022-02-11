@@ -1,0 +1,32 @@
+<%- include("../../partials/header") %>
+
+<h1 class="title"><%= `Analysis ${analysisid} for Project ${projectid}` %></h1>
+
+<ul>
+	<li><strong>Name: </strong> <%= data.name %></li>
+	<li><strong>OwnerID: </strong> <%= data.ownerId %></li>
+	<li><strong>TenantID: </strong> <%= data.tenantId %></li>
+	<li><strong>TenantName: </strong> <%= data.tenantName %></li>
+	<li><strong>Reference: </strong> <%= data.reference %></li>
+	<li><strong>UserReference: </strong> <%= data.userReference %></li>
+	<li><strong>Status: </strong> <%= data.status %></li>
+	<li><strong>Summary: </strong> <%= data.summary %></li>
+	<li><strong>TimeCreated: </strong><%= data.timeCreated %></li>
+	<li><strong>TimeModified: </strong><%= data.timeModified %></li>
+	<li><strong>StartDate: </strong><%= data.startDate %></li>
+	<li><strong>EndDate: </strong><%= data.endDate %></li>
+</ul>
+
+<ul>
+	<li><a href="/projects/<%= projectid %>/analyses/<%= data.id %>/steps">Steps</a></li>
+	<li><a href="/projects/<%= projectid %>/analyses/<%= data.id %>/inputs">Inputs</a></li>
+	<li><a href="/projects/<%= projectid %>/analyses/<%= data.id %>/outputs">Outputs</a></li>
+	<li><a href="/projects/<%= projectid %>/analyses/<%= data.id %>/rawOutput">RawOutput</a></li>
+	<li><a href="/projects/<%= projectid %>/analyses/<%= data.id %>/configurations">Configurations</a></li>
+</ul>
+
+<pre>
+<%- jsonSyntaxHighlight(JSON.stringify(data, null, 2)) %>
+</pre>
+
+<%- include("../../partials/footer") %>

@@ -1,0 +1,13 @@
+<%- include("../../partials/header") %>
+
+<h1 class="title"><%= `Datum ${dataid}` %></h1>
+
+<ul>
+	<li>Project: <a href="/projects/<%= projectid %>"><%= projectid %></a></li>
+</ul>
+
+<pre>
+<%- jsonSyntaxHighlight(JSON.stringify(data, null, 2)) %>
+</pre>
+
+<%- include("../../partials/footer") %>

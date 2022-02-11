@@ -10,14 +10,13 @@ router.get("/", (req, res) => {
   let qs = req.query;
   opts.url = "/workgroups";
   opts.params = qs;
-
   axios(opts)
     .then((response) => {
       // res.send(response.data);
-      res.render("dcs/workgroups", {
-        wg: response.data,
-        jsonSyntaxHighlight: utils.jsonSyntaxHighlight,
-      });
+      res.render("workgroups", {
+       data: response.data,
+       jsonSyntaxHighlight: utils.jsonSyntaxHighlight,
+       });
     })
     .catch((error) => utils.print_error(error));
 });
