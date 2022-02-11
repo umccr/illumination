@@ -1,41 +1,29 @@
 # Illumination
 
-## TL;DR
+**IMPORTANT**: The `main` branch of this repo currently handles **ICA V1**.
+For **ICA V2**, see the [v2 branch](https://github.com/umccr/illumination/tree/v2).
 
-- Required [ICA CLI installed and configured](https://support.illumina.com/sequencing/sequencing_software/illumina-connected-analytics.html)
-- Required [Docker Desktop](https://www.docker.com/products/docker-desktop)
-
-```
-ica login
-
-export ICA_ACCESS_TOKEN=$(ica tokens create --project-name development)
-
-docker run --rm -it -e ICA_ACCESS_TOKEN -p 3000:3000 victorskl/illumination
-
-(Ctrl+C to stop)
-unset ICA_ACCESS_TOKEN
-```
-
-- Open http://localhost:3000
+- Open <http://localhost:3000>
 
 
 ## TOC
 
-- [Illumination](#illumination)
-  - [Installation](#installation)
-  - [Running](#running)
-    - [Updating](#updating)
-  - [Features](#features)
-    - [Display JSON of Workflow Version Definitions](#display-json-of-workflow-version-definitions)
-    - [Display Summarised JSON Information In Tables](#display-summarised-json-information-in-tables)
-  - [Docker](#docker)
-  - [Developer Notes](#developer-notes)
-    - [Adding new endpoints](#adding-new-endpoints)
-    - [Resources](#resources)
-  - [Routes Supported](#routes-supported)
+* [Installation](#installation)
+* [Running](#running)
+    * [Updating](#updating)
+* [Features](#features)
+    * [Display JSON of Workflow Version Definitions](#display-json-of-workflow-version-definitions)
+    * [Display Summarised JSON Information In Tables](#display-summarised-json-information-in-tables)
+* [Docker](#docker)
+    * [Using Docker](#using-docker)
+    * [Docker Shortcuts](#docker-shortcuts)
+* [Developer Notes](#developer-notes)
+    * [Adding new endpoints](#adding-new-endpoints)
+    * [Resources](#resources)
+* [Routes Supported](#routes-supported)
 
-Node.js Express app that interacts with the Illumina Stratus API.
-Currently supports only `GET` endpoints.
+Node.js Express app that interacts with the Illumina Connected Analytics (ICA) API.
+Supports only `GET` endpoints.
 
 <img src="https://i.postimg.cc/fydrbjbK/illumination-home.png" alt="illumination home" height="500">
 
@@ -50,11 +38,10 @@ brew install node
 
 # check that it works
 node --version
-# v14.4.0
 ```
 
 **Step 2**: Clone `illumination` repo and install dependencies
-(should take around 10-20 seconds)
+(should take a minute max).
 
 ```bash
 git clone https://github.com/umccr/illumination
