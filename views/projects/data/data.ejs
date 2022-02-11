@@ -1,0 +1,77 @@
+<%- include("../../partials/header") %>
+
+<h1 class="title">Data for Project <a href="/projects/<%= projectid %>"><%= projectid %></a></h1>
+
+<table
+  id="tab"
+  class="ui striped selectable celled compact table"
+  style="width:100%"
+>
+  <thead>
+    <tr>
+      <th>N</th>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Path</th>
+      <th>Size (bytes)</th>
+      <th>TimeCreated</th>
+      <th>TimeModified</th>
+      <th>Status</th>
+      <th>DataType</th>
+      <th>StoredFirstAt</th>
+      <th>OwningProjID</th>
+      <th>TenantID</th>
+      <th>TenantName</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% p = data["items"]; %>
+    <% firstPageToken = data["firstPageToken"] %>
+    <% nextPageToken = data["nextPageToken"] %>
+    <% prevPageToken = data["prevPageToken"] %>
+    <% if (firstPageToken) {%>
+        <a href="/projects/<%= projectid %>/data?pageToken=<%= firstPageToken %>" class="ui toggle compact blue button">FirstPage</a>
+    <% } %>
+    <% if (nextPageToken) {%>
+        <a href="/projects/<%= projectid %>/data?pageToken=<%= nextPageToken %>" class="ui toggle compact green button">NextPage</a>
+    <% } %>
+    <% if (prevPageToken) {%>
+        <a href="/projects/<%= projectid %>/data?pageToken=<%= prevPageToken %>" class="ui toggle compact orange button">PreviousPage</a>
+    <% } %>
+    <% for (let i = 0; i < p.length; i++) { %>
+    <% d = p[i].data %>
+    <% dd = d.details %>
+    <tr>
+      <td><%= `${i + 1}.` %></td>
+      <td><a href="/projects/<%= projectid %>/data/<%= d.id %>"><%= d.id %></a></td>
+      <td><%= dd.name %></td>
+      <td><%= dd.path %></td>
+      <td><%= dd.fileSizeInBytes %></td>
+      <td><%= dd.timeCreated %></td>
+      <td><%= dd.timeModified %></td>
+      <td><%= dd.status %></td>
+      <td><%= dd.dataType %></td>
+      <td><%= dd.storedForTheFirstTimeAt %></td>
+      <td><%= dd.owningProjectId %></td>
+      <td><%= dd.tenantId %></td>
+      <td><%= dd.tenantName %></td>
+    </tr>
+    <% } %>
+  </tbody>
+</table>
+
+<script>
+  $(document).ready(function() {
+    $("#tab").DataTable({
+      pageLength: 10,
+      lengthMenu: [ [10, -1], [10, "All"] ],
+      "dom": '<"top"flip>t<"bottom"flip>'
+    });
+  });
+</script>
+
+<pre>
+<%- jsonSyntaxHighlight(JSON.stringify(data, null, 2)) %>
+</pre>
+
+<%- include("../../partials/footer") %>

@@ -2,6 +2,8 @@
 
 <h1 class="title"><%= `Project ${projectid}` %></h1>
 
+<h2><a href="/projects/<%= data.id %>/data">DATA</a></h2>
+
 <% region = data.region %>
 <% country = region.country %>
 <% location = `${region.cityName}, ${country.name} (${country.code} - ${country.region})` %>

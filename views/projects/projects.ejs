@@ -12,6 +12,7 @@
       <th>N</th>
       <th>Name</th>
       <th>ID</th>
+      <th>DATA</th>
       <th>OwnerID</th>
       <th>TenantID</th>
       <th>TenantName</th>
@@ -45,6 +46,7 @@
       <td><%= `${i + 1}.` %></td>
       <td><%= p[i].name %></td>
       <td><a href="/projects/<%= p[i].id %>"><%= p[i].id %></a></td>
+      <td><a href="/projects/<%= p[i].id %>/data">DATA</a></td>
       <td><%= id2username(p[i].ownerId) %></td>
       <td><%= p[i].tenantId %></td>
       <td><%= p[i].tenantName %></td>
