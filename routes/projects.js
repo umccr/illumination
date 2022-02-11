@@ -51,7 +51,7 @@ router.get("/:projectid/analyses", (req, res) => {
   axios(opts)
     .then((response) => {
       //res.send(response.data);
-      res.render("projects/analyses", {
+      res.render("projects/analysis/analyses", {
        data: response.data,
        projectid: projectid,
        id2username: id2username.id2username,
@@ -71,7 +71,7 @@ router.get("/:projectid/analyses/:analysisid", (req, res) => {
   axios(opts)
     .then((response) => {
       //res.send(response.data);
-      res.render("projects/analysisid", {
+      res.render("projects/analysis/analysisid", {
        data: response.data,
        projectid: projectid,
        analysisid: analysisid,
@@ -92,7 +92,7 @@ router.get("/:projectid/analyses/:analysisid/steps", (req, res) => {
   axios(opts)
     .then((response) => {
       //res.send(response.data);
-      res.render("projects/analysissteps", {
+      res.render("projects/analysis/analysissteps", {
        data: response.data,
        projectid: projectid,
        analysisid: analysisid,
@@ -113,7 +113,7 @@ router.get("/:projectid/analyses/:analysisid/inputs", (req, res) => {
   axios(opts)
     .then((response) => {
       //res.send(response.data);
-      res.render("projects/analysisinputs", {
+      res.render("projects/analysis/analysisinputs", {
        data: response.data,
        projectid: projectid,
        analysisid: analysisid,
@@ -134,7 +134,7 @@ router.get("/:projectid/analyses/:analysisid/outputs", (req, res) => {
   axios(opts)
     .then((response) => {
       //res.send(response.data);
-      res.render("projects/analysisoutputs", {
+      res.render("projects/analysis/analysisoutputs", {
        data: response.data,
        projectid: projectid,
        analysisid: analysisid,
@@ -155,7 +155,7 @@ router.get("/:projectid/analyses/:analysisid/rawOutput", (req, res) => {
   axios(opts)
     .then((response) => {
       //res.send(response.data);
-      res.render("projects/analysisrawoutput", {
+      res.render("projects/analysis/analysisrawoutput", {
        data: response.data,
        projectid: projectid,
        analysisid: analysisid,
@@ -176,7 +176,7 @@ router.get("/:projectid/analyses/:analysisid/configurations", (req, res) => {
   axios(opts)
     .then((response) => {
       //res.send(response.data);
-      res.render("projects/analysisconfigurations", {
+      res.render("projects/analysis/analysisconfigurations", {
        data: response.data,
        projectid: projectid,
        analysisid: analysisid,

@@ -1,6 +1,6 @@
-<%- include("../partials/header") %>
+<%- include("../../partials/header") %>
 
-<h1 class="title"><%= `Raw Outputs` %></h1>
+<h1 class="title"><%= `Inputs` %></h1>
 <ul>
   <li>AnalysisID: <a href="/projects/<%= projectid %>/analyses/<%= analysisid %>"><%= analysisid %></a></li>
   <li>ProjectID: <a href="/projects/<%= projectid %>"><%= projectid %></a></li>
@@ -10,5 +10,4 @@
 <%- jsonSyntaxHighlight(JSON.stringify(data, null, 2)) %>
 </pre>
 
-<%- include("../partials/footer") %>
-
+<%- include("../../partials/footer") %>
