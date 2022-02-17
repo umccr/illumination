@@ -114,7 +114,7 @@ const listEndpoints = require("express-list-endpoints");
 console.log(listEndpoints(app));
 
 [
-    '/projects',            },
+    '/projects',
     '/projects/:projectid',
     '/projects/:projectid/analyses'
     '/projects/:projectid/data',

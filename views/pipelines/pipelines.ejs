@@ -10,7 +10,6 @@
   <thead>
     <tr>
       <th>N</th>
-      <th>Email</th>
       <th>ID</th>
       <th>OwnerID</th>
       <th>Code</th>
@@ -26,7 +25,6 @@
     <% for (let i = 0; i < p.length; i++) { %>
     <tr>
       <td><%= `${i + 1}.` %></td>
-      <td><%= p[i].email %></td>
       <td><a href="/pipelines/<%= p[i].id %>"><%= p[i].id %></a></td>
       <td><%= id2username(p[i].ownerId) %></td>
       <td><%= p[i].code %></td>
