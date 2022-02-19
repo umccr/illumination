@@ -1,0 +1,9 @@
+<%- include("../partials/header") %>
+
+<h1 class="title"><%= `User ${id2username(userid)} (${userid})` %></h1>
+
+<pre>
+<%- jsonSyntaxHighlight(JSON.stringify(data, null, 2)) %>
+</pre>
+
+<%- include("../partials/footer") %>

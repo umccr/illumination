@@ -1,4 +1,4 @@
-<%- include("partials/header") %>
+<%- include("../partials/header") %>
 
 <h1 class="title"><%= `Users` %></h1>
 
@@ -25,7 +25,7 @@
     <tr>
       <td><%= `${i + 1}.` %></td>
       <td><%= p[i].email %></td>
-      <td><%= p[i].id %></td>
+      <td><a href="/users/<%= p[i].id %>"><%= p[i].id %></a></td>
       <td><%= p[i].ownerId %></td>
       <td><%= p[i].tenantId %></td>
       <td><%= p[i].username %></td>
@@ -50,5 +50,4 @@
 <%- jsonSyntaxHighlight(JSON.stringify(data, null, 2)) %>
 </pre>
 
-<%- include("partials/footer") %>
-
+<%- include("../partials/footer") %>

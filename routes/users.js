@@ -4,6 +4,7 @@ const axios = require("axios").default;
 const illumina = require("../utils/illumina");
 const utils = require("../utils/utils");
 const request_opts = illumina.request_opts();
+const id2username = require("../utils/id2username");
 
 router.get("/", (req, res) => {
   let opts = request_opts;
@@ -13,8 +14,27 @@ router.get("/", (req, res) => {
   axios(opts)
     .then((response) => {
       // res.send(response.data);
-      res.render("users", {
+      res.render("users/users", {
        data: response.data,
+       jsonSyntaxHighlight: utils.jsonSyntaxHighlight,
+       });
+    })
+    .catch((error) => utils.print_error(error));
+});
+
+router.get("/:userid", (req, res) => {
+  let opts = request_opts;
+  let qs = req.query;
+  const userid = req.params.userid;
+  opts.url = `/users/${userid}`;
+  opts.params = qs;
+  axios(opts)
+    .then((response) => {
+      // res.send(response.data);
+      res.render("users/userid", {
+       data: response.data,
+       userid: userid,
+       id2username: id2username.id2username,
        jsonSyntaxHighlight: utils.jsonSyntaxHighlight,
        });
     })
