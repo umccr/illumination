@@ -7,7 +7,7 @@ const format_date = function (date) {
 };
 
 const print_error = function (e) {
-  console.error(chalk.red(`THERE WAS AN ERROR \n${e}`));
+  console.error(chalk.red(`Illumination ERROR: \n${e}`));
 };
 
 // https://stackoverflow.com/questions/4810841/how-can-i-pretty-print-json-using-javascript

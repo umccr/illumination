@@ -2,26 +2,35 @@ const yaml = require("js-yaml"),
   fs = require("fs"),
   path = require("path"),
   os = require("os"),
-  combineURLs = require("axios/lib/helpers/combineURLs");
+  utils = require("./utils")
+combineURLs = require("axios/lib/helpers/combineURLs");
 
-const ica_v2_server_url = process.env.ICAV2_SERVER_URL || "https://ica.illumina.com";
-const base_url = combineURLs(ica_v2_server_url, "ica/rest/api");
+const ica_v2_server_url = process.env.ICAV2_SERVER_URL || "ica.illumina.com";
+const base_url = combineURLs(`https://${ica_v2_server_url}`, "ica/rest/api");
 
+/* grab access-token from:
+* 1. the ICAV2_ACCESS_TOKEN env var
+* 2. the ~/.icav2/.session.ica.yaml file
+*/
 const token = (function () {
-  console.log("Loading ICAV2 token");
+  let session_file = ".icav2/.session.ica.yaml"
+  let session_file_path = path.join(os.homedir(), session_file);
   let token;
   token = process.env.ICAV2_ACCESS_TOKEN;
   if (token) {
-    console.log("Using token from ENV");
+    console.log("Loading ICAV2 access-token from ICAV2_ACCESS_TOKEN env var");
   } else {
     try {
-      let session_file = path.join(os.homedir(), ".icav2/.session.ica.yaml");
-      token = yaml.load(fs.readFileSync(session_file, "utf8"));
+      token = yaml.load(fs.readFileSync(session_file_path, "utf8"));
       token = token["access-token"];
+      if (token) {
+        console.log(`Loading ICAV2 access-token from ~/${session_file}`);
+      }
     } catch (e) {
-      console.log(e);
+      utils.print_error(`Couldn't find ICAV2_ACCESS_TOKEN env var or 'access-token' in ~/${session_file}.`)
+      utils.print_error(e);
+      process.exit(1);
     }
-    console.log("Using token from session file");
   }
   return token;
 })();
@@ -30,7 +39,6 @@ const request_opts = function () {
   return {
     headers: {
       Authorization: `Bearer ${token}`,
-      // "Content-Type": "application/json",
       "accept": "application/vnd.illumina.v3+json"
     },
     baseURL: base_url,
