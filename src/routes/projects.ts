@@ -1,4 +1,4 @@
-const express = require("express");
+import express from "express";
 const router = express.Router();
 const axios = require("axios").default;
 const illumina = require("../utils/illumina");
@@ -12,7 +12,7 @@ router.get("/", (req, res) => {
   opts.url = "/projects";
   opts.params = qs;
   axios(opts)
-    .then((response) => {
+    .then((response: any) => {
       //res.send(response.data);
       res.render("projects/projects", {
        data: response.data,
@@ -20,7 +20,7 @@ router.get("/", (req, res) => {
        jsonSyntaxHighlight: utils.jsonSyntaxHighlight,
        });
     })
-    .catch((error) => utils.print_error(error));
+    .catch((error: Error) => utils.print_error(error));
 });
 
 router.get("/:projectid", (req, res) => {
@@ -30,7 +30,7 @@ router.get("/:projectid", (req, res) => {
   opts.url = `/projects/${projectid}`;
   opts.params = qs;
   axios(opts)
-    .then((response) => {
+    .then((response: any) => {
       //res.send(response.data);
       res.render("projects/projectid", {
        data: response.data,
@@ -39,7 +39,7 @@ router.get("/:projectid", (req, res) => {
        jsonSyntaxHighlight: utils.jsonSyntaxHighlight,
        });
     })
-    .catch((error) => utils.print_error(error));
+    .catch((error: Error) => utils.print_error(error));
 });
 
 router.get("/:projectid/analyses", (req, res) => {
@@ -49,7 +49,7 @@ router.get("/:projectid/analyses", (req, res) => {
   opts.url = `/projects/${projectid}/analyses`;
   opts.params = qs;
   axios(opts)
-    .then((response) => {
+    .then((response: any) => {
       //res.send(response.data);
       res.render("projects/analysis/analyses", {
        data: response.data,
@@ -58,7 +58,7 @@ router.get("/:projectid/analyses", (req, res) => {
        jsonSyntaxHighlight: utils.jsonSyntaxHighlight,
        });
     })
-    .catch((error) => utils.print_error(error));
+    .catch((error: Error) => utils.print_error(error));
 });
 
 router.get("/:projectid/data", (req, res) => {
@@ -68,7 +68,7 @@ router.get("/:projectid/data", (req, res) => {
   opts.url = `/projects/${projectid}/data`;
   opts.params = qs;
   axios(opts)
-    .then((response) => {
+    .then((response: any) => {
       //res.send(response.data);
       res.render("projects/data/data", {
        data: response.data,
@@ -77,7 +77,7 @@ router.get("/:projectid/data", (req, res) => {
        jsonSyntaxHighlight: utils.jsonSyntaxHighlight,
        });
     })
-    .catch((error) => utils.print_error(error));
+    .catch((error: Error) => utils.print_error(error));
 });
 
 router.get("/:projectid/data/:dataid", (req, res) => {
@@ -88,7 +88,7 @@ router.get("/:projectid/data/:dataid", (req, res) => {
   opts.url = `/projects/${projectid}/data/${dataid}`;
   opts.params = qs;
   axios(opts)
-    .then((response) => {
+    .then((response: any) => {
       //res.send(response.data);
       res.render("projects/data/dataid", {
        data: response.data,
@@ -98,7 +98,7 @@ router.get("/:projectid/data/:dataid", (req, res) => {
        jsonSyntaxHighlight: utils.jsonSyntaxHighlight,
        });
     })
-    .catch((error) => utils.print_error(error));
+    .catch((error: Error) => utils.print_error(error));
 });
 
 router.get("/:projectid/analyses/:analysisid", (req, res) => {
@@ -109,7 +109,7 @@ router.get("/:projectid/analyses/:analysisid", (req, res) => {
   opts.url = `/projects/${projectid}/analyses/${analysisid}`;
   opts.params = qs;
   axios(opts)
-    .then((response) => {
+    .then((response: any) => {
       //res.send(response.data);
       res.render("projects/analysis/analysisid", {
        data: response.data,
@@ -119,7 +119,7 @@ router.get("/:projectid/analyses/:analysisid", (req, res) => {
        jsonSyntaxHighlight: utils.jsonSyntaxHighlight,
        });
     })
-    .catch((error) => utils.print_error(error));
+    .catch((error: Error) => utils.print_error(error));
 });
 
 router.get("/:projectid/analyses/:analysisid/steps", (req, res) => {
@@ -130,7 +130,7 @@ router.get("/:projectid/analyses/:analysisid/steps", (req, res) => {
   opts.url = `/projects/${projectid}/analyses/${analysisid}/steps`;
   opts.params = qs;
   axios(opts)
-    .then((response) => {
+    .then((response: any) => {
       //res.send(response.data);
       res.render("projects/analysis/analysissteps", {
        data: response.data,
@@ -140,7 +140,7 @@ router.get("/:projectid/analyses/:analysisid/steps", (req, res) => {
        jsonSyntaxHighlight: utils.jsonSyntaxHighlight,
        });
     })
-    .catch((error) => utils.print_error(error));
+    .catch((error: Error) => utils.print_error(error));
 });
 
 router.get("/:projectid/analyses/:analysisid/inputs", (req, res) => {
@@ -151,7 +151,7 @@ router.get("/:projectid/analyses/:analysisid/inputs", (req, res) => {
   opts.url = `/projects/${projectid}/analyses/${analysisid}/inputs`;
   opts.params = qs;
   axios(opts)
-    .then((response) => {
+    .then((response: any) => {
       //res.send(response.data);
       res.render("projects/analysis/analysisinputs", {
        data: response.data,
@@ -161,7 +161,7 @@ router.get("/:projectid/analyses/:analysisid/inputs", (req, res) => {
        jsonSyntaxHighlight: utils.jsonSyntaxHighlight,
        });
     })
-    .catch((error) => utils.print_error(error));
+    .catch((error: Error) => utils.print_error(error));
 });
 
 router.get("/:projectid/analyses/:analysisid/outputs", (req, res) => {
@@ -172,7 +172,7 @@ router.get("/:projectid/analyses/:analysisid/outputs", (req, res) => {
   opts.url = `/projects/${projectid}/analyses/${analysisid}/outputs`;
   opts.params = qs;
   axios(opts)
-    .then((response) => {
+    .then((response: any) => {
       //res.send(response.data);
       res.render("projects/analysis/analysisoutputs", {
        data: response.data,
@@ -182,7 +182,7 @@ router.get("/:projectid/analyses/:analysisid/outputs", (req, res) => {
        jsonSyntaxHighlight: utils.jsonSyntaxHighlight,
        });
     })
-    .catch((error) => utils.print_error(error));
+    .catch((error: Error) => utils.print_error(error));
 });
 
 router.get("/:projectid/analyses/:analysisid/rawOutput", (req, res) => {
@@ -193,7 +193,7 @@ router.get("/:projectid/analyses/:analysisid/rawOutput", (req, res) => {
   opts.url = `/projects/${projectid}/analyses/${analysisid}/rawOutput`;
   opts.params = qs;
   axios(opts)
-    .then((response) => {
+    .then((response: any) => {
       //res.send(response.data);
       res.render("projects/analysis/analysisrawoutput", {
        data: response.data,
@@ -203,7 +203,7 @@ router.get("/:projectid/analyses/:analysisid/rawOutput", (req, res) => {
        jsonSyntaxHighlight: utils.jsonSyntaxHighlight,
        });
     })
-    .catch((error) => utils.print_error(error));
+    .catch((error: Error) => utils.print_error(error));
 });
 
 router.get("/:projectid/analyses/:analysisid/configurations", (req, res) => {
@@ -214,7 +214,7 @@ router.get("/:projectid/analyses/:analysisid/configurations", (req, res) => {
   opts.url = `/projects/${projectid}/analyses/${analysisid}/configurations`;
   opts.params = qs;
   axios(opts)
-    .then((response) => {
+    .then((response: any) => {
       //res.send(response.data);
       res.render("projects/analysis/analysisconfigurations", {
        data: response.data,
@@ -224,7 +224,7 @@ router.get("/:projectid/analyses/:analysisid/configurations", (req, res) => {
        jsonSyntaxHighlight: utils.jsonSyntaxHighlight,
        });
     })
-    .catch((error) => utils.print_error(error));
+    .catch((error: Error) => utils.print_error(error));
 });
 
 module.exports = router;

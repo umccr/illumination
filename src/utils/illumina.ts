@@ -3,10 +3,9 @@ const yaml = require("js-yaml"),
   path = require("path"),
   os = require("os"),
   utils = require("./utils")
-combineURLs = require("axios/lib/helpers/combineURLs");
 
 const ica_v2_server_url = process.env.ICAV2_SERVER_URL || "ica.illumina.com";
-const base_url = combineURLs(`https://${ica_v2_server_url}`, "ica/rest/api");
+const base_url = utils.combineURLs(`https://${ica_v2_server_url}`, "ica/rest/api");
 
 /* grab access-token from:
 * 1. the ICAV2_ACCESS_TOKEN env var

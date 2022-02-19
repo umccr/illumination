@@ -1,6 +1,6 @@
-const express = require("express"),
-  app = express(),
-  path = require("path");
+import express from "express";
+const app = express();
+import path from "path";
 
 const indexRouter = require("./routes/index"),
   projectsRouter = require("./routes/projects"),
