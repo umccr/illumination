@@ -10,7 +10,7 @@
     "build": "npm-run-all clean build-ts copy-assets",
     "clean": "rimraf dist/*",
     "copy-assets": "ts-node tools/copyStaticAssets.ts",
-    "start": "node .",
+    "start": "npm run build && node .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
