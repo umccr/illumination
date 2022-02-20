@@ -1,4 +1,4 @@
-const express = require("express");
+import express from "express";
 const router = express.Router();
 const axios = require("axios").default;
 const illumina = require("../utils/illumina");
@@ -9,18 +9,18 @@ const id2username = require("../utils/id2username");
 router.get("/", (req, res) => {
   let opts = request_opts;
   let qs = req.query;
-  opts.url = "/storageConfigurations";
+  opts.url = "/storageBundles";
   opts.params = qs;
   axios(opts)
-    .then((response) => {
-      res.send(response.data);
-     // res.render("storageconfigurations", {
-     //  data: response.data,
-     //  id2username: id2username.id2username,
-     //  jsonSyntaxHighlight: utils.jsonSyntaxHighlight,
-     //  });
+    .then((response: any) => {
+      // res.send(response.data);
+      res.render("storagebundles", {
+       data: response.data,
+       id2username: id2username.id2username,
+       jsonSyntaxHighlight: utils.jsonSyntaxHighlight,
+       });
     })
-    .catch((error) => utils.print_error(error));
+    .catch((error: Error) => utils.print_error(error));
 });
 
 module.exports = router;

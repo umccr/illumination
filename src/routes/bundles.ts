@@ -1,4 +1,4 @@
-const express = require("express");
+import express from "express";
 const router = express.Router();
 const axios = require("axios").default;
 const illumina = require("../utils/illumina");
@@ -11,14 +11,14 @@ router.get("/", (req, res) => {
   opts.url = "/bundles";
   opts.params = qs;
   axios(opts)
-    .then((response) => {
+    .then((response: any) => {
       // res.send(response.data);
       res.render("bundles", {
        data: response.data,
        jsonSyntaxHighlight: utils.jsonSyntaxHighlight,
        });
     })
-    .catch((error) => utils.print_error(error));
+    .catch((error: Error) => utils.print_error(error));
 });
 
 module.exports = router;

@@ -1,17 +1,17 @@
-const chalk = require("chalk");
-const dayjs = require("dayjs");
+import chalk from "chalk";
+import dayjs from "dayjs";
 
 // dayjs uses the local time by default
-const format_date = function (date) {
+const format_date = function (date: string) {
   return dayjs(date).format("YYYY-MM-DD HH:mm:ss ZZ");
 };
 
-const print_error = function (e) {
-  console.error(chalk.red(`THERE WAS AN ERROR \n${e}`));
+const print_error = function (e: Error) {
+  console.error(chalk.red(`Illumination ERROR: \n${e}`));
 };
 
 // https://stackoverflow.com/questions/4810841/how-can-i-pretty-print-json-using-javascript
-const jsonSyntaxHighlight = function (json) {
+const jsonSyntaxHighlight = function (json: string) {
   json = json
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
@@ -37,7 +37,7 @@ const jsonSyntaxHighlight = function (json) {
 };
 
 // https://stackoverflow.com/questions/15900485/correct-way-to-convert-size-in-bytes-to-kb-mb-gb-in-javascript/18650828/#18650828
-function format_bytes(bytes, decimals = 2) {
+function format_bytes(bytes: number, decimals = 2) {
   if (bytes === 0) return "0 B";
 
   const k = 1024;
@@ -48,9 +48,23 @@ function format_bytes(bytes, decimals = 2) {
   return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + " " + sizes[i];
 }
 
+/**
+ * Creates a new URL by combining the specified URLs (from axios/lib/helpers/combineURLs.js)
+ *
+ * @param {string} baseURL The base URL
+ * @param {string} relativeURL The relative URL
+ * @returns {string} The combined URL
+ */
+const combineURLs = function (baseURL: string, relativeURL: string) {
+  return relativeURL
+    ? baseURL.replace(/\/+$/, '') + '/' + relativeURL.replace(/^\/+/, '')
+    : baseURL;
+};
+
 module.exports = {
   format_date: format_date,
   format_bytes: format_bytes,
   print_error: print_error,
   jsonSyntaxHighlight: jsonSyntaxHighlight,
+  combineURLs: combineURLs,
 };
