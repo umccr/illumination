@@ -16,6 +16,7 @@ router.get("/", (req, res) => {
       // res.send(response.data);
       res.render("users/users", {
        data: response.data,
+       id2username: id2username.id2username,
        jsonSyntaxHighlight: utils.jsonSyntaxHighlight,
        });
     })

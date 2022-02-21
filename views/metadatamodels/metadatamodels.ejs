@@ -1,4 +1,4 @@
-<%- include("partials/header") %>
+<%- include("../partials/header") %>
 
 <h1 class="title"><%= `Metadata Models` %></h1>
 
@@ -25,7 +25,7 @@
     <% for (let i = 0; i < p.length; i++) { %>
     <tr>
       <td><%= `${i + 1}.` %></td>
-      <td><%= p[i].id %></td>
+      <td><a href="/metadataModels/<%= p[i].id %>"><%= p[i].id %></a></td>
       <td><%= p[i].ownerId %></td>
       <td><%= p[i].tenantId %></td>
       <td><%= p[i].name %></td>
@@ -52,5 +52,4 @@
 <%- jsonSyntaxHighlight(JSON.stringify(data, null, 2)) %>
 </pre>
 
-<%- include("partials/footer") %>
-
+<%- include("../partials/footer") %>

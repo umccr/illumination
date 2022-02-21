@@ -12,6 +12,7 @@
       <th>N</th>
       <th>Email</th>
       <th>ID</th>
+      <th>ID2</th>
       <th>OwnerID</th>
       <th>TenantID</th>
       <th>UserName</th>
@@ -26,6 +27,7 @@
       <td><%= `${i + 1}.` %></td>
       <td><%= p[i].email %></td>
       <td><a href="/users/<%= p[i].id %>"><%= p[i].id %></a></td>
+      <td><%= id2username(p[i].ownerId) %></td>
       <td><%= p[i].ownerId %></td>
       <td><%= p[i].tenantId %></td>
       <td><%= p[i].username %></td>
@@ -39,8 +41,8 @@
 <script>
   $(document).ready(function() {
     $("#tab").DataTable({
-      pageLength: 10,
-      lengthMenu: [ [10, -1], [10, "All"] ],
+      pageLength: 20,
+      lengthMenu: [ [10, 20, 50, -1], [10, 20, 50, "All"] ],
       "dom": '<"top"flip>t<"bottom"flip>'
     });
   });

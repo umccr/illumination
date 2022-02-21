@@ -5,12 +5,13 @@
   "main": "dist/app.js",
   "scripts": {
     "dev": "nodemon -w src -w views -e ts,ejs --exec npm run dev:start",
-    "dev:start": "npm-run-all build start",
+    "dev:start": "npm-run-all build start2",
     "build-ts": "tsc",
     "build": "npm-run-all clean build-ts copy-assets",
     "clean": "rimraf dist/*",
     "copy-assets": "ts-node tools/copyStaticAssets.ts",
     "start": "npm run build && node .",
+    "start2": "node .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

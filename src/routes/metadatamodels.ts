@@ -13,8 +13,44 @@ router.get("/", (req, res) => {
   axios(opts)
     .then((response: any) => {
       // res.send(response.data);
-      res.render("metadatamodels", {
+      res.render("metadatamodels/metadatamodels", {
        data: response.data,
+       jsonSyntaxHighlight: utils.jsonSyntaxHighlight,
+       });
+    })
+    .catch((error: Error) => utils.print_error(error));
+});
+
+router.get("/:metadatamodelid", (req, res) => {
+  let opts = request_opts;
+  let qs = req.query;
+  const metadatamodelid = req.params.metadatamodelid;
+  opts.url = `/metadataModels/${metadatamodelid}`;
+  opts.params = qs;
+  axios(opts)
+    .then((response: any) => {
+      // res.send(response.data);
+      res.render("metadatamodels/metadatamodelid", {
+       data: response.data,
+       metadatamodelid: metadatamodelid,
+       jsonSyntaxHighlight: utils.jsonSyntaxHighlight,
+       });
+    })
+    .catch((error: Error) => utils.print_error(error));
+});
+
+router.get("/:metadatamodelid/fields", (req, res) => {
+  let opts = request_opts;
+  let qs = req.query;
+  const metadatamodelid = req.params.metadatamodelid;
+  opts.url = `/metadataModels/${metadatamodelid}/fields`;
+  opts.params = qs;
+  axios(opts)
+    .then((response: any) => {
+      // res.send(response.data);
+      res.render("metadatamodels/metadatamodelfields", {
+       data: response.data,
+       metadatamodelid: metadatamodelid,
        jsonSyntaxHighlight: utils.jsonSyntaxHighlight,
        });
     })
