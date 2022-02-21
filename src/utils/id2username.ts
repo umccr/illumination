@@ -3,7 +3,7 @@ import fs from "fs";
 const id2username_json = JSON.parse(fs.readFileSync("./id2username.json", "utf-8"))
 
 const id2username = function (id: string) {
-  id2username_json[id];
+  return id2username_json[id];
 };
 
 module.exports = {
