@@ -1,6 +1,6 @@
 <%- include("../partials/header") %>
 
-<h1 class="title"><%= `Pipelines` %></h1>
+<h1 class="title"><%= `Pipeline ${pipelineid} Reference Sets` %></h1>
 
 <table
   id="tab"
@@ -12,9 +12,6 @@
       <th>N</th>
       <th>ID</th>
       <th>OwnerID</th>
-      <th>Code</th>
-      <th>Description</th>
-      <th>Language</th>
       <th>TimeCreated</th>
       <th>TimeModified</th>
     </tr>
@@ -24,11 +21,8 @@
     <% for (let i = 0; i < p.length; i++) { %>
     <tr>
       <td><%= `${i + 1}.` %></td>
-      <td><a href="/pipelines/<%= p[i].id %>"><%= p[i].id %></a></td>
+      <td><%= p[i].id %></td>
       <td><%= id2username(p[i].ownerId) %></td>
-      <td><%= p[i].code %></td>
-      <td><%= p[i].description %></td>
-      <td><%= p[i].language %></td>
       <td><%= p[i].timeCreated %></td>
       <td><%= p[i].timeModified %></td>
     </tr>
@@ -51,3 +45,4 @@
 </pre>
 
 <%- include("../partials/footer") %>
+
