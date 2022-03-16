@@ -274,7 +274,7 @@ router.get("/:projectid/permissions", (req, res) => {
   axios(opts)
     .then((response: any) => {
       //res.send(response.data);
-      res.render("projects/permissions", {
+      res.render("projects/permissions/permissions", {
        data: response.data,
        projectid: projectid,
        id2username: id2username.id2username,
@@ -284,6 +284,26 @@ router.get("/:projectid/permissions", (req, res) => {
     .catch((error: Error) => utils.print_error(error));
 });
 
+router.get("/:projectid/permissions/:permissionid", (req, res) => {
+  let opts = request_opts;
+  let qs = req.query;
+  const projectid = req.params.projectid;
+  const permissionid = req.params.permissionid;
+  opts.url = `/projects/${projectid}/permissions/${permissionid}`;
+  opts.params = qs;
+  axios(opts)
+    .then((response: any) => {
+      //res.send(response.data);
+      res.render("projects/permissions/permissionid", {
+       data: response.data,
+       projectid: projectid,
+       permissionid: permissionid,
+       id2username: id2username.id2username,
+       jsonSyntaxHighlight: utils.jsonSyntaxHighlight,
+       });
+    })
+    .catch((error: Error) => utils.print_error(error));
+});
 
 router.get("/:projectid/pipelines", (req, res) => {
   let opts = request_opts;

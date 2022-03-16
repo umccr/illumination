@@ -1,4 +1,4 @@
-<%- include("../partials/header") %>
+<%- include("../../partials/header") %>
 
 <h1 class="title"><%= `Permissions for project ${projectid}` %></h1>
 
@@ -42,7 +42,7 @@
     <% for (let i = 0; i < p.length; i++) { %>
     <tr>
       <td><%= `${i + 1}.` %></td>
-      <td><%= p[i].id %></td>
+      <td><a href="/projects/<%= projectid %>/permissions/<%= p[i].id %>"><%= p[i].id %></a></td>
       <td><%= id2username(p[i].ownerId) %></td>
       <td><%= id2username(p[i].user.id) %></td>
       <td><%= id2username(p[i].user.ownerId) %></td>
@@ -74,5 +74,5 @@
 <%- jsonSyntaxHighlight(JSON.stringify(data, null, 2)) %>
 </pre>
 
-<%- include("../partials/footer") %>
+<%- include("../../partials/footer") %>
 

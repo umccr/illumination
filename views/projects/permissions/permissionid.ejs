@@ -1,0 +1,11 @@
+<%- include("../../partials/header") %>
+
+<h1 class="title"><%= `Permission ${permissionid} for project ${projectid}` %></h1>
+
+
+<pre>
+<%- jsonSyntaxHighlight(JSON.stringify(data, null, 2)) %>
+</pre>
+
+<%- include("../../partials/footer") %>
+
