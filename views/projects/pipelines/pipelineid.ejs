@@ -1,0 +1,21 @@
+<%- include("../../partials/header") %>
+
+<h1 class="title"><%= `Pipeline ${pipelineid} for project ${projectid}` %></h1>
+
+<ul>
+  <li><strong>OwnerID: </strong> <%= id2username(data.pipeline.ownerId) %></li>
+  <li><strong>TenantID: </strong> <%= data.pipeline.tenantId %></li>
+  <li><strong>TenantName: </strong> <%= data.pipeline.tenantName %></li>
+  <li><strong>Language: </strong> <%= data.pipeline.language %></li>
+  <li><strong>Code: </strong> <%= data.pipeline.code %></li>
+  <li><strong>Description: </strong> <%= data.pipeline.description %></li>
+  <li><strong>TimeCreated: </strong><%= data.pipeline.timeCreated %></li>
+  <li><strong>TimeModified: </strong><%= data.pipeline.timeModified %></li>
+</ul>
+
+<pre>
+<%- jsonSyntaxHighlight(JSON.stringify(data, null, 2)) %>
+</pre>
+
+<%- include("../../partials/footer") %>
+

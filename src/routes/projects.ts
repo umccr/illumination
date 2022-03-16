@@ -61,6 +61,44 @@ router.get("/:projectid/analyses", (req, res) => {
     .catch((error: Error) => utils.print_error(error));
 });
 
+router.get("/:projectid/base/jobs", (req, res) => {
+  let opts = request_opts;
+  let qs = req.query;
+  const projectid = req.params.projectid;
+  opts.url = `/projects/${projectid}/base/jobs`;
+  opts.params = qs;
+  axios(opts)
+    .then((response: any) => {
+      res.send(response.data);
+      // res.render("projects/base/jobs", {
+      // data: response.data,
+      // projectid: projectid,
+      // id2username: id2username.id2username,
+      // jsonSyntaxHighlight: utils.jsonSyntaxHighlight,
+      // });
+    })
+    .catch((error: Error) => utils.print_error(error));
+});
+
+router.get("/:projectid/base/tables", (req, res) => {
+  let opts = request_opts;
+  let qs = req.query;
+  const projectid = req.params.projectid;
+  opts.url = `/projects/${projectid}/base/tables`;
+  opts.params = qs;
+  axios(opts)
+    .then((response: any) => {
+      res.send(response.data);
+      // res.render("projects/base/tables", {
+      //  data: response.data,
+      //  projectid: projectid,
+      //  id2username: id2username.id2username,
+      //  jsonSyntaxHighlight: utils.jsonSyntaxHighlight,
+      //  });
+    })
+    .catch((error: Error) => utils.print_error(error));
+});
+
 router.get("/:projectid/data", (req, res) => {
   let opts = request_opts;
   let qs = req.query;
@@ -220,6 +258,46 @@ router.get("/:projectid/analyses/:analysisid/configurations", (req, res) => {
        data: response.data,
        projectid: projectid,
        analysisid: analysisid,
+       id2username: id2username.id2username,
+       jsonSyntaxHighlight: utils.jsonSyntaxHighlight,
+       });
+    })
+    .catch((error: Error) => utils.print_error(error));
+});
+
+router.get("/:projectid/pipelines", (req, res) => {
+  let opts = request_opts;
+  let qs = req.query;
+  const projectid = req.params.projectid;
+  opts.url = `/projects/${projectid}/pipelines`;
+  opts.params = qs;
+  axios(opts)
+    .then((response: any) => {
+      //res.send(response.data);
+      res.render("projects/pipelines/pipelines", {
+       data: response.data,
+       projectid: projectid,
+       id2username: id2username.id2username,
+       jsonSyntaxHighlight: utils.jsonSyntaxHighlight,
+       });
+    })
+    .catch((error: Error) => utils.print_error(error));
+});
+
+router.get("/:projectid/pipelines/:pipelineid", (req, res) => {
+  let opts = request_opts;
+  let qs = req.query;
+  const projectid = req.params.projectid;
+  const pipelineid = req.params.pipelineid;
+  opts.url = `/projects/${projectid}/pipelines/${pipelineid}`;
+  opts.params = qs;
+  axios(opts)
+    .then((response: any) => {
+      //res.send(response.data);
+      res.render("projects/pipelines/pipelineid", {
+       data: response.data,
+       projectid: projectid,
+       pipelineid: pipelineid,
        id2username: id2username.id2username,
        jsonSyntaxHighlight: utils.jsonSyntaxHighlight,
        });

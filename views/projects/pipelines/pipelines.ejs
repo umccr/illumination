@@ -1,0 +1,54 @@
+<%- include("../../partials/header") %>
+
+<h1 class="title"><%= `Pipelines for project ${projectid}` %></h1>
+
+<table
+  id="tab"
+  class="ui striped selectable celled compact table"
+  style="width:100%"
+>
+  <thead>
+    <tr>
+      <th>N</th>
+      <th>ID</th>
+      <th>OwnerID</th>
+      <th>Code</th>
+      <th>Description</th>
+      <th>Language</th>
+      <th>TimeCreated</th>
+      <th>TimeModified</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% p = data["items"]; %>
+    <% for (let i = 0; i < p.length; i++) { %>
+    <% pline = p[i].pipeline %>
+    <tr>
+      <td><%= `${i + 1}.` %></td>
+      <td><a href="/projects/<%= projectid %>/pipelines/<%= pline.id %>"><%= pline.id %></a></td>
+      <td><%= id2username(pline.ownerId) %></td>
+      <td><%= pline.code %></td>
+      <td><%= pline.description %></td>
+      <td><%= pline.language %></td>
+      <td><%= pline.timeCreated %></td>
+      <td><%= pline.timeModified %></td>
+    </tr>
+    <% } %>
+  </tbody>
+</table>
+
+<script>
+  $(document).ready(function() {
+    $("#tab").DataTable({
+      pageLength: 100,
+      lengthMenu: [ [10, 50, 100, 200, 300, -1], [10, 50, 100, 200, 300, "All"] ],
+      "dom": '<"top"flip>t<"bottom"flip>'
+    });
+  });
+</script>
+
+<pre>
+<%- jsonSyntaxHighlight(JSON.stringify(data, null, 2)) %>
+</pre>
+
+<%- include("../../partials/footer") %>
