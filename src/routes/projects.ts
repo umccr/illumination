@@ -265,6 +265,26 @@ router.get("/:projectid/analyses/:analysisid/configurations", (req, res) => {
     .catch((error: Error) => utils.print_error(error));
 });
 
+router.get("/:projectid/permissions", (req, res) => {
+  let opts = request_opts;
+  let qs = req.query;
+  const projectid = req.params.projectid;
+  opts.url = `/projects/${projectid}/permissions`;
+  opts.params = qs;
+  axios(opts)
+    .then((response: any) => {
+      //res.send(response.data);
+      res.render("projects/permissions", {
+       data: response.data,
+       projectid: projectid,
+       id2username: id2username.id2username,
+       jsonSyntaxHighlight: utils.jsonSyntaxHighlight,
+       });
+    })
+    .catch((error: Error) => utils.print_error(error));
+});
+
+
 router.get("/:projectid/pipelines", (req, res) => {
   let opts = request_opts;
   let qs = req.query;
