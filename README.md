@@ -51,7 +51,7 @@ npm install
 
 ```text
 export ICAV2_ACCESS_TOKEN=`cat ~/.icav2/.session.ica.yaml | grep access-token | sed -e 's/access-token: //'`
-export ICAV2_SERVER_URL="https://ica.illumina.com"
+# export ICAV2_SERVER_URL="ica.illumina.com" # this is hardcoded as a fallback
 ```
 
 **Step 4** (Optional): Adjust the `utils/id2username.json` for better mapping of User IDs to User names.
