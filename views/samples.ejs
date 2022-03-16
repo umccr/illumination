@@ -10,11 +10,13 @@
   <thead>
     <tr>
       <th>N</th>
-      <th>Email</th>
       <th>ID</th>
+      <th>Name</th>
+      <th>Status</th>
+      <th>MetadataValid</th>
       <th>OwnerID</th>
       <th>TenantID</th>
-      <th>UserName</th>
+      <th>TenantName</th>
       <th>TimeCreated</th>
       <th>TimeModified</th>
     </tr>
@@ -24,11 +26,13 @@
     <% for (let i = 0; i < p.length; i++) { %>
     <tr>
       <td><%= `${i + 1}.` %></td>
-      <td><%= p[i].email %></td>
       <td><%= p[i].id %></td>
-      <td><%= p[i].ownerId %></td>
+      <td><%= p[i].name %></td>
+      <td><%= p[i].status %></td>
+      <td><%= p[i].metadataValid %></td>
+      <td><%= id2username(p[i].ownerId) %></td>
       <td><%= p[i].tenantId %></td>
-      <td><%= p[i].username %></td>
+      <td><%= p[i].tenantName %></td>
       <td><%= p[i].timeCreated %></td>
       <td><%= p[i].timeModified %></td>
     </tr>
