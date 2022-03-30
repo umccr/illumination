@@ -1,6 +1,13 @@
 const express = require("express"),
   app = express(),
-  path = require("path");
+  path = require("path"),
+  dotenv = require("dotenv"),
+  dotenvExpand = require("dotenv-expand");
+
+// read local .env for ENV vars (and override
+// those already pre-defined in e.g. ~/.bashrc)
+const myEnv = dotenv.config({ override: true });
+dotenvExpand.expand(myEnv);
 
 const indexRouter = require("./routes/index"),
   tasksRouter = require("./routes/tasks"),
