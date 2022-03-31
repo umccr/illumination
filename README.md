@@ -54,6 +54,8 @@ export ICAV2_ACCESS_TOKEN=`cat ~/.icav2/.session.ica.yaml | grep access-token | 
 # export ICAV2_SERVER_URL="ica.illumina.com" # this is hardcoded as a fallback
 ```
 
+You can also use a `.env` file with your environment variables for convenience - see <https://github.com/motdotla/dotenv>
+
 **Step 4** (Optional): Adjust the `utils/id2username.json` for better mapping of User IDs to User names.
 
 ## Running

@@ -1,6 +1,13 @@
 import express from "express";
 const app = express();
 import path from "path";
+import { config as configDotEnv } from 'dotenv';
+import { expand as dotenvExpand } from 'dotenv-expand';
+
+// read local .env for ENV vars (and override
+// those already pre-defined in e.g. ~/.bashrc)
+const myEnv = configDotEnv({ override: true });
+dotenvExpand(myEnv);
 
 const indexRouter = require("./routes/index"),
   projectsRouter = require("./routes/projects"),
