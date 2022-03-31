@@ -16,11 +16,7 @@
       <th>Size (bytes)</th>
       <th>TimeCreated</th>
       <th>TimeModified</th>
-      <th>Status</th>
       <th>DataType</th>
-      <th>StoredFirstAt</th>
-      <th>OwningProjID</th>
-      <th>TenantID</th>
       <th>TenantName</th>
     </tr>
   </thead>
@@ -45,15 +41,15 @@
       <td><%= `${i + 1}.` %></td>
       <td><a href="/projects/<%= projectid %>/data/<%= d.id %>"><%= d.id %></a></td>
       <td><%= dd.name %></td>
+    <% if (dd.dataType === "FOLDER") {%>
+      <td><a href="/projects/<%= projectid %>/data?pageSize=100&parentFolderPath=<%= dd.path %>"> <%= dd.path %></a></td>
+    <% } else { %>
       <td><%= dd.path %></td>
+    <% } %>
       <td><%= dd.fileSizeInBytes %></td>
       <td><%= dd.timeCreated %></td>
       <td><%= dd.timeModified %></td>
-      <td><%= dd.status %></td>
       <td><%= dd.dataType %></td>
-      <td><%= dd.storedForTheFirstTimeAt %></td>
-      <td><%= dd.owningProjectId %></td>
-      <td><%= dd.tenantId %></td>
       <td><%= dd.tenantName %></td>
     </tr>
     <% } %>
