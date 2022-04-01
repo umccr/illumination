@@ -1,7 +1,7 @@
 {
   "name": "illumination",
   "version": "0.1.0",
-  "description": "Interacting with Illumina Stratus API",
+  "description": "Interacting with Illumina ICAv1 API",
   "main": "app.js",
   "scripts": {
     "start": "node ./app.js",
@@ -24,13 +24,13 @@
     "axios": "^0.21.2",
     "chalk": "^4.1.1",
     "dayjs": "^1.10.6",
-    "dotenv": "^16.0.0",
-    "dotenv-expand": "^8.0.3",
     "ejs": "^3.1.6",
     "express": "^4.17.1",
     "js-yaml": "^4.1.0"
   },
   "devDependencies": {
+    "dotenv": "^16.0.0",
+    "dotenv-expand": "^8.0.3",
     "express-list-endpoints": "^5.0.0",
     "nodemon": "^2.0.15"
   },
