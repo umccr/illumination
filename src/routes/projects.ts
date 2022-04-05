@@ -113,6 +113,8 @@ router.get("/:projectid/data", (req, res) => {
        projectid: projectid,
        id2username: id2username.id2username,
        jsonSyntaxHighlight: utils.jsonSyntaxHighlight,
+       format_bytes: utils.format_bytes,
+       format_date: utils.format_date
        });
     })
     .catch((error: Error) => utils.print_error(error));

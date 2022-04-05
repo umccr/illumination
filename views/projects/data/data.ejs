@@ -13,7 +13,7 @@
       <th>ID</th>
       <th>Name</th>
       <th>Path</th>
-      <th>Size (bytes)</th>
+      <th>Size</th>
       <th>TimeCreated</th>
       <th>TimeModified</th>
       <th>DataType</th>
@@ -46,9 +46,9 @@
     <% } else { %>
       <td><%= dd.path %></td>
     <% } %>
-      <td><%= dd.fileSizeInBytes %></td>
-      <td><%= dd.timeCreated %></td>
-      <td><%= dd.timeModified %></td>
+      <td><%= format_bytes(dd.fileSizeInBytes) %></td>
+      <td><%= format_date(dd.timeCreated) %></td>
+      <td><%= format_date(dd.timeModified) %></td>
       <td><%= dd.dataType %></td>
       <td><%= dd.tenantName %></td>
     </tr>
