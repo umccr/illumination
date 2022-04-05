@@ -1,10 +1,11 @@
-name: deploy
+name: deploy_to_ghcrio
 
 on:
   push:
     branches:
       - main
       - v2
+      
 jobs:
   tag_and_dockerise:
     # When merging to one of the branches above and the commit message matches
@@ -16,7 +17,7 @@ jobs:
         shell: bash -l {0}
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Get package version
         id: package-version
         uses: martinbeentjes/npm-get-version-action@master
@@ -33,10 +34,9 @@ jobs:
               ref: the_tag,
               sha: context.sha
             })
-
       # checkout tag from above
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           ref: v${{ steps.package-version.outputs.current-version }}
       # Use qemu to perform multiplatform builds
@@ -51,6 +51,7 @@ jobs:
           config-inline: |
             [worker.oci]
               max-parallelism = 2
+      # Log in to GitHub Container registry
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v1
         with:
@@ -59,11 +60,8 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Build and push docker image
         uses: docker/build-push-action@v2
-        env:
-          VERSION: ${{ steps.package-version.outputs.current-version }}
         with:
           context: .
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: |
-            ghcr.io/${{ github.repository }}:${{ env.VERSION }}
+          tags: ghcr.io/${{ github.repository }}:${{ steps.package-version.outputs.current-version }},ghcr.io/${{ github.repository }}:latest
