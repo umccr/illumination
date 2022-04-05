@@ -1,19 +1,44 @@
-name: build-docker-container-and-push-to-ghcrio
+name: deploy_to_ghcrio
 
 on:
   push:
     branches:
-      - "main"
-
-
+      - main
+      - v2
+      
 jobs:
-  docker:
+  tag_and_dockerise:
+    # When merging to one of the branches above and the commit message matches
+    if: "startsWith(github.event.head_commit.message, 'Bump version:')"
+    name: Tag and dockerise
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash -l {0}
     steps:
-      # Standard checkout step
       - name: Checkout code
-        id: git_checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
+      - name: Get package version
+        id: package-version
+        uses: martinbeentjes/npm-get-version-action@master
+      - name: Tag based on version
+        uses: actions/github-script@v5
+        env:
+          VERSION: ${{ steps.package-version.outputs.current-version }}
+        with:
+          script: |
+            const the_tag = 'refs/tags/v' + process.env.VERSION
+            github.rest.git.createRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: the_tag,
+              sha: context.sha
+            })
+      # checkout tag from above
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          ref: v${{ steps.package-version.outputs.current-version }}
       # Use qemu to perform multiplatform builds
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
@@ -33,15 +58,10 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      # Build and push docker images
-      - name: Build and Push Docker Image
+      - name: Build and push docker image
         uses: docker/build-push-action@v2
         with:
           context: .
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ghcr.io/${{ github.repository }}:latest
-
-
-
-
+          tags: ghcr.io/${{ github.repository }}:${{ steps.package-version.outputs.current-version }},ghcr.io/${{ github.repository }}:latest

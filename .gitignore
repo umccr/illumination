@@ -1,11 +1,4 @@
-ami_license_vccc.txt
-node_modules/
-
-.Rproj.user
-.Rhistory
-*.html
-.vscode/
-*.swp
-nogit/
-
-test_iap.js
+/node_modules
+/.vscode
+/dist
+/.env
