@@ -385,4 +385,46 @@ router.get("/:projectid/customNotificationSubscriptions", (req, res) => {
     .catch((error: Error) => utils.print_error(error));
 });
 
+router.get("/:projectid/bundles", (req, res) => {
+  let opts = request_opts;
+  let qs = req.query;
+  const projectid = req.params.projectid;
+  opts.url = `/projects/${projectid}/bundles`;
+  opts.params = qs;
+  axios(opts)
+    .then((response: any) => {
+      //res.send(response.data);
+      res.render("projects/bundles/bundles", {
+       data: response.data,
+       projectid: projectid,
+       id2username: id2username.id2username,
+       jsonSyntaxHighlight: utils.jsonSyntaxHighlight,
+       format_bytes: utils.format_bytes,
+       format_date: utils.format_date,
+       });
+    })
+    .catch((error: Error) => utils.print_error(error));
+});
+
+router.get("/:projectid/bundles/:bundleid", (req, res) => {
+  let opts = request_opts;
+  let qs = req.query;
+  const projectid = req.params.projectid;
+  const bundleid = req.params.bundleid;
+  opts.url = `/projects/${projectid}/bundles/${bundleid}`;
+  opts.params = qs;
+  axios(opts)
+    .then((response: any) => {
+      //res.send(response.data);
+      res.render("projects/bundles/bundleid", {
+       data: response.data,
+       projectid: projectid,
+       bundleid: bundleid,
+       id2username: id2username.id2username,
+       jsonSyntaxHighlight: utils.jsonSyntaxHighlight,
+       });
+    })
+    .catch((error: Error) => utils.print_error(error));
+});
+
 module.exports = router;
