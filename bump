@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+# usage: bump major/minor/patch
+npm version $1 -m 'Bump version: %s'
