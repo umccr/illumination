@@ -1,6 +1,6 @@
-<%- include("partials/header") %>
+<%- include("../partials/header") %>
 
-<h1 class="title"><%= `Event Log` %></h1>
+<h1 class="title"><%= `Notification Channels` %></h1>
 
 <table
   id="tab"
@@ -11,11 +11,13 @@
     <tr>
       <th>N</th>
       <th>ID</th>
+      <th>Address</th>
       <th>Type</th>
-      <th>Enabled</th>
-      <th>TenantName</th>
       <th>TimeCreated</th>
       <th>TimeModified</th>
+      <th>OwnerID</th>
+      <th>Enabled</th>
+      <th>TenantName</th>
     </tr>
   </thead>
   <tbody>
@@ -24,11 +26,13 @@
     <tr>
       <td><%= `${i + 1}.` %></td>
       <td><%= p[i].id %></td>
+      <td><%= p[i].address %></td>
       <td><%= p[i].type %></td>
+      <td><%= format_date(p[i].timeCreated) %></td>
+      <td><%= format_date(p[i].timeModified) %></td>
+      <td><%= id2username(p[i].ownerId) %></td>
       <td><%= p[i].enabled %></td>
       <td><%= p[i].tenantName %></td>
-      <td><%= p[i].timeCreated %></td>
-      <td><%= p[i].timeModified %></td>
     </tr>
     <% } %>
   </tbody>
@@ -48,5 +52,4 @@
 <%- jsonSyntaxHighlight(JSON.stringify(data, null, 2)) %>
 </pre>
 
-<%- include("partials/footer") %>
-
+<%- include("../partials/footer") %>
