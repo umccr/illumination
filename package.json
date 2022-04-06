@@ -1,6 +1,6 @@
 {
   "name": "illumination",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Interacting with Illumina ICAV2 API",
   "main": "dist/app.js",
   "scripts": {
