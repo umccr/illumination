@@ -1,0 +1,60 @@
+<%- include("../partials/header") %>
+
+<h1 class="title"><%= `Entitled Bundles` %></h1>
+
+<table
+  id="tab"
+  class="ui striped selectable celled compact table"
+  style="width:100%"
+>
+  <thead>
+    <tr>
+      <th>N</th>
+      <th>ID</th>
+      <th>Name</th>
+      <th>ShortDescription</th>
+      <th>OwnerID</th>
+      <th>ReleaseVersion</th>
+      <th>VersionComment</th>
+      <th>Status</th>
+      <th>TimeCreated</th>
+      <th>TimeModified</th>
+      <th>TenantName</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% p = data["items"]; %>
+    <% for (let i = 0; i < p.length; i++) { %>
+    <tr>
+      <td><%= `${i + 1}.` %></td>
+      <td><a href="/entitledbundles/<%= p[i].id %>"><%= p[i].id %></a></td>
+      <td><%= p[i].name %></td>
+      <td><%= p[i].shortDescription %></td>
+      <td><%= p[i].ownerId %></td>
+      <td><%= p[i].releaseVersion %></td>
+      <td><%= p[i].versionComment %></td>
+      <td><%= p[i].status %></td>
+      <td><%= p[i].tenantName %></td>
+      <td><%= p[i].timeCreated %></td>
+      <td><%= p[i].timeModified %></td>
+    </tr>
+    <% } %>
+  </tbody>
+</table>
+
+<script>
+  $(document).ready(function() {
+    $("#tab").DataTable({
+      pageLength: 10,
+      lengthMenu: [ [10, -1], [10, "All"] ],
+      "dom": '<"top"flip>t<"bottom"flip>'
+    });
+  });
+</script>
+
+<pre>
+<%- jsonSyntaxHighlight(JSON.stringify(data, null, 2)) %>
+</pre>
+
+<%- include("../partials/footer") %>
+

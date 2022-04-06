@@ -14,6 +14,7 @@ const indexRouter = require("./routes/index"),
   analysisStoragesRouter = require("./routes/analysisstorages"),
   usersRouter = require("./routes/users"),
   bundlesRouter = require("./routes/bundles"),
+  entitledBundlesRouter = require("./routes/entitledbundles"),
   workgroupsRouter = require("./routes/workgroups"),
   regionsRouter = require("./routes/regions"),
   samplesRouter = require("./routes/samples"),
@@ -40,6 +41,7 @@ app.use("/projects", projectsRouter);
 app.use("/analysisStorages", analysisStoragesRouter);
 app.use("/users", usersRouter);
 app.use("/bundles", bundlesRouter);
+app.use("/entitledbundles", entitledBundlesRouter);
 app.use("/workgroups", workgroupsRouter);
 app.use("/regions", regionsRouter);
 app.use("/samples", samplesRouter);
