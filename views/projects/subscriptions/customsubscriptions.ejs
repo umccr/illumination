@@ -1,6 +1,6 @@
-<%- include("../partials/header") %>
+<%- include("../../partials/header") %>
 
-<h1 class="title"><%= `Notification Channels` %></h1>
+<h1 class="title"><%= `Custom Notification Subscriptions for ProjectID ${projectid}` %></h1>
 
 <table
   id="tab"
@@ -11,12 +11,12 @@
     <tr>
       <th>N</th>
       <th>ID</th>
-      <th>Address</th>
-      <th>Type</th>
+      <th>FilterExpression</th>
+      <th>NotificationChannel</th>
+      <th>Enabled</th>
+      <th>OwnerID</th>
       <th>TimeCreated</th>
       <th>TimeModified</th>
-      <th>OwnerID</th>
-      <th>Enabled</th>
       <th>TenantName</th>
     </tr>
   </thead>
@@ -25,14 +25,13 @@
     <% for (let i = 0; i < p.length; i++) { %>
     <tr>
       <td><%= `${i + 1}.` %></td>
-      <td><a href="/notificationChannels/<%= p[i].id %>"><%= p[i].id %></a></td>
       <td><%= p[i].id %></td>
-      <td><%= p[i].address %></td>
-      <td><%= p[i].type %></td>
+      <td><%= p[i].filterExpression %></td>
+      <td><%= p[i].notificationChannel.id %></td>
+      <td><%= p[i].enabled %></td>
+      <td><%= id2username(p[i].ownerId) %></td>
       <td><%= format_date(p[i].timeCreated) %></td>
       <td><%= format_date(p[i].timeModified) %></td>
-      <td><%= id2username(p[i].ownerId) %></td>
-      <td><%= p[i].enabled %></td>
       <td><%= p[i].tenantName %></td>
     </tr>
     <% } %>
@@ -53,4 +52,4 @@
 <%- jsonSyntaxHighlight(JSON.stringify(data, null, 2)) %>
 </pre>
 
-<%- include("../partials/footer") %>
+<%- include("../../partials/footer") %>

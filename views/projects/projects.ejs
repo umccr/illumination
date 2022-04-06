@@ -14,17 +14,12 @@
       <th>ID</th>
       <th>DATA</th>
       <th>OwnerID</th>
-      <th>TenantID</th>
-      <th>TenantName</th>
-      <th>Active</th>
       <th>Information</th>
       <th>TimeCreated</th>
       <th>TimeModified</th>
-      <th>BillingMode</th>
+      <th>Active</th>
       <th>DataSharingEnabled</th>
-      <th>StBunID</th>
-      <th>StBunName</th>
-      <th>StBunOwnerID</th>
+      <th>TenantName</th>
     </tr>
   </thead>
   <tbody>
@@ -48,17 +43,12 @@
       <td><a href="/projects/<%= p[i].id %>"><%= p[i].id %></a></td>
       <td><a href="/projects/<%= p[i].id %>/data">DATA</a></td>
       <td><%= id2username(p[i].ownerId) %></td>
-      <td><%= p[i].tenantId %></td>
-      <td><%= p[i].tenantName %></td>
-      <td><%= p[i].active %></td>
       <td><%= p[i].information %></td>
       <td><%= p[i].timeCreated %></td>
       <td><%= p[i].timeModified %></td>
-      <td><%= p[i].billingMode %></td>
+      <td><%= p[i].active %></td>
       <td><%= p[i].dataSharingEnabled %></td>
-      <td><%= p[i].storageBundle.id %></td>
-      <td><%= p[i].storageBundle.bundleName %></td>
-      <td><%= p[i].storageBundle.ownerId %></td>
+      <td><%= p[i].tenantName %></td>
     </tr>
     <% } %>
   </tbody>
