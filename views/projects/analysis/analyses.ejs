@@ -10,19 +10,16 @@
   <thead>
     <tr>
       <th>N</th>
-      <th>ID</th>
+      <th>AnalysisID</th>
+      <th>PipelineID</th>
+      <th>OwnerID</th>
+      <th>Reference</th>
+      <th>Status</th>
+      <th>Summary</th>
       <th>TimeCreated</th>
       <th>TimeModified</th>
-      <th>OwnerID</th>
-      <th>TenantID</th>
-      <th>TenantName</th>
-      <th>Reference</th>
-      <th>UserReference</th>
-      <th>PipelineID</th>
-      <th>Status</th>
       <th>StartDate</th>
       <th>EndDate</th>
-      <th>Summary</th>
     </tr>
   </thead>
   <tbody>
@@ -43,18 +40,15 @@
     <tr>
       <td><%= `${i + 1}.` %></td>
       <td><a href="/projects/<%= projectid %>/analyses/<%= p[i].id %>"><%= p[i].id %></a></td>
-      <td><%= p[i].timeCreated %></td>
-      <td><%= p[i].timeModified %></td>
-      <td><%= p[i].ownerId %></td>
-      <td><%= p[i].tenantId %></td>
-      <td><%= p[i].tenantName %></td>
+      <td><a href="/pipelines/<%= p[i].pipeline.id %>"><%= p[i].pipeline.id %></a></td>
+      <td><%= id2username(p[i].ownerId) %></td>
       <td><%= p[i].reference %></td>
-      <td><%= p[i].userReference %></td>
-      <td><%= p[i].pipeline.id %></td>
       <td><%= p[i].status %></td>
-      <td><%= p[i].startDate %></td>
-      <td><%= p[i].endDate %></td>
       <td><%= p[i].summary %></td>
+      <td><%= format_date(p[i].timeCreated) %></td>
+      <td><%= format_date(p[i].timeModified) %></td>
+      <td><%= format_date(p[i].startDate) %></td>
+      <td><%= format_date(p[i].endDate) %></td>
     </tr>
     <% } %>
   </tbody>
@@ -62,9 +56,29 @@
 
 <script>
   $(document).ready(function() {
+    const status_ind = 5;
+    const summary_ind = 6;
     $("#tab").DataTable({
-      pageLength: 10,
-      lengthMenu: [ [10, -1], [10, "All"] ],
+      pageLength: 100,
+      lengthMenu: [ [10, 20, 50, 100, -1], [10, 20, 50, 100, "All"] ],
+      columnDefs: [
+        {
+          targets: summary_ind,
+          render: $.fn.dataTable.render.ellipsis(10, true)
+        }
+      ],
+      "createdRow": function ( row, data, index ) {
+          if ( data[status_ind] === "SUCCEEDED" ) {
+              $('td', row).eq(status_ind).addClass('completed');
+          } else if (data[status_ind] === "PENDING") {
+              $('td', row).eq(status_ind).addClass('pending');
+          } else if (data[status_ind] === "FAILED" || data[status_ind] === "ABORTED") {
+              $('td', row).eq(status_ind).addClass('failed');
+          } else if (data[status_ind] === "RUNNING") {
+              $('td', row).eq(status_ind).addClass('running');
+          }
+
+      },
       "dom": '<"top"flip>t<"bottom"flip>'
     });
   });
