@@ -213,14 +213,14 @@ router.get("/:projectid/analyses/:analysisid/outputs", (req, res) => {
   opts.params = qs;
   axios(opts)
     .then((response: any) => {
-      //res.send(response.data);
-      res.render("projects/analysis/analysisoutputs", {
-       data: response.data,
-       projectid: projectid,
-       analysisid: analysisid,
-       id2username: id2username.id2username,
-       jsonSyntaxHighlight: utils.jsonSyntaxHighlight,
-       });
+      res.send(response.data);
+     // res.render("projects/analysis/analysisoutputs", {
+     //  data: response.data,
+     //  projectid: projectid,
+     //  analysisid: analysisid,
+     //  id2username: id2username.id2username,
+     //  jsonSyntaxHighlight: utils.jsonSyntaxHighlight,
+     //  });
     })
     .catch((error: Error) => utils.print_error(error));
 });

@@ -1,6 +1,6 @@
 <%- include("../partials/header") %>
 
-<h1 class="title"><%= `Entitled Bundles` %></h1>
+<h1 class="title">Data for BundleID <a href="/bundles/<%= bundleid %>"><%= bundleid %></a></h1>
 
 <table
   id="tab"
@@ -12,29 +12,33 @@
       <th>N</th>
       <th>ID</th>
       <th>Name</th>
-      <th>ShortDescription</th>
-      <th>ReleaseVersion</th>
-      <th>VersionComment</th>
-      <th>Status</th>
-      <th>Categories</th>
+      <th>Path</th>
+      <th>Size</th>
       <th>TimeCreated</th>
       <th>TimeModified</th>
+      <th>DataType</th>
+      <th>TenantName</th>
     </tr>
   </thead>
   <tbody>
     <% p = data["items"]; %>
     <% for (let i = 0; i < p.length; i++) { %>
+    <% d = p[i].data %>
+    <% dd = d.details %>
     <tr>
       <td><%= `${i + 1}.` %></td>
-      <td><a href="/entitledbundles/<%= p[i].id %>"><%= p[i].id %></a></td>
-      <td><%= p[i].name %></td>
-      <td><%= p[i].shortDescription %></td>
-      <td><%= p[i].releaseVersion %></td>
-      <td><%= p[i].versionComment %></td>
-      <td><%= p[i].status %></td>
-      <td><%= p[i].categories %></td>
-      <td><%= p[i].timeCreated %></td>
-      <td><%= p[i].timeModified %></td>
+      <td><%= d.id %></td>
+      <td><%= dd.name %></td>
+    <% if (dd.dataType === "FOLDER") {%>
+      <td><a href="/bundles/<%= bundleid %>/data?pageSize=100&parentFolderPath=<%= dd.path %>"><%= dd.path %></a></td>
+    <% } else { %>
+      <td><%= dd.path %></td>
+    <% } %>
+      <td><%= format_bytes(dd.fileSizeInBytes) %></td>
+      <td><%= format_date(dd.timeCreated) %></td>
+      <td><%= format_date(dd.timeModified) %></td>
+      <td><%= dd.dataType %></td>
+      <td><%= dd.tenantName %></td>
     </tr>
     <% } %>
   </tbody>
@@ -55,4 +59,3 @@
 </pre>
 
 <%- include("../partials/footer") %>
-
