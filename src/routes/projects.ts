@@ -363,6 +363,7 @@ router.get("/:projectid/notificationSubscriptions", (req, res) => {
        projectid: projectid,
        id2username: id2username.id2username,
        jsonSyntaxHighlight: utils.jsonSyntaxHighlight,
+       format_date: utils.format_date,
        });
     })
     .catch((error: Error) => utils.print_error(error));
