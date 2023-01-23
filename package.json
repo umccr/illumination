@@ -6,6 +6,9 @@
   "scripts": {
     "start": "node ./app.js",
     "devstart": "nodemon",
+    "start_prod": "WORKGROUP='PROD' ICA_ACCESS_TOKEN=${ICA_ACCESS_TOKEN_PROD} PORT=3001 node ./app.js",
+    "start_dev": "WORKGROUP='DEV' ICA_ACCESS_TOKEN=${ICA_ACCESS_TOKEN_DEV} PORT=3002 node ./app.js",
+    "start_staging": "WORKGROUP='STAGING' ICA_ACCESS_TOKEN=${ICA_ACCESS_TOKEN_STAGING} PORT=3003 node ./app.js",
     "build": "docker build -t victorskl/illumination:latest .",
     "push": "docker push victorskl/illumination:latest",
     "run": "docker run --rm -it -e ICA_ACCESS_TOKEN -p 3000:3000 victorskl/illumination"
