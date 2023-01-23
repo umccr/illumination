@@ -4,7 +4,7 @@
   <%=`List of Files in Volume ${vname}`%>
 </h1>
 <h2>
-  <a href="/folders?volume.name=<%= vname %>&path=<%= qs.path %>&pageSize=1000"><%=`Click for Folders in gds://${vname}${qs.path}`%></a>
+  <a href="/folders?volume.name=<%= vname %>&path=<%= qs.path %>&pageSize=1000&recursive=false"><%=`Click for Folders (non-recursive) in gds://${vname}${qs.path}`%></a>
 </h2>
 
 <table
