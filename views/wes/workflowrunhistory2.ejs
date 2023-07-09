@@ -11,10 +11,11 @@
     <tr>
       <th>N</th>
       <th>Name</th>
-      <th>EventID</th>
-      <th>EventIDprev</th>
-      <th>EventType</th>
       <th>Timestamp</th>
+      <th>ID</th>
+      <th>IDprev</th>
+      <th>Type</th>
+      <th>Details</th>
     </tr>
   </thead>
   <tbody>
@@ -33,13 +34,16 @@
     <% } %>
 
     <% for (let i = 0; i < events.length; i++) { %>
+      <% ed = events[i].eventDetails %>
+      <% ed = jsonSyntaxHighlight(JSON.stringify(ed, null, 4)) %>
       <tr>
         <td><%= `${i + 1}.` %></td>
         <td><%= events[i].name %></td>
+        <td><%= format_date(events[i].timestamp) %></td>
         <td><%= events[i].eventId %></td>
         <td><%= events[i].previousEventId %></td>
         <td><%= events[i].eventType %></td>
-        <td><%= format_date(events[i].timestamp) %></td>
+        <td><%- ed %></td>
       </tr>
       <% } %>
   </tbody>
@@ -48,24 +52,26 @@
 <script>
   $(document).ready(function() {
     $("#workflowrunhistory_table").DataTable({
-      pageLength: 100,
+      pageLength: 50,
       lengthMenu: [ [10, 50, 100, 300, -1], [10, 50, 100, 300, "All"] ],
       "createdRow": function ( row, data, index ) {
-          if ( data[4] === "Succeeded" || data[4] === "RunSucceeded" ) {
-              $('td', row).eq(4).addClass('completed');
-          } else if (data[4] === "Started") {
-              $('td', row).eq(4).addClass('running');
-          } else if (data[4] === "Failed" || data[4] === "Aborted") {
-              $('td', row).eq(4).addClass('failed');
-          } else if (data[4] === "RunStarted") {
-              $('td', row).eq(4).addClass('running');
+          if ( data[5] === "Succeeded" || data[5] === "RunSucceeded" ) {
+              $('td', row).eq(5).addClass('completed');
+          } else if (data[5] === "Started") {
+              $('td', row).eq(5).addClass('running');
+          } else if (data[5] === "Failed" || data[5] === "Aborted") {
+              $('td', row).eq(5).addClass('failed');
+          } else if (data[5] === "RunFailed") {
+              $('td', row).eq(5).addClass('failed2');
+          } else if (data[5] === "RunStarted") {
+              $('td', row).eq(5).addClass('running');
           }
-
       },
-      "dom": '<"top"flip>t<"bottom"flip>'
+      "dom": '<"top"flip>t<"bottom"flip>',
     });
   });
 </script>
+
 
 <pre>
 <%- jsonSyntaxHighlight(JSON.stringify(history, null, 2)) %>

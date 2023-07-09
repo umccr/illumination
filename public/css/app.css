@@ -52,6 +52,10 @@ td.failed {
   background-color: #ffcccb;
 }
 
+td.failed2 {
+  background-color: #ff3333;
+}
+
 td.running {
   color: green;
 }
