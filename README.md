@@ -14,6 +14,8 @@ For **ICA V2**, see the [v2 branch](https://github.com/umccr/illumination/tree/v
 * [Docker](#docker)
     * [Using Docker](#using-docker)
     * [Docker Shortcuts](#docker-shortcuts)
+* [Docker Compose Example](#docker-compose-example)
+    * [Files](#files)
 * [Developer Notes](#developer-notes)
     * [Adding new endpoints](#adding-new-endpoints)
     * [Resources](#resources)
@@ -169,3 +171,125 @@ console.log(listEndpoints(app));
   { path: '*', methods: [ 'GET' ] }
 ];
 ```
+
+## Docker compose example
+
+To run multiple containers for different projects, one can use docker-compose to spin up a new illumination on a separate port.  
+
+Here's an example of a docker-compose set up
+
+### Files
+
+* build.sh
+* docker-compose.yml
+* .env
+
+#### build.sh
+
+Script to update .env with ICA access tokens per account, and then restarting the docker container.
+
+It is recommended this script be invoked once per day (since tokens expire every 48 hours) via a crontab.  
+
+> Example crontab entry
+
+```
+0 4 * * * (cd /opt/illumination; bash build.sh 2>/dev/null)
+```
+
+Example build.sh script
+
+
+```
+#!/usr/bin/env bash
+
+get_api_key(){
+  # Ensure no new line is at the end of ica-api-key.txt
+  # Store this file with 600 permissions
+  cat "$HOME/.ssh/ica-api-key.txt"
+}
+
+get_personal_token(){
+  ica tokens create --api-key "$(get_api_key)"
+}
+
+get_project_token(){
+  project_name="$1"
+  personal_token="$2"
+  ica tokens create \
+    --api-key "$(get_api_key)" \
+    --project-name "${project_name}" \
+    --access-token "${personal_token}"
+}
+
+personal_token="$(get_personal_token)"
+
+#get_v2_project_token(){
+#  project_name="$1"
+#}
+
+echo "ICAV1_ACCESS_TOKEN_DEVELOPMENT=$(get_project_token "development" "${personal_token}")" > .env
+echo "ICAV1_ACCESS_TOKEN_PRODUCTION=$(get_project_token "production" "${personal_token}")" >> .env
+echo "ICAV1_ACCESS_TOKEN_STAGING=$(get_project_token "staging" "${personal_token}")" >> .env
+echo "ICAV2_ACCESS_TOKEN=$(icav2 tokens create)" >> .env
+chmod 600 .env
+
+# Restart docker service
+docker compose up --detach --force-recreate
+```
+
+#### .env file
+
+```
+ICAV1_ACCESS_TOKEN_DEVELOPMENT=...
+ICAV1_ACCESS_TOKEN_PRODUCTION=...
+ICAV1_ACCESS_TOKEN_STAGING=...
+ICAV2_ACCESS_TOKEN=...
+```
+
+#### docker-compose.yml file
+
+```yaml
+version: '3'
+services:
+  icav1_development:
+    image: ghcr.io/umccr/illumination:1.0.1
+    container_name: icav1_development_illumination
+    environment:
+      - TZ=Australia/Melbourne
+      - ICA_ACCESS_TOKEN=${ICAV1_ACCESS_TOKEN_DEVELOPMENT}
+      - PORT=3000
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+  icav1_production:
+    image: ghcr.io/umccr/illumination:1.0.1
+    container_name: icav1_production_illumination
+    environment:
+      - TZ=Australia/Melbourne
+      - ICA_ACCESS_TOKEN=${ICAV1_ACCESS_TOKEN_PRODUCTION}
+      - PORT=3000
+    restart: unless-stopped
+    ports:
+      - "3001:3000"
+  icav1_staging:
+    image: ghcr.io/umccr/illumination:1.0.1
+    container_name: icav1_staging_illumination
+    environment:
+      - TZ=Australia/Melbourne
+      - ICA_ACCESS_TOKEN=${ICAV1_ACCESS_TOKEN_STAGING}
+      - PORT=3000
+    restart: unless-stopped
+    ports:
+      - "3002:3000"
+  icav2:
+    image: ghcr.io/umccr/illumination:2.0.1
+    container_name: icav2
+    environment:
+      - TZ=Australia/Melbourne
+      - ICAV2_ACCESS_TOKEN=${ICAV2_ACCESS_TOKEN}
+      - PORT=3000
+    restart: unless-stopped
+    ports:
+      - "3003:3000"
+```
+
