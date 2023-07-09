@@ -49,7 +49,7 @@
           <a href="/workflows/runs/<%= wruns[i].id %>?include=engineParameters"><%= wruns[i].id %></a>
         </td>
         <td>
-          <a href="/workflows/runs/<%= wruns[i].id %>/history?pageSize=200&sort=eventId asc"><%= wruns[i].name %></a>
+          <a href="/workflows/runs/<%= wruns[i].id %>/history?pageSize=300&sort=eventId desc"><%= wruns[i].name %></a>
         </td>
         <td>
            [<a href="/workflows/<%= parentid %>"><%= parentid %></a>] --- [<a href="/workflows/<%= hrefToVersion %>"><%= versionName %></a>] --- [<a href="/files/?volume.name=<%= wruns[i].id %>&pageSize=1000&path=/*">Results</a>]

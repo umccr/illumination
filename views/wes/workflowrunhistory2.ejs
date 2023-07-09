@@ -1,0 +1,76 @@
+<%- include("../partials/header") %>
+
+<h1 class="title"><%= `History for Workflow Run with ID ${runid}` %></h1>
+
+<table
+  id="workflowrunhistory_table"
+  class="ui striped selectable celled compact table"
+  style="width:100%"
+>
+  <thead>
+    <tr>
+      <th>N</th>
+      <th>Name</th>
+      <th>EventID</th>
+      <th>EventIDprev</th>
+      <th>EventType</th>
+      <th>Timestamp</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% events = history["items"]; %>
+    <% firstPageToken = history["firstPageToken"] %>
+    <% nextPageToken = history["nextPageToken"] %>
+    <% prevPageToken = history["prevPageToken"] %>
+    <% if (firstPageToken) {%>
+        <a href="/workflows/runs/<%= runid %>/history?pageToken=<%= firstPageToken %>&sort=eventId desc" class="ui toggle compact blue button">FirstPage</a>
+    <% } %>
+    <% if (nextPageToken) {%>
+        <a href="/workflows/runs/<%= runid %>/history?pageToken=<%= nextPageToken %>&sort=eventId desc" class="ui toggle compact green button">NextPage</a>
+    <% } %>
+    <% if (prevPageToken) {%>
+        <a href="/workflows/runs/<%= runid %>/history?pageToken=<%= prevPageToken %>&sort=eventId desc" class="ui toggle compact orange button">PreviousPage</a>
+    <% } %>
+
+    <% for (let i = 0; i < events.length; i++) { %>
+      <tr>
+        <td><%= `${i + 1}.` %></td>
+        <td><%= events[i].name %></td>
+        <td><%= events[i].eventId %></td>
+        <td><%= events[i].previousEventId %></td>
+        <td><%= events[i].eventType %></td>
+        <td><%= format_date(events[i].timestamp) %></td>
+      </tr>
+      <% } %>
+  </tbody>
+</table>
+
+<script>
+  $(document).ready(function() {
+    $("#workflowrunhistory_table").DataTable({
+      pageLength: 100,
+      lengthMenu: [ [10, 50, 100, 300, -1], [10, 50, 100, 300, "All"] ],
+      "createdRow": function ( row, data, index ) {
+          if ( data[4] === "Succeeded" || data[4] === "RunSucceeded" ) {
+              $('td', row).eq(4).addClass('completed');
+          } else if (data[4] === "Started") {
+              $('td', row).eq(4).addClass('running');
+          } else if (data[4] === "Failed" || data[4] === "Aborted") {
+              $('td', row).eq(4).addClass('failed');
+          } else if (data[4] === "RunStarted") {
+              $('td', row).eq(4).addClass('running');
+          }
+
+      },
+      "dom": '<"top"flip>t<"bottom"flip>'
+    });
+  });
+</script>
+
+<pre>
+<%- jsonSyntaxHighlight(JSON.stringify(history, null, 2)) %>
+</pre>
+
+
+<%- include("../partials/footer") %>
+

@@ -70,9 +70,11 @@ router.get("/runs/:runid/history", (req, res) => {
 
   axios(opts)
     .then((response) => {
-      res.render("wes/workflowrunhistory", {
+      // res.send(response.data);
+      res.render("wes/workflowrunhistory2", {
         history: response.data,
         runid: runid,
+        format_date: utils.format_date,
         jsonSyntaxHighlight: utils.jsonSyntaxHighlight,
       });
     })
