@@ -33,6 +33,7 @@ const id2username = function (id) {
     "e44e09eb-60c7-3a0f-9313-46f7454ede92": "ASI",
     "c1bd420d-3ff7-3c69-aa3e-e00e4c4529d2": "ASI",
     "290ed655-8d6f-3bce-b850-1f8673ddd6a6": "CAI",
+    "e4fe87e6-7964-391a-a737-5f079b4dfdd0": "SSI",
     "41fc4571-741c-386e-be44-cf9ae7313f53": "VL",
     "bc70451e-72c1-3956-80a9-00da82865d11": "HM",
     "877a7b1e-c57e-37d5-ab81-dbaba8577414": "SW",
