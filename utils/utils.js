@@ -6,6 +6,10 @@ const format_date = function (date) {
   return dayjs(date).format("YYYY-MM-DD HH:mm:ss ZZ");
 };
 
+const date_diff = function(start, end) {
+  return dayjs(end).diff(start, 'minute');
+};
+
 const print_error = function (e) {
   console.error(chalk.red(`THERE WAS AN ERROR \n${e}`));
 };
@@ -50,6 +54,7 @@ function format_bytes(bytes, decimals = 2) {
 
 module.exports = {
   format_date: format_date,
+  date_diff: date_diff,
   format_bytes: format_bytes,
   print_error: print_error,
   jsonSyntaxHighlight: jsonSyntaxHighlight,

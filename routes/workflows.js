@@ -37,6 +37,7 @@ router.get("/runs", (req, res) => {
         base_url: illumina.base_url,
         id2username: illumina.id2username,
         format_date: utils.format_date,
+        date_diff: utils.date_diff,
       });
     })
     .catch((error) => utils.print_error(error));

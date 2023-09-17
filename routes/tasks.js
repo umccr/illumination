@@ -34,6 +34,7 @@ router.get("/runs", (req, res) => {
         taskruns: response.data,
         id2username: illumina.id2username,
         format_date: utils.format_date,
+        date_diff: utils.date_diff,
       });
     })
     .catch((error) => utils.print_error(error));

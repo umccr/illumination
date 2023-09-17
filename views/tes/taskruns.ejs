@@ -12,13 +12,13 @@
       <th>N</th>
       <th>ID</th>
       <th>Name</th>
-      <th>Description</th>
       <th>Status</th>
       <th>StatusDetails</th>
-      <th>CreatedBy</th>
       <th>TimeCreated</th>
-      <th>ModifiedBy</th>
       <th>TimeModified</th>
+      <th>TimeDiffMin</th>
+      <th>CreatedBy</th>
+      <th>ModifiedBy</th>
     </tr>
   </thead>
   <tbody>
@@ -41,17 +41,17 @@
       <td><%= `${i + 1}.` %></td>
       <td><a href="/tasks/runs/<%= truns[i].id %>"><%= truns[i].id %></a></td>
       <td><%= truns[i].name %></td>
-      <td><%= truns[i].description %></td>
       <td><%= truns[i].status %></td>
       <td><%= truns[i].statusDetails %></td>
+      <td><%= format_date(truns[i].timeCreated) %></td>
+      <td><%= format_date(truns[i].timeModified) %></td>
+      <td><%= date_diff(truns[i].timeCreated, truns[i].timeModified) %></td>
       <td title="<%= truns[i].createdBy %>">
         <%= id2username(truns[i].createdBy) %>
       </td>
-      <td><%= format_date(truns[i].timeCreated) %></td>
       <td title="<%= truns[i].modifiedBy %>">
         <%= id2username(truns[i].modifiedBy) %>
       </td>
-      <td><%= format_date(truns[i].timeModified) %></td>
     </tr>
     <% } %>
   </tbody>
@@ -64,19 +64,19 @@
       lengthMenu: [ [10, 50, 100, -1], [10, 50, 100, "All"] ],
       columnDefs: [
         {
-          targets: [2, 3, 5],
+          targets: [2, 4],
           render: $.fn.dataTable.render.ellipsis(15)
         }
       ],
       "createdRow": function ( row, data, index ) {
-          if ( data[4] === "Completed" ) {
-              $('td', row).eq(4).addClass('completed');
-          } else if (data[4] === "Pending") {
-              $('td', row).eq(4).addClass('pending');
-          } else if (data[4] === "Failed" || data[4] === "Aborted") {
-              $('td', row).eq(4).addClass('failed');
-          } else if (data[4] === "Running") {
-              $('td', row).eq(4).addClass('running');
+          if ( data[3] === "Completed" ) {
+              $('td', row).eq(3).addClass('completed');
+          } else if (data[3] === "Pending") {
+              $('td', row).eq(3).addClass('pending');
+          } else if (data[3] === "Failed" || data[3] === "Aborted") {
+              $('td', row).eq(3).addClass('failed');
+          } else if (data[3] === "Running") {
+              $('td', row).eq(3).addClass('running');
           }
 
       },

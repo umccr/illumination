@@ -12,13 +12,14 @@
       <th>N</th>
       <th>RunID</th>
       <th>RunName (Click for History)</th>
-      <th>[ParentID] --- [VersionName] --- [Results]</th>
+      <th>[ParentID] --- [VersionName]</th>
       <th>Status</th>
       <th>Error (ErrorCause)</th>
-      <th>CreatedBy</th>
       <th>TimeStarted</th>
-      <th>ModifiedBy</th>
       <th>TimeModified</th>
+      <th>TimeDiffMin</th>
+      <th>CreatedBy</th>
+      <th>ModifiedBy</th>
     </tr>
   </thead>
   <tbody>
@@ -52,14 +53,15 @@
           <a href="/workflows/runs/<%= wruns[i].id %>/history?pageSize=300&sort=eventId desc"><%= wruns[i].name %></a>
         </td>
         <td>
-           [<a href="/workflows/<%= parentid %>"><%= parentid %></a>] --- [<a href="/workflows/<%= hrefToVersion %>"><%= versionName %></a>] --- [<a href="/files/?volume.name=<%= wruns[i].id %>&pageSize=1000&path=/*">Results</a>]
+           [<a href="/workflows/<%= parentid %>"><%= parentid %></a>] --- [<a href="/workflows/<%= hrefToVersion %>"><%= versionName %></a>]
         </td>
         <td><%= wruns[i].status %></td>
         <td><%= error_final %></td>
-        <td><%= id2username(wruns[i].createdBy) %></td>
         <td><%= format_date(wruns[i].timeStarted) %></td>
-        <td><%= id2username(wruns[i].modifiedBy) %></td>
         <td><%= format_date(wruns[i].timeModified) %></td>
+        <td><%= date_diff(wruns[i].timeCreated, wruns[i].timeModified) %></td>
+        <td><%= id2username(wruns[i].createdBy) %></td>
+        <td><%= id2username(wruns[i].modifiedBy) %></td>
       </tr>
       <% } %>
   </tbody>
