@@ -11,6 +11,7 @@
     <tr>
       <th>N</th>
       <th>Name</th>
+      <th>DurationSecs</th>
       <th>Timestamp</th>
       <th>ID</th>
       <th>IDprev</th>
@@ -35,10 +36,17 @@
 
     <% for (let i = 0; i < events.length; i++) { %>
       <% ed = events[i].eventDetails %>
+      <% ad = ed.additionalDetails %>
+      <% if (ad === undefined) {%>
+      <% ad = null %>
+      <% } else { %>
+      <% ad = Math.floor(ad[0].Duration) || null %>
+      <% } %>
       <% ed = jsonSyntaxHighlight(JSON.stringify(ed, null, 4)) %>
       <tr>
         <td><%= `${i + 1}.` %></td>
         <td><%= events[i].name %></td>
+        <td><%- ad %></td>
         <td><%= format_date(events[i].timestamp) %></td>
         <td><%= events[i].eventId %></td>
         <td><%= events[i].previousEventId %></td>
@@ -55,16 +63,16 @@
       pageLength: 50,
       lengthMenu: [ [10, 50, 100, 300, -1], [10, 50, 100, 300, "All"] ],
       "createdRow": function ( row, data, index ) {
-          if ( data[5] === "Succeeded" || data[5] === "RunSucceeded" ) {
-              $('td', row).eq(5).addClass('completed');
-          } else if (data[5] === "Started") {
-              $('td', row).eq(5).addClass('running');
-          } else if (data[5] === "Failed" || data[5] === "Aborted") {
-              $('td', row).eq(5).addClass('failed');
-          } else if (data[5] === "RunFailed") {
-              $('td', row).eq(5).addClass('failed2');
-          } else if (data[5] === "RunStarted") {
-              $('td', row).eq(5).addClass('running');
+          if ( data[6] === "Succeeded" || data[6] === "RunSucceeded" ) {
+              $('td', row).eq(6).addClass('completed');
+          } else if (data[6] === "Started") {
+              $('td', row).eq(6).addClass('running');
+          } else if (data[6] === "Failed" || data[6] === "Aborted") {
+              $('td', row).eq(6).addClass('failed');
+          } else if (data[6] === "RunFailed") {
+              $('td', row).eq(6).addClass('failed2');
+          } else if (data[6] === "RunStarted") {
+              $('td', row).eq(6).addClass('running');
           }
       },
       "dom": '<"top"flip>t<"bottom"flip>',
