@@ -11,7 +11,7 @@
     <tr>
       <th>N</th>
       <th>Name</th>
-      <th>DurationSecs</th>
+      <th>DurationMin</th>
       <th>Timestamp</th>
       <th>ID</th>
       <th>IDprev</th>
@@ -40,7 +40,7 @@
       <% if (ad === undefined) {%>
       <% ad = null %>
       <% } else { %>
-      <% ad = Math.floor(ad[0].Duration) || null %>
+      <% ad = Math.floor(ad[0].Duration / 60) || null %>
       <% } %>
       <% ed = jsonSyntaxHighlight(JSON.stringify(ed, null, 4)) %>
       <tr>
