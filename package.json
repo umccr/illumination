@@ -1,6 +1,6 @@
 {
   "name": "illumination",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Interacting with Illumina ICAv1 API",
   "main": "app.js",
   "scripts": {
