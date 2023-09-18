@@ -5,7 +5,7 @@ on:
     branches:
       - main
       - v2
-      
+
 jobs:
   tag_and_dockerise:
     # When merging to one of the branches above and the commit message matches
@@ -20,9 +20,9 @@ jobs:
         uses: actions/checkout@v3
       - name: Get package version
         id: package-version
-        uses: martinbeentjes/npm-get-version-action@master
+        uses: martinbeentjes/npm-get-version-action@v1.3.1
       - name: Tag based on version
-        uses: actions/github-script@v5
+        uses: actions/github-script@v6
         env:
           VERSION: ${{ steps.package-version.outputs.current-version }}
         with:
@@ -41,10 +41,10 @@ jobs:
           ref: v${{ steps.package-version.outputs.current-version }}
       # Use qemu to perform multiplatform builds
       - name: Set up QEMU
-        uses: docker/setup-qemu-action@v1
+        uses: docker/setup-qemu-action@v2
       # Use docker buildx to build multi-platform containers
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
+        uses: docker/setup-buildx-action@v2
         with:
           use: true
           install: true
@@ -53,13 +53,13 @@ jobs:
               max-parallelism = 2
       # Log in to GitHub Container registry
       - name: Login to GitHub Container Registry
-        uses: docker/login-action@v1
+        uses: docker/login-action@v2
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Build and push docker image
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v4
         with:
           context: .
           platforms: linux/amd64,linux/arm64
