@@ -11,7 +11,7 @@
     <tr>
       <th>N</th>
       <th>Path (Click for files recursive)</th>
-      <th>Name</th>
+      <th>Name (Click for folders nrecursive)</th>
       <th>Size</th>
       <th>ID</th>
       <th>CreatedBy</th>
@@ -45,8 +45,12 @@
     <% for (let i = 0; i < fs.length; i++) { %>
     <tr>
       <td><%= `${i + 1}.` %></td>
-      <td><a href="/files?volume.name=<%= vname %>&path=<%= fs[i].path %>*&pageSize=1000"><%= fs[i].path %></a></td>
-      <td><%= fs[i].name %></td>
+      <td><a href="/files?volume.name=<%= vname %>&path=<%= fs[i].path %>*&pageSize=1000&recursive=true"><%= fs[i].path %></a></td>
+      <% if (fs[i].id.startsWith("fol")) { %>
+        <td><a href="/folders?volume.name=<%= vname %>&path=<%= fs[i].path %>*&pageSize=100&recursive=false"><%= fs[i].name %></a></td>
+      <% } else{ %>
+        <td><%= fs[i].name %></td>
+        <% } %>
       <td></td>
       <td><a href="/folders/<%= fs[i].id %>"><%= fs[i].id %></a></td>
       <td title="<%= fs[i].createdBy %>">
