@@ -1,7 +1,7 @@
 {
   "name": "illumination",
   "version": "2.0.1",
-  "description": "Interacting with Illumina ICAV2 API",
+  "description": "Interacting with Illumina ICAv2 API",
   "main": "dist/app.js",
   "scripts": {
     "dev": "nodemon -w src -w views -e ts,ejs --exec npm run dev:start",
@@ -25,15 +25,15 @@
   },
   "homepage": "https://github.com/umccr/illumination#readme",
   "dependencies": {
-    "axios": "^0.26.0",
+    "axios": "^1.6.0",
     "chalk": "^4.1.1",
-    "dayjs": "^1.10.7",
-    "ejs": "^3.1.6",
-    "express": "^4.17.3",
+    "dayjs": "^1.10.6",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
     "js-yaml": "^4.1.0"
   },
   "devDependencies": {
-    "@types/express": "^4.17.13",
+    "@types/express": "^4.17.21",
     "@types/fs-extra": "^9.0.13",
     "@types/node": "^17.0.18",
     "@types/shelljs": "^0.8.11",
@@ -41,7 +41,7 @@
     "dotenv-expand": "^8.0.3",
     "express-list-endpoints": "^6.0.0",
     "fs-extra": "^10.0.0",
-    "nodemon": "^2.0.15",
+    "nodemon": "^3.1.4",
     "npm-run-all": "^4.1.5",
     "rimraf": "^3.0.2",
     "shelljs": "^0.8.5",
